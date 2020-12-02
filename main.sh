@@ -19,4 +19,8 @@ source "$OMS_DIR/lib/git.sh"
 source "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"
 PS1="\[$(tput sc; rightprompt $OMS_THEME_RIGHT; tput rc)\]$OMS_THEME_PS"
 
+# RUN PLUGIN
+for plug in ${OMS_PLUGIN[@]}; do
+  source "$OMS_DIR/usr/plugin/$plug/$plug.plugin.sh"
+done
 

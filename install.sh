@@ -14,6 +14,7 @@ OMS_DIR='$OMS'
 
 # OhMySh theme
 OMS_THEME='colorshell'
+OMS_PLUGIN=(helloworld)
 
 # OhMySh main script
 source \"\$OMS_DIR/main.sh\"
