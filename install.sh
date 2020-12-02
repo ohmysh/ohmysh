@@ -29,7 +29,7 @@ echo '   OhMySh <https://github.com/ohmysh/ohmysh>'
 echo ' >> Getting scripts'
 git clone https://github.com/ohmysh/ohmysh.git "$OMS"
 echo ' >> Putting config file'
-echo $OMS_RC >> "$OMS_RC_D"
+echo $OMS_RC > "$OMS_RC_D"
 
 echo ' OhMySh is already installed! '
 
@@ -39,7 +39,8 @@ echo ' >> Checking shell'
 if [ $SHELL != "/bin/sh" ] ; then
   echo '    -> Do you want to change shell to "sh"? It will work with OhMySh (Y/N)'
   read ch
-  if [ $ch == 'Y' || $ch == 'y' ]; then
+  if [ "$ch" = 'Y' ] || [ "$ch" = 'y' ] ; then
+    echo '    -> Change shell to "sh" '
     chsh -s /bin/sh || echo '    -> Change ERROR!!! Try to run "chsh -s /bin/sh" when script exit'
   else
     echo '    -> You chose NO'
