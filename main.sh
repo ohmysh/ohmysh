@@ -13,6 +13,7 @@ fi
 
 source "$OMS_DIR/lib/color.sh"
 source "$OMS_DIR/lib/theme.sh"
+source "$OMS_DIR/lib/check-command.sh"
 source "$OMS_DIR/lib/git.sh"
 
 # RUN THEME
