@@ -71,7 +71,7 @@ Change variable `OMS_THEME` to new theme name.
 
 All plugins of OMS is in `$OMS_DIR/usr/plugin` folder.
 
-You can also creat a plugin by yourself.
+You can also creat a plugin by yourself, look [This page](https://github.com/ohmysh/ohmysh/blob/main/usr/plugin/readme.md).
 
 ### Run Plugin
 
