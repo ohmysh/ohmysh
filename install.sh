@@ -26,9 +26,23 @@ source \"\$OMS_DIR/main.sh\"
 "
 OMS_RC_D="$HOME/.profile"
 
+# lib
+check-command(){
+  if [ -n $2  ]; then
+    where="::$2"
+  fi
+  hash $1 2>/dev/null || { echo " >> OhMySh$where : ERROR cannot found command \"$1\", please insall it!!! "; return 1; }
+ return 0
+}
+
 # install
 echo ' Welcome to OhMySh installer script! '
 echo '   OhMySh <https://github.com/ohmysh/ohmysh>'
+check-command git Installer
+if [ -n $? ] ; then
+  echo ' Failed to install OhMySh!!!'
+  exit 1
+fi
 echo ' >> Getting scripts'
 git clone https://github.com/ohmysh/ohmysh.git "$OMS"
 echo ' >> Putting config file'
