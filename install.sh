@@ -4,6 +4,7 @@
 
 # config
 OMS="$HOME/.ohmysh"
+OMS_CACHE="$HOME/.ohmysh-cache"
 OMS_RC="#
 # CREATED BY OhMySh <https://github.com/ohmysh/ohmysh>
 # OhMySh
@@ -11,6 +12,7 @@ OMS_RC="#
 
 # OhMySh work dir. Please don't edit it!
 OMS_DIR='$OMS'
+OMS_CACHE='$OMS_CACHE'
 
 # OhMySh theme
 OMS_THEME='colorshell'
@@ -31,6 +33,9 @@ echo ' >> Getting scripts'
 git clone https://github.com/ohmysh/ohmysh.git "$OMS"
 echo ' >> Putting config file'
 echo $OMS_RC > "$OMS_RC_D"
+echo ' >> Creating cache'
+mkdir -p "$OMS_CACHE"
+date +%Y%m%d > $OMS_CACHE/update
 
 echo ' OhMySh is already installed! '
 

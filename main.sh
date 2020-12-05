@@ -1,5 +1,4 @@
 #!/bin/sh
-
 #
 # Made by OhMySh Dev
 # main SH Script
@@ -10,6 +9,8 @@ then
   echo " >> OMS settings error !!! "
   exit 1
 fi
+
+source "$OMS_DIR/lib/update.sh"
 
 source "$OMS_DIR/lib/color.sh"
 source "$OMS_DIR/lib/theme.sh"
