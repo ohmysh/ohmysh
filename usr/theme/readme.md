@@ -2,6 +2,12 @@
 
 `/usr/theme` directory is for save themes
 
+## Creat a new theme by yourself
+
+1. Creat a folder and named with your theme name.
+2. Creat a file and named `YOUR-THEME-NAME.theme.sh`
+3. Edit it
+
 ## Theme config file guide
 
 `...@... $` The command prompt will be stored here in the variable `OMS_THEME_PS`. Here are some shortcuts.
