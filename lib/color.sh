@@ -29,3 +29,25 @@ function bred(){
 function byellow(){
     echo -e "\033[33m\033[01m$1\033[0m"
 }
+
+_error(){
+  if [ -z $2 ]
+  then
+    tp="[ERROR] OhMySh"
+  else
+    tp="[ERROR] OhMySh::$2"
+  fi
+  bred " >> $tp : $1"
+}
+
+_warn(){
+  if [ -z $2  ]
+  then
+    tp="[ERROR] OhMySh"
+  else
+    tp="[ERROR] OhMySh::$2"
+  fi
+  byellow " >> $tp : $1"
+                          
+}
+

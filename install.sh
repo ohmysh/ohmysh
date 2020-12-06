@@ -25,6 +25,15 @@ source \"\$OMS_DIR/main.sh\"
 # Such as 'alias XXXX=\"XXXX\"'
 "
 OMS_RC_D="$HOME/.profile"
+NF="NEWFILE"
+
+if [ -f "$HOME/.ohmysh-backup" ]
+then
+  NF="OLDFILE"
+  mv "$HOME/.ohmysh-backup" "$OMS_RC_D"
+  . $OMS_RC_D
+  $OMS=$OMS_DIR
+fi  
 
 # lib
 checkcommand(){
@@ -46,6 +55,7 @@ fi
 echo ' >> Getting OMS'
 git clone https://github.com/ohmysh/ohmysh.git "$OMS"
 echo ' >> Putting config file'
+if [ "$NF" = "NEWFILE" ] ; then
 cat <<EOF > "$OMS_RC_D"
 #
 # CREATED BY OhMySh <https://github.com/ohmysh/ohmysh>
@@ -66,6 +76,7 @@ source "\$OMS_DIR/main.sh"
 # Global defines
 # Such as 'alias XXXX="XXXX"'
 EOF
+fi
 echo ' >> Creating cache'
 mkdir -p "$OMS_CACHE"
 date +%Y%m%d > $OMS_CACHE/update
