@@ -1,17 +1,16 @@
 <center><h1><img src="https://516wjy.xyz:516/OhMySh-width.png" alt="OhMySh Icon"></h1></center>
 
-- OhMySh Main Repository.
-- OhMySh Dev is a part of [LanGong Dev](https://github.com/langong-dev).
+OhMySh is an excellent configuration tool for SH that allows you to change the theme of your SH to a good looking one, OhMySh also supports plugins, so you can search for them in the repository. OhMySh also supports plugins and you can search for them in the repository. Of course, OhMySh allows you to write your own themes and plugins!
 
-# Getting OhMySh
+# Getting Started
 
 ## Prepare
 
-OhMySh is for SH, so every SH in **all platform** can run OMS!
+OhMySh have to work on [SH shell (Bourne_shell)](https://en.wikipedia.org/wiki/Bourne_shell). 
 
-You have to install `curl` `sh` `git` , because OhMySh need them.
+So You have to install `sh` , some other tools we need: `curl` `git` .
 
-## Getting OhMySh
+## Installation
 
 Run scripts below here in SH.
 
@@ -49,9 +48,11 @@ And then : restart computer!
 - **Error code `1`** OMS cannot found some application for run OMS, you can read "Prepare" to fix
 - **Cannot run OMS** run Install Script again to fix it.
 
-# Config
+# Using OhMySh
 
 ## Themes
+
+OhMySh have a lot of themes for you.
 
 ### Get Themes
 
@@ -84,3 +85,31 @@ Change array `OMS_PLUGIN` to plugins name. Like:
 OMS_PLUGIN=(helloworld wttr ...)
 ...
 ```
+
+# Uninstalling OhMySh
+
+- If you don't like OhMySh, you can uninstall OhMySh.
+
+```sh
+rm ~/.profile
+```
+
+- If you don't want to use SH, you can change shell.
+
+```sh
+chsh -l                   to get list of your shells
+chsh -s SHELL-FROM-LIST   to change shell
+```
+
+# License
+
+OhMySh is under MIT-License.
+
+# Contributors
+
+OhMySh is not a best project, We need you to help us.
+
+- Email `wjy@516wjy.xyz`
+- PullRequest GitHub Repo `ohmysh/ohmysh`
+
+Thanks so much!
