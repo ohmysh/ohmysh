@@ -86,12 +86,16 @@ OMS_PLUGIN=(helloworld wttr ...)
 ...
 ```
 
+# OhMySh Command Line Interface (CLI)
+
+See `ohmysh --help` .
+
 # Uninstalling OhMySh
 
 - If you don't like OhMySh, you can uninstall OhMySh.
 
 ```sh
-rm ~/.profile
+ohmysh --uninstall
 ```
 
 - If you don't want to use SH, you can change shell.
