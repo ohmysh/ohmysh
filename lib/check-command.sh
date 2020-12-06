@@ -1,4 +1,4 @@
-check-command(){
+checkcommand(){
   if [ -n $2 ]; then
     where="::$2"
   fi

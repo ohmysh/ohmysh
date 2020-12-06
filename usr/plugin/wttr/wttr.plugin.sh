@@ -1,6 +1,6 @@
-check-command curl wttr
+checkcommand curl wttr
 if [ -n $? ]
 then
-  curl wttr.in
+  alias wttr="curl wttr.in"
 fi
 

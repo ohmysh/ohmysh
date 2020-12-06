@@ -27,7 +27,7 @@ source \"\$OMS_DIR/main.sh\"
 OMS_RC_D="$HOME/.profile"
 
 # lib
-check-command(){
+checkcommand(){
   if [ -n $2  ]; then
     where="::$2"
   fi
@@ -38,15 +38,35 @@ check-command(){
 # install
 echo ' Welcome to OhMySh installer script! '
 echo '   OhMySh <https://github.com/ohmysh/ohmysh>'
-check-command git Installer
-if [ -n $? ] ; then
+checkcommand git Installer
+if [ $? == 1 ] ; then
   echo ' Failed to install OhMySh!!!'
   exit 1
 fi
 echo ' >> Getting scripts'
 git clone https://github.com/ohmysh/ohmysh.git "$OMS"
 echo ' >> Putting config file'
-echo $OMS_RC > "$OMS_RC_D"
+#echo $OMS_RC > "$OMS_RC_D"
+cat <<EOF > "$OMS_RC_D"
+#
+# CREATED BY OhMySh <https://github.com/ohmysh/ohmysh>
+# OhMySh
+#
+
+# OhMySh work dir. Please don't edit it!
+OMS_DIR='$OMS'
+OMS_CACHE='$OMS_CACHE'
+
+# OhMySh theme
+OMS_THEME='colorshell'
+OMS_PLUGIN=(helloworld)
+
+# OhMySh main script
+source "\$OMS_DIR/main.sh"
+
+# Global defines
+# Such as 'alias XXXX="XXXX"'
+EOF
 echo ' >> Creating cache'
 mkdir -p "$OMS_CACHE"
 date +%Y%m%d > $OMS_CACHE/update
