@@ -40,13 +40,12 @@ echo ' Welcome to OhMySh installer script! '
 echo '   OhMySh <https://github.com/ohmysh/ohmysh>'
 checkcommand git Installer
 if [ $? == 1 ] ; then
-  echo ' Failed to install OhMySh!!!'
+  echo ' >> OhMySh::Installer : ERROR Failed to install OhMySh!!! '
   exit 1
 fi
-echo ' >> Getting scripts'
+echo ' >> Getting OMS'
 git clone https://github.com/ohmysh/ohmysh.git "$OMS"
 echo ' >> Putting config file'
-#echo $OMS_RC > "$OMS_RC_D"
 cat <<EOF > "$OMS_RC_D"
 #
 # CREATED BY OhMySh <https://github.com/ohmysh/ohmysh>
@@ -89,4 +88,5 @@ fi
 
 echo ' Installed OhMySh! '
 
+# OhMySh Installer Script.
 
