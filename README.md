@@ -1,14 +1,14 @@
 <center><h1><img src="https://516wjy.xyz:516/OhMySh-width.png" alt="OhMySh Icon"></h1></center>
 
-OhMySh is an excellent configuration tool for SH that allows you to change the theme of your SH to a good looking one, OhMySh also supports plugins, so you can search for them in the repository. OhMySh also supports plugins and you can search for them in the repository. Of course, OhMySh allows you to write your own themes and plugins!
+OhMySh is an excellent configuration tool for **SH** that allows you to change the theme of your SH to a good looking one, OhMySh also supports plugins, so you can search for them in the repository. OhMySh also supports plugins and you can search for them in the repository. Of course, OhMySh allows you to write your own themes and plugins!
 
 # Getting Started
 
 ## Prepare
 
-OhMySh have to work on [SH shell (Bourne_shell)](https://en.wikipedia.org/wiki/Bourne_shell). 
+OhMySh works on [SH shell (Bourne_shell)](https://en.wikipedia.org/wiki/Bourne_shell). 
 
-So You have to install `sh` , some other tools we need: `curl` `git` .
+So `sh` should be installed, some other tools we need: `curl` `git` .
 
 ## Installation
 
