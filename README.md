@@ -83,6 +83,10 @@ OMS_PLUGIN=(helloworld wttr ...)
 ...
 ```
 
+# OhMySh FAQ
+
+[FAQ](https://github.com/ohmysh/ohmysh/blob/main/FAQ.md)
+
 # OhMySh Command Line Interface (CLI)
 
 See `ohmysh --help` .
