@@ -10,6 +10,7 @@ then
   exit 1
 fi
 
+source "$OMS_DIR/lib/ohmysh-version.sh"
 source "$OMS_DIR/lib/update.sh"
 
 source "$OMS_DIR/lib/color.sh"

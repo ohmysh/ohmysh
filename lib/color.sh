@@ -34,8 +34,11 @@ _error(){
   if [ -z $2 ]
   then
     tp="[ERROR] OhMySh"
-  else
+  elif [ -z $3 ]
+  then
     tp="[ERROR] OhMySh::$2"
+  else
+    tp="[ERROR $3] OhMySh::$2"
   fi
   bred " >> $tp : $1"
 }
