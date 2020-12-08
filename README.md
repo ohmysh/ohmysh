@@ -45,11 +45,6 @@ And then : restart computer!
 
 **Or** you can run command-line `sh --login` when you want use SH and OMS.
 
-## Install error code
-
-- **Error code `1`** OMS cannot found some application for run OMS, you can read "Prepare" to fix
-- **Cannot run OMS** run Install Script again to fix it.
-
 # Using OhMySh
 
 ## Themes
