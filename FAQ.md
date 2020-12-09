@@ -3,7 +3,10 @@
 ## Installation Errors
 
 - **Error code `1`** : OMS cannot found some application for run OMS, you can read "Prepare" to fix
-- **Cannot run OMS** : Run Install Script again to fix it.
+
+## Using Errors
+
+- **Cannot run OMS** : Run Installer Script and add option `--config` like `sh OMSInstaller.sh --config`
 
 ## OhMySh Command Line Interface
 
