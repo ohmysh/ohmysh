@@ -46,11 +46,10 @@ _error(){
 _warn(){
   if [ -z $2  ]
   then
-    tp="[ERROR] OhMySh"
+    tp="[WARNING] OhMySh"
   else
-    tp="[ERROR] OhMySh::$2"
+    tp="[WARNING] OhMySh::$2"
   fi
   byellow " >> $tp : $1"
-                          
 }
 

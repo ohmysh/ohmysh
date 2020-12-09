@@ -44,24 +44,12 @@ checkcommand(){
  return 0
 }
 
-# install
-echo ' Welcome to OhMySh installer script! '
-echo '   OhMySh <https://github.com/ohmysh/ohmysh>'
-checkcommand git Installer
-if [ $? == 1 ] ; then
-  echo ' >> OhMySh::Installer : ERROR Failed to install OhMySh!!! '
-  exit 1
-fi
-echo ' >> Getting OMS'
-git clone https://github.com/ohmysh/ohmysh.git "$OMS"
-echo ' >> Putting config file'
-if [ "$NF" = "NEWFILE" ] ; then
-cat <<EOF > "$OMS_RC_D"
+omsconfig(){
+  cat <<EOF > "$OMS_RC_D"
 #
 # CREATED BY OhMySh <https://github.com/ohmysh/ohmysh>
 # OhMySh
 #
-
 # OhMySh work dir. Please don't edit it!
 OMS_DIR='$OMS'
 OMS_CACHE='$OMS_CACHE'
@@ -76,6 +64,46 @@ source "\$OMS_DIR/main.sh"
 # Global defines
 # Such as 'alias XXXX="XXXX"'
 EOF
+}
+
+echo ' Welcome to OhMySh installer script! '
+echo '   OhMySh <https://github.com/ohmysh/ohmysh>'
+
+# options
+if [ ! -z "$1" ]
+then
+  if [ "$1" = "--config" ]
+  then
+    echo ' >> Config Force'
+    omsconfig
+  else
+    cat <<EOF
+Installer Help --- OhMySh
+[OPTIONS]
+    --help      :   Get help
+    --config    :   Config only
+OhMySh Installer Script
+EOF
+  fi
+  exit
+fi
+
+# install
+echo ' >> Preparing Install'
+checkcommand git Installer
+if [ $? == 1 ] ; then
+  echo ' >> [ERROR 1] OhMySh::Installer : ERROR Failed to install OhMySh!!! '
+  exit 1
+fi
+if [ -d "$OMS" ]
+then
+  echo ' >> [ERROR 2] OhMySh::Installer : You had installed OhMySh!!! '
+fi
+echo ' >> Getting OMS'
+git clone https://github.com/ohmysh/ohmysh.git "$OMS"
+echo ' >> Putting config file'
+if [ "$NF" = "NEWFILE" ] ; then
+  omsconfig
 fi
 echo ' >> Creating cache'
 mkdir -p "$OMS_CACHE"
@@ -97,7 +125,8 @@ if [ $SHELL != "/bin/sh" ] ; then
   fi
 fi
 
-echo ' Installed OhMySh! '
+source "$OMS/lib/ohmysh-version.sh"
+echo " Installed OhMySh Version $OMS_VER!"
 
 # OhMySh Installer Script.
 
