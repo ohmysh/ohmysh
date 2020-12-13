@@ -2,17 +2,24 @@
 
 _helpcommand(){
   cat <<EOF
-               Help --- OhMySh
+                          Help --- OhMySh
 [Usage] ohmysh [OPTIONS]
 
 [OPTIONS]: 
-    --update         :    Update OhMySh
-    --uninstall      :    Uninstalling OhMySh
-    -h   --help      :    Ask help
-    -v   --version   :    Check OhMySh Version
-    --theme [THEME]  :    Change theme
+    --update                    :    Update OhMySh
+    --uninstall                 :    Uninstalling OhMySh
+    -h  --help                  :    Ask help
+    -v  --version               :    Check OhMySh Version
+    -t  --theme [THEME]         :    Change theme
+    --themelist                 :    Get list of themes
+    -p  --plugin [OPT] [PLUGIN] :    Enable or disable plugin
+    plugin::[OPT]:
+         enable [PLUGIN]        :    Enable a plugin
+         disable [PLUGIN]       :    Disable a plugin
+         restart [PLUGIN]       :    Restart a plugin
+    --pluginlist                :    Get list of plugins
 
-OhMySh Command Line Interface
+OhMySh Command Line Interface $OMS_CLI_VER
 EOF
 }
 
@@ -58,7 +65,7 @@ OhMySh Profile Path :  $HOME/.profile
 OhMySh Logged User  :  $USER
 System Shell        :  $SHELL
 
-OhMySh Command Line Interface
+OhMySh Command Line Interface $OMS_CLI_VER
 EOF
   elif [ "$1" = "--theme" ] || [ "$1" = "-t" ]
   then
@@ -66,13 +73,43 @@ EOF
     then
       _error "Cannot read your new theme" 'CLI::Theme'
     else
-
+      _warn "Change theme to '$2'" 'CLI::Theme'
       OMS_THEME_NEW="$2"
-      sed -n "/$OMS_THEME/p" $HOME/.profile | sed "s/$OMS_THEME/$OMS_THEME_NEW/g" $HOME/.profile > "$OMS_CACHE/profile"
+      sed -n "/OMS_THEME='$OMS_THEME'/p" $HOME/.profile | sed "s/OMS_THEME='$OMS_THEME'/OMS_THEME='$OMS_THEME_NEW'/g" $HOME/.profile > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
       OMS_THEME=$OMS_THEME_NEW
       _theme_runner
     fi
+  elif [ "$1" = "--themelist" ]
+  then
+    ls "$OMS_DIR/usr/theme"
+  elif [ "$1" = "--plugin" ] || [ "$1" = "-p" ]
+  then
+    if [ -z "$2" ] || [ -z "$3" ]
+    then
+      _error "Cannot read sub-option" 'CLI::Plugin'
+      _helpcommand
+    elif [ "$2" = "enable" ]
+    then
+      _warn "Enable plugin '$3'" 'CLI::Plugin'
+      OMS_PLUGIN_NEW="$3"
+      sed -n "/OMS_PLUGIN=(/p" $HOME/.profile | sed "s/(/($OMS_PLUGIN_NEW /" $HOME/.profile > "$OMS_CACHE/profile"
+      mv "$OMS_CACHE/profile" "$HOME/.profile"
+      _plugin_runner "$OMS_PLUGIN_NEW"
+    elif [ "$2" = "disable" ]
+    then
+      _warn "Disable plugin '$3'" 'CLI::Plugin'
+      OMS_PLUGIN_NEW="$3"
+      sed -n "/OMS_PLUGIN=(/p" $HOME/.profile | sed "s/$OMS_PLUGIN_NEW//g" $HOME/.profile > "$OMS_CACHE/profile"
+      mv "$OMS_CACHE/profile" "$HOME/.profile"
+    elif [ "$2" = "restart" ]
+    then
+      _warn "Restart plugin '$3'" "CLI::Plugin"
+      _plugin_runner "$3"
+    fi
+  elif [ "$1" = "--pluginlist" ]
+  then
+    ls "$OMS_DIR/usr/plugin"
   else
     _error "Option '$1' not found" 'CLI' '2'
   fi

@@ -16,6 +16,7 @@ source "$OMS_DIR/lib/update.sh"
 
 source "$OMS_DIR/lib/color.sh"
 source "$OMS_DIR/lib/theme.sh"
+source "$OMS_DIR/lib/plugin.sh"
 source "$OMS_DIR/lib/check-command.sh"
 source "$OMS_DIR/lib/git.sh"
 
@@ -25,7 +26,7 @@ source "$OMS_DIR/lib/ohmysh-cli.sh"
 _theme_runner
 
 # RUN PLUGIN
-for plug in ${OMS_PLUGIN[@]}; do
-  source "$OMS_DIR/usr/plugin/$plug/$plug.plugin.sh"
+for _p in ${OMS_PLUGIN[@]}; do
+  _plugin_runner "$_p"
 done
 

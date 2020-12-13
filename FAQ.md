@@ -6,6 +6,9 @@
 
 ## Using Errors
 
+- **Error 1** : Run `ohmysh --themelist`
+- **Error 2** : Run `ohmysh --pluginlist`
+
 - **Cannot run OMS** : Run Installer Script and add option `--config` like `sh OMSInstaller.sh --config`
 
 ## OhMySh Command Line Interface
