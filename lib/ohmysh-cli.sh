@@ -10,6 +10,7 @@ _helpcommand(){
     --uninstall      :    Uninstalling OhMySh
     -h   --help      :    Ask help
     -v   --version   :    Check OhMySh Version
+    --theme [THEME]  :    Change theme
 
 OhMySh Command Line Interface
 EOF
@@ -59,6 +60,19 @@ System Shell        :  $SHELL
 
 OhMySh Command Line Interface
 EOF
+  elif [ "$1" = "--theme" ] || [ "$1" = "-t" ]
+  then
+    if [ -z "$2" ]
+    then
+      _error "Cannot read your new theme" 'CLI::Theme'
+    else
+
+      OMS_THEME_NEW="$2"
+      sed -n "/$OMS_THEME/p" $HOME/.profile | sed "s/$OMS_THEME/$OMS_THEME_NEW/g" $HOME/.profile > "$OMS_CACHE/profile"
+      mv "$OMS_CACHE/profile" "$HOME/.profile"
+      OMS_THEME=$OMS_THEME_NEW
+      _theme_runner
+    fi
   else
     _error "Option '$1' not found" 'CLI' '2'
   fi

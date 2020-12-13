@@ -21,8 +21,18 @@ BGCOLOR[purple]='\033[45m'
 BGCOLOR[cyan]='\033[46m'
 BGCOLOR[white]='\033[47m'
 
-rightprompt()
-{
+rightprompt(){
   printf "%*s" $COLUMNS $1
 }
 
+_theme_runner(){
+  if [ -f "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"  ]
+  then
+    source "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"
+    #PS1="\[$(tput sc; rightprompt $OMS_THEME_RIGHT; tput rc)\]\[$(OMS_GIT)\]$OMS_THEME_PS"
+    PS1="$OMS_THEME_PS"
+  else
+    _error "Cannot found theme '$OMS_THEME'!!!" 'OhMySh' '1'
+    PS1="OhMySh::NoTheme \$ "
+  fi
+}
