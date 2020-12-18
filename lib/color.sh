@@ -40,7 +40,7 @@ _error(){
   else
     tp="[ERROR $3] OhMySh::$2"
   fi
-  bred " >> $tp : $1"
+  bred " $tp : $1"
 }
 
 _warn(){
@@ -50,6 +50,6 @@ _warn(){
   else
     tp="[WARNING] OhMySh::$2"
   fi
-  byellow " >> $tp : $1"
+  byellow " $tp : $1"
 }
 
