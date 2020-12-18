@@ -3,7 +3,8 @@
 _helpcommand(){
   cat <<EOF
                           Help --- OhMySh
-[Usage] ohmysh [OPTIONS]
+[Usage]:
+    ohmysh [OPTIONS] OR oms [OPTIONS]
 
 [OPTIONS]: 
     --update                    :    Update OhMySh
@@ -100,7 +101,7 @@ EOF
     then
       _warn "Disable plugin '$3'" 'CLI::Plugin'
       OMS_PLUGIN_NEW="$3"
-      sed -n "/OMS_PLUGIN=(/p" $HOME/.profile | sed "s/$OMS_PLUGIN_NEW//g" $HOME/.profile > "$OMS_CACHE/profile"
+      sed -n "/OMS_PLUGIN=(/p" $HOME/.profile | sed "s/$OMS_PLUGIN_NEW //g" $HOME/.profile > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
     elif [ "$2" = "restart" ]
     then
@@ -116,5 +117,5 @@ EOF
 }
 
 alias ohmysh="_maincommand $1 $2 $3 $4"
-
+alias oms="_maincommand $1 $2 $3 $4"
 

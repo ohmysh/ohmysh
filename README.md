@@ -2,13 +2,15 @@
 
 <b>The SH Shell Framework</b></center>
 
+[GitHub](https://github.com/ohmysh/ohmysh) | [FAQ](https://github.com/ohmysh/ohmysh/blob/main/FAQ.md) | [Getting Start](https://github.com/ohmysh/ohmysh#getting-started) | [Using OhMySh](https://github.com/ohmysh/ohmysh#using-ohmysh) | [View License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)
+
 OhMySh is an excellent configuration tool for **SH** that allows you to change the theme of your SH to a good looking one, OhMySh also supports plugins, so you can search for them in the repository. OhMySh also supports plugins and you can search for them in the repository. Of course, OhMySh allows you to write your own themes and plugins!
 
 # Getting Started
 
 ## Prepare
 
-OhMySh works on [SH shell (Bourne_shell)](https://en.wikipedia.org/wiki/Bourne_shell). 
+OhMySh works on [SH shell (Bourne shell)](https://en.wikipedia.org/wiki/Bourne_shell). 
 
 So `sh` should be installed, some other tools we need: `curl` `git` .
 
@@ -53,34 +55,45 @@ OhMySh have a lot of themes for you.
 
 ### Get Themes
 
-All theme of OMS is in `$OMS_DIR/usr/theme` folder.
+All theme of OMS is in `$OMS_DIR/usr/theme` folder, run this command to get list of themes:
+
+```sh
+oms --themelist
+```
 
 You can also creat a theme by yourself, look [This page](https://github.com/ohmysh/ohmysh/blob/main/usr/theme/readme.md).
 
 ### Change Theme
 
-Edit `.profile` file in **home** directory (`~` or `$HOME`).
+Run this command:
 
-Change variable `OMS_THEME` to new theme name.
+```sh
+oms -t THEME-NAME
+```
+
+> `THEME-NAME` is your new theme name
 
 ## Plugin
 
 ### Get Plugin
 
-All plugins of OMS is in `$OMS_DIR/usr/plugin` folder.
+All plugins of OMS is in `$OMS_DIR/usr/plugin` folder, run this command to get list of plugins.
+
+```sh
+oms --pluginlist
+```
 
 You can also creat a plugin by yourself, look [This page](https://github.com/ohmysh/ohmysh/blob/main/usr/plugin/readme.md).
 
 ### Run Plugin
 
-Edit `.profile` file in **home** directory (`~` or `$HOME`).
+Run this command:
 
-Change array `OMS_PLUGIN` to plugins name. Like:
+- `TYPE` : There are 3 types, `enable` (Enable a plugin), `disable` (Disable a plugin), `restart` (Restart a **ENABLED** plugin).
+- `PLUGIN-NAME` : The plugin name you want to run or stop.
 
 ```sh
-...
-OMS_PLUGIN=(helloworld wttr ...)
-...
+oms -p TYPE PLUGIN-NAME
 ```
 
 # OhMySh FAQ
@@ -89,7 +102,9 @@ OMS_PLUGIN=(helloworld wttr ...)
 
 # OhMySh Command Line Interface (CLI)
 
-See `ohmysh --help` .
+OhMySh Command Line Interface (CLI) is a command line tool for OhMySh. You can use it to change theme, run plugin and do more things!
+
+See `ohmysh --help` or `oms --help` .
 
 # Uninstalling OhMySh
 
