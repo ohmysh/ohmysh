@@ -17,3 +17,4 @@
 - **ERROR 2** : Run `ohmysh --help` to check your options
 
 - **Cannot found CLI** : Run Install Script again to fix it
+
