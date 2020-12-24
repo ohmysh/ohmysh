@@ -61,8 +61,6 @@ OMS_PLUGIN=(helloworld)
 # OhMySh main script
 source "\$OMS_DIR/main.sh"
 
-# Global defines
-# Such as 'alias XXXX="XXXX"'
 EOF
 }
 
@@ -108,6 +106,7 @@ fi
 echo ' >> Creating cache'
 mkdir -p "$OMS_CACHE"
 date +%Y%m%d > $OMS_CACHE/update
+cp "$OMS/lib/alias.e.sh" "$OMS_CACHE/alias.ohmysh.sh"
 
 echo ' OhMySh is already installed! '
 

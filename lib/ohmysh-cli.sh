@@ -19,6 +19,7 @@ _helpcommand(){
          disable [PLUGIN]       :    Disable a plugin
          restart [PLUGIN]       :    Restart a plugin
     --pluginlist                :    Get list of plugins
+    --alias [EDITOR]            :    Config aliases (EDITOR=vi)
 
 OhMySh Command Line Interface $OMS_CLI_VER
 EOF
@@ -111,6 +112,14 @@ EOF
   elif [ "$1" = "--pluginlist" ]
   then
     ls "$OMS_DIR/usr/plugin"
+  elif [ "$1" = "-a" ] || [ "$1" = "--alias" ]
+  then
+    if [ -z "$2" ]
+    then
+      vi "$OMS_CACHE/alias.ohmysh.sh"
+    else
+      $2 "$OMS_CACHE/alias.ohmysh.sh"
+    fi
   else
     _error "Option '$1' not found" 'CLI' '2'
   fi

@@ -10,9 +10,9 @@ OhMySh is an excellent configuration tool for **SH** that allows you to change t
 
 ## Prepare
 
-OhMySh works on [SH shell (Bourne shell)](https://en.wikipedia.org/wiki/Bourne_shell). 
+OhMySh works on [SH shell (Bourne shell)](https://en.wikipedia.org/wiki/Bourne_shell) or GNU-Bash. 
 
-So `sh` should be installed, some other tools we need: `curl` `git` .
+So `sh (>=5.x.x)` should be installed, some other tools we need: `curl` `git` .
 
 ## Installation
 
@@ -96,6 +96,11 @@ Run this command:
 oms -p TYPE PLUGIN-NAME
 ```
 
+## Aliases
+
+If you want to add some aliases, run `oms --alias` (and edit with `vi`) or `oms --alias EDITOR` (edit with `EDITOR`)
+
+
 # OhMySh FAQ
 
 [FAQ](https://github.com/ohmysh/ohmysh/blob/main/FAQ.md)
@@ -133,3 +138,4 @@ OhMySh is not a best project, We need you to help us.
 - PullRequest GitHub Repo `ohmysh/ohmysh`
 
 Thanks so much!
+

@@ -19,6 +19,7 @@ source "$OMS_DIR/lib/theme.sh"
 source "$OMS_DIR/lib/plugin.sh"
 source "$OMS_DIR/lib/check-command.sh"
 source "$OMS_DIR/lib/git.sh"
+source "$OMS_DIR/lib/alias.sh"
 
 source "$OMS_DIR/lib/ohmysh-cli.sh"
 
@@ -29,4 +30,6 @@ _theme_runner
 for _p in ${OMS_PLUGIN[@]}; do
   _plugin_runner "$_p"
 done
+
+cd ~
 
