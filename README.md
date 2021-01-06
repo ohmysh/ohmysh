@@ -4,7 +4,7 @@
 
 [GitHub](https://github.com/ohmysh/ohmysh) | [FAQ](https://github.com/ohmysh/ohmysh/blob/main/FAQ.md) | [Getting Start](https://github.com/ohmysh/ohmysh#getting-started) | [Using OhMySh](https://github.com/ohmysh/ohmysh#using-ohmysh) | [View License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)
 
-OhMySh is an excellent configuration tool for **SH** that allows you to change the theme of your SH to a good looking one, OhMySh also supports plugins, so you can search for them in the repository. OhMySh also supports plugins and you can search for them in the repository. Of course, OhMySh allows you to write your own themes and plugins!
+OhMySh is an excellent configuration tool for **SH** that allows you to change the theme of your SH to a good looking one , OhMySh also supports plugins , . So you can search for them in the repository . OhMySh also supports plugins and you can search for them in the repository . Of course , OhMySh allows you to write your own themes and plugins !
 
 # Getting Started
 
