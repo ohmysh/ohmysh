@@ -31,7 +31,7 @@ Run the following script with **any** shell.
 sh --login
 ```
 
-> ### Why with `--login` option
+> ### Running SH with `--login` option
 > 
 > If you run SH with the `--login` option, SH will run OMS automatically.
 
