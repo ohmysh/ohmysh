@@ -2,30 +2,30 @@
 
 <b>The SH Shell Framework</b></center>
 
-[GitHub](https://github.com/ohmysh/ohmysh) | [FAQ](https://github.com/ohmysh/ohmysh/blob/main/FAQ.md) | [Getting Start](https://github.com/ohmysh/ohmysh#getting-started) | [Using OhMySh](https://github.com/ohmysh/ohmysh#using-ohmysh) | [View License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)
+[GitHub](https://github.com/ohmysh/ohmysh) | [FAQ](https://github.com/ohmysh/ohmysh/blob/main/FAQ.md) | [Getting Started](https://github.com/ohmysh/ohmysh#getting-started) | [Using OhMySh](https://github.com/ohmysh/ohmysh#using-ohmysh) | [View the  License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)
 
-OhMySh is an excellent configuration tool for **SH** that allows you to change the theme of your SH to a good looking one, OhMySh also supports plugins. So you can search for them in the repository. OhMySh also supports plugins and you can search for them in the repository. Of course, OhMySh allows you to write your own themes and plugins!
+OhMySh is an excellent configuration tool for **SH** that allows you to change the theme of SH. OhMySh supports plugins. You can get them from the repository. OhMySh also supports plugins. You can get them from the repository too. For advanced users, OhMySh also supports customized themes and plugins!
 
 # Getting Started
 
-## Prepare
+## Preparation
 
-OhMySh works on [SH shell (Bourne shell)](https://en.wikipedia.org/wiki/Bourne_shell) or GNU-Bash. 
+OhMySh works with [SH shell (Bourne shell)](https://en.wikipedia.org/wiki/Bourne_shell) and GNU-Bash. 
 
-So `sh (>=5.x.x)` should be installed, some other tools we need: `curl` `git` .
+So make sure `sh (>=5.x.x)` was installed. There are some dependences: `curl` `git` .
 
 ## Installation
 
-Run scripts below here in SH.
+Run the following commands with SH.
 
 ```sh
 curl https://raw.githubusercontent.com/ohmysh/ohmysh/main/install.sh > OMSInstaller.sh
 sh OMSInstaller.sh
 ```
 
-## Checking Install
+## Checking the Installation
 
-Run script below here in **any** shell.
+Run the following script with **any** shell.
 
 ```sh
 sh --login
@@ -33,73 +33,70 @@ sh --login
 
 > ### Why with `--login` option
 > 
-> If you add `--login` option, SH will run OMS. If you don't, SH will not run OMS.
+> If you run SH with the `--login` option, SH will run OMS automatically.
 
-## Change Shell and Start to use
+## Getting ready to use
 
-If you had not change sh when Install Script asked you, you can run this script:
+If you didn't change default shell to SH while installing the OMS, you can run this comand and reboot your machine after that:
 
 ```sh
 chsh -s /bin/sh
 ```
 
-And then : restart computer!
-
-**Or** you can run command-line `sh --login` when you want use SH and OMS.
+**Or** run command `sh --login` if you want to use it.
 
 # Using OhMySh
 
 ## Themes
 
-OhMySh have a lot of themes for you.
+OhMySh has various themes for you.
 
-### Get Themes
+### Getting the Theme
 
-All theme of OMS is in `$OMS_DIR/usr/theme` folder, run this command to get list of themes:
+All the themes of OMS are installed at `$OMS_DIR/usr/theme`. Run the following command to get a list of them:
 
 ```sh
 oms --themelist
 ```
 
-You can also creat a theme by yourself, look [This page](https://github.com/ohmysh/ohmysh/blob/main/usr/theme/readme.md).
+You can also make a customized theme by yourself. Read [This page](https://github.com/ohmysh/ohmysh/blob/main/usr/theme/readme.md).
 
-### Change Theme
+### Changing the Theme
 
-Run this command:
+Run the following command:
 
 ```sh
 oms -t THEME-NAME
 ```
 
-> `THEME-NAME` is your new theme name
+> `THEME-NAME` is the name of the theme you want.
 
-## Plugin
+## Plugins
 
-### Get Plugin
+### Getting Plugins
 
-All plugins of OMS is in `$OMS_DIR/usr/plugin` folder, run this command to get list of plugins.
+All the plugins of OMS are installed at `$OMS_DIR/usr/plugin` folder. Run the following command to get a list of them.
 
 ```sh
 oms --pluginlist
 ```
 
-You can also creat a plugin by yourself, look [This page](https://github.com/ohmysh/ohmysh/blob/main/usr/plugin/readme.md).
+You can also make a customized plugin by yourself. Read [This page](https://github.com/ohmysh/ohmysh/blob/main/usr/plugin/readme.md).
 
-### Run Plugin
+### Running Plugins
 
-Run this command:
-
-- `TYPE` : There are 3 types, `enable` (Enable a plugin), `disable` (Disable a plugin), `restart` (Restart a **ENABLED** plugin).
-- `PLUGIN-NAME` : The plugin name you want to run or stop.
+Run the following command:
 
 ```sh
 oms -p TYPE PLUGIN-NAME
 ```
 
+- `TYPE` : There are 3 options, `enable` (Enable a plugin), `disable` (Disable a plugin), `restart` (Restart a **ENABLED** plugin).
+- `PLUGIN-NAME` : The plugin name you want.
+
 ## Aliases
 
-If you want to add some aliases, run `oms --alias` (and edit with `vi`) or `oms --alias EDITOR` (edit with `EDITOR`)
-
+If you want to modify the aliases settings, run `oms --alias` (and edit it with `vi`) or `oms --alias EDITOR` (edit it with the custom `EDITOR`)
 
 # OhMySh FAQ
 
@@ -107,23 +104,23 @@ If you want to add some aliases, run `oms --alias` (and edit with `vi`) or `oms 
 
 # OhMySh Command Line Interface (CLI)
 
-OhMySh Command Line Interface (CLI) is a command line tool for OhMySh. You can use it to change theme, run plugin and do more things!
+OhMySh Command Line Interface (CLI) is a command line tool for OhMySh. You can use it to change the theme, run plugins and do more things!
 
 See `ohmysh --help` or `oms --help` .
 
 # Uninstalling OhMySh
 
-- If you don't like OhMySh, you can uninstall OhMySh.
+- If you want to remove OhMySh (TwT), uninstall it with the following command.
 
 ```sh
 ohmysh --uninstall
 ```
 
-- If you don't want to use SH, you can change shell.
+- Changing back to the default shell
 
 ```sh
-chsh -l                   to get list of your shells
-chsh -s SHELL-FROM-LIST   to change shell
+chsh -l                   getting list of shells
+chsh -s SHELL-FROM-LIST   changing the default shell
 ```
 
 # License
@@ -132,10 +129,9 @@ OhMySh is under MIT-License.
 
 # Contributors
 
-OhMySh is not a best project, We need you to help us.
+OhMySh is not the best. We need your help. Contact us by the following ways:
 
 - Email `wjy@516wjy.xyz`
 - PullRequest GitHub Repo `ohmysh/ohmysh`
 
-Thanks so much!
-
+Thanks!
