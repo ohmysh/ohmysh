@@ -12,7 +12,7 @@ OhMySh is an excellent configuration tool for **SH** that allows you to change t
 
 OhMySh works with [SH shell (Bourne shell)](https://en.wikipedia.org/wiki/Bourne_shell) and GNU-Bash. 
 
-So make sure `sh (>=5.x.x)` was installed. There are some dependences: `curl` `git` .
+So make sure `sh (>=5.x.x)` was installed. There are some other dependences: `curl` `git` .
 
 ## Installation
 
