@@ -18,3 +18,8 @@
 
 - **Cannot found CLI** : Run Install Script again to fix it
 
+## Known Problems
+
+> We will solve them quickly.
+
+- Some shell cannot run main.sh script error
