@@ -27,11 +27,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Prepare config file
-        shell: sh
         run: sh ./test/prepare.sh
 
       - name: Run OhMySH
-        shell: sh
-        run: |
-          . ./.oms
-          . ./main.sh
+        run: sh ./.oms
