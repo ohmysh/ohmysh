@@ -2,8 +2,7 @@
 
 path=$(pwd)
 
-mkdir build
-mkdir build/cache
+mkdir test/cache
 
 cat <<EOF > "$path/.oms"
 #
@@ -12,7 +11,7 @@ cat <<EOF > "$path/.oms"
 #
 # OhMySh work dir. Please don't edit it!
 OMS_DIR='$path'
-OMS_CACHE='$path/build/cache'
+OMS_CACHE='$path/test/cache'
 # OhMySh theme
 OMS_THEME='colorshell'
 OMS_PLUGIN=()
