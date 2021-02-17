@@ -33,4 +33,4 @@ jobs:
         run: cat .oms
 
       - name: Run OhMySH
-        run: sh ./.oms
+        run: . .oms
