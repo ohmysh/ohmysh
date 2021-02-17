@@ -29,5 +29,8 @@ jobs:
       - name: Prepare config file
         run: sh ./test/prepare.sh
 
+      - name: Test Configuration file
+        run: cat .oms
+
       - name: Run OhMySH
         run: sh ./.oms
