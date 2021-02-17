@@ -2,11 +2,13 @@
 
 <b>The SH Shell Framework</b></center>
 
-[GitHub](https://github.com/ohmysh/ohmysh) | [FAQ](https://github.com/ohmysh/ohmysh/blob/main/FAQ.md) | [Getting Started](https://github.com/ohmysh/ohmysh#getting-started) | [Using OhMySh](https://github.com/ohmysh/ohmysh#using-ohmysh) | [View the  License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)
+[GitHub](https://github.com/ohmysh/ohmysh) | [FAQ](https://ohmysh.github.io/docs/?file=003-FAQ/001-FAQ) | [Getting Started](https://ohmysh.github.io/docs/?file=001-Getting%20Started/001-Installation%20Guide) | [Using OhMySh](https://ohmysh.github.io/docs/?file=002-Using%20OhMySH/001-Themes) | [View the  License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)
 
 OhMySh is an excellent configuration tool for **SH** that allows you to change the theme of SH. OhMySh supports plugins. You can get them from the repository. OhMySh also supports plugins. You can get them from the repository too. For advanced users, OhMySh also supports customized themes and plugins!
 
 # Getting Started
+
+[More in our docs](https://ohmysh.github.io/docs/?file=001-Getting%20Started/001-Installation%20Guide)
 
 ## Preparation
 
@@ -47,60 +49,11 @@ chsh -s /bin/sh
 
 # Using OhMySh
 
-## Themes
-
-OhMySh has various themes for you.
-
-### Getting the Theme
-
-All the themes of OMS are installed at `$OMS_DIR/usr/theme`. Run the following command to get a list of them:
-
-```sh
-oms --themelist
-```
-
-You can also make a customized theme by yourself. Read [This page](https://github.com/ohmysh/ohmysh/blob/main/usr/theme/readme.md).
-
-### Changing the Theme
-
-Run the following command:
-
-```sh
-oms -t THEME-NAME
-```
-
-> `THEME-NAME` is the name of the theme you want.
-
-## Plugins
-
-### Getting Plugins
-
-All the plugins of OMS are installed at `$OMS_DIR/usr/plugin` folder. Run the following command to get a list of them.
-
-```sh
-oms --pluginlist
-```
-
-You can also make a customized plugin by yourself. Read [This page](https://github.com/ohmysh/ohmysh/blob/main/usr/plugin/readme.md).
-
-### Running Plugins
-
-Run the following command:
-
-```sh
-oms -p TYPE PLUGIN-NAME
-```
-
-- `TYPE` : There are 3 options, `enable` (Enable a plugin), `disable` (Disable a plugin), `restart` (Restart a **ENABLED** plugin).
-- `PLUGIN-NAME` : The plugin name you want.
-
-## Aliases
-
-If you want to modify the aliases settings, run `oms --alias` (and edit it with `vi`) or `oms --alias EDITOR` (edit it with the custom `EDITOR`)
+[See in Docs](https://ohmysh.github.io/docs)
 
 # OhMySh FAQ
 
-[FAQ](https://github.com/ohmysh/ohmysh/blob/main/FAQ.md)
+[FAQ](https://ohmysh.github.io/docs/index.html?file=003-FAQ/001-FAQ)
 
 # OhMySh Command Line Interface (CLI)
 
@@ -108,20 +61,9 @@ OhMySh Command Line Interface (CLI) is a command line tool for OhMySh. You can u
 
 See `ohmysh --help` or `oms --help` .
 
-# Uninstalling OhMySh
+# More
 
-- If you want to remove OhMySh (TwT), uninstall it with the following command.
-
-```sh
-ohmysh --uninstall
-```
-
-- Changing back to the default shell
-
-```sh
-chsh -l                   getting list of shells
-chsh -s SHELL-FROM-LIST   changing the default shell
-```
+[Our Docs](https://ohmysh.github.io/docs)
 
 # License
 
