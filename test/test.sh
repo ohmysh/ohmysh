@@ -1,3 +1,5 @@
+. .oms
+
 oms -h
 ohmysh -h
 
