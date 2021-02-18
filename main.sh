@@ -4,7 +4,7 @@
 # main SH Script
 # 
 
-if [ "$OMS_DIR" == "" ]
+if [ -z "$OMS_DIR" ]
 then
   echo " >> OMS settings error !!! "
   exit 1
