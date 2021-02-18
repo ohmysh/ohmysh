@@ -3,8 +3,15 @@
 # OhMySh
 
 # config
-OMS="$HOME/.ohmysh"
-OMS_CACHE="$HOME/.ohmysh-cache"
+if [ -z $OMS ]
+then
+  OMS="$HOME/.ohmysh"
+fi
+if [ -z $OMS_CACHE ]
+then
+  OMS_CACHE="$HOME/.ohmysh-cache"
+fi
+
 OMS_RC="#
 # CREATED BY OhMySh <https://github.com/ohmysh/ohmysh>
 # OhMySh
@@ -25,6 +32,7 @@ source \"\$OMS_DIR/main.sh\"
 # Such as 'alias XXXX=\"XXXX\"'
 "
 OMS_RC_D="$HOME/.profile"
+OMS_RC_BASH="$HOME/.bashrc"
 NF="NEWFILE"
 
 if [ -f "$HOME/.ohmysh-backup" ]
@@ -76,10 +84,15 @@ then
     omsconfig
   else
     cat <<EOF
-Installer Help --- OhMySh
+                     Installer Help --- OhMySh
 [OPTIONS]
-    --help      :   Get help
-    --config    :   Config only
+    --help                           :   Get help
+    --config                         :   Config only
+
+[Advanced Settings]
+    OMS=XXX ./OMSInstaller.sh        :   Change OMS install path
+    OMS_CACHE=XXX ./OMSInstaller.sh  :   Change OMS Cache path
+
 OhMySh Installer Script
 EOF
   fi

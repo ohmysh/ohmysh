@@ -4,6 +4,8 @@ path=$(pwd)
 
 mkdir test/cache
 
+sh lib/whatshell.sh
+
 cat <<EOF > "$path/.oms"
 #
 # CREATED BY OhMySh <https://github.com/ohmysh/ohmysh>

@@ -2,6 +2,11 @@
 
 # OMS UPDATER
 
+if [ -z $(cat $OMS_CACHE/update) ]
+then
+  echo $(date +%Y%m%d > $OMS_CACHE/update)
+fi
+
 if [ $(cat $OMS_CACHE/update) != $(date +%Y%m%d) ] || [ ! -z $forceUpdate ]
 then
   echo " OhMySh::Updater : Getting update... "
