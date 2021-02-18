@@ -35,5 +35,3 @@ jobs:
       - name: Run OhMySH
         run: . .oms
         
-      - name: CLI Test
-        run: bash ./test/test.sh
