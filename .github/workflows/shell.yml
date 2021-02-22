@@ -28,3 +28,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run Shellcheck
         uses: azohra/shell-linter@latest
+        with:
+          path: "main.sh,install.sh"
+          
