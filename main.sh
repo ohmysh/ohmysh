@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Made by OhMySh Dev
 # main SH Script
