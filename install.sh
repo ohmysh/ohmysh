@@ -103,12 +103,12 @@ fi
 echo ' >> Preparing Install'
 checkcommand git Installer
 if [ $? == 1 ] ; then
-  echo ' >> [ERROR 1] OhMySh::Installer : ERROR Failed to install OhMySh!!! '
+  echo ' [ERROR 1] OhMySh::Installer : ERROR Failed to install OhMySh!!! '
   exit 1
 fi
 if [ -d "$OMS" ]
 then
-  echo ' >> [ERROR 2] OhMySh::Installer : You had installed OhMySh!!! '
+  echo ' [ERROR 2] OhMySh::Installer : You had installed OhMySh!!! '
 fi
 echo ' >> Getting OMS'
 git clone https://github.com/ohmysh/ohmysh.git "$OMS"
@@ -126,16 +126,9 @@ echo ' OhMySh is already installed! '
 # config
 echo ' Configing... '
 echo ' >> Checking shell'
-if [ $SHELL != "/bin/sh" ] ; then
-  echo '    -> Do you want to change shell to "sh"? It will work with OhMySh (Y/N)'
-  read ch
-  if [ "$ch" = 'Y' ] || [ "$ch" = 'y' ] ; then
-    echo '    -> Change shell to "sh" '
-    chsh -s /bin/sh || echo '    -> Change ERROR!!! Try to run "chsh -s /bin/sh" when script exit'
-  else
-    echo '    -> You chose NO'
-  fi
-fi
+
+echo " [INFO] Your shell is $SHELL"
+echo ' [INFO] If your shell is not /bin/sh or /bin/bash, Run chsh -s /bin/sh'
 
 source "$OMS/lib/ohmysh-version.sh"
 echo " Installed OhMySh Version $OMS_VER!"
