@@ -1,6 +1,6 @@
 ## blue to echo 
 function blue(){
-    echo -e "\033[34m[ $1 ]\033[0m"
+    echo -e "\033[34m$1\033[0m"
 }
 
 
@@ -51,5 +51,15 @@ _warn(){
     tp="[WARNING] OhMySh::$2"
   fi
   byellow " $tp : $1"
+}
+
+_info(){
+    if [ -z $2  ]
+    then
+        tp="[INFO] OhMySh"
+    else
+        tp="[INFO] OhMySh::$2"
+    fi
+    blue " $tp : $1"
 }
 
