@@ -35,4 +35,4 @@ jobs:
         shell: bash
         run: |
           # . ~/.profile
-          oms -v
+          . ~/.bashrc && oms -v
