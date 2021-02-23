@@ -15,6 +15,7 @@ then
   _CACHE_BUILD="$OMS_BUILD"
   _CACHE_CLI_VERSION="$OMS_CLI_VER"
   _CACHE_CLI_BUILD="$OMS_CLI_BUILD"
+  _CACHE_PLUGIN=(${OMS_PLUGIN[*]})
   cd $OMS_DIR
   git pull || echo " OhMySh::Updater : ERROR cannot get update!!! "
   source $OMS_DIR/lib/ohmysh-version.sh

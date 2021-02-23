@@ -32,10 +32,11 @@ _maincommand(){
     _helpcommand
   elif [ "$1" = "--update" ]
   then
-    _warn 'Updating OhMySh' 'CLI'
+    _info 'Updating OhMySh' 'CLI'
     forceUpdate=1
     source "$OMS_DIR/lib/update.sh"
     unset forceUpdate
+    #. ~/.profile
   elif [ "$1" = "--help" ] || [ "$1" = "-h" ]
   then
     _helpcommand
@@ -48,9 +49,9 @@ _maincommand(){
       _warn 'Uninstalling OhMySh' 'CLI'
       mv "$HOME/.profile" "$HOME/.ohmysh-backup"
       rm -rf "$OMS_DIR"
-      _warn 'Uninstalled OhMySh, Thanks for use!' 'CLI'
+      _info 'Uninstalled OhMySh, Thanks for use!' 'CLI'
     else
-      _warn 'You chose No' 'CLI'
+      _info 'You chose No' 'CLI'
     fi
   elif [ "$1" = "--version" ] || [ "$1" = "-v" ]
   then
@@ -95,14 +96,14 @@ EOF
     then
       _warn "Enable plugin '$3'" 'CLI::Plugin'
       OMS_PLUGIN_NEW="$3"
-      sed -n "/OMS_PLUGIN=(/p" $HOME/.profile | sed "s/(/($OMS_PLUGIN_NEW /" $HOME/.profile > "$OMS_CACHE/profile"
+      sed -n "/OMS_PLUGIN=(/p" $HOME/.profile | sed "s/(/(\"$OMS_PLUGIN_NEW\" /" $HOME/.profile > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
       _plugin_runner "$OMS_PLUGIN_NEW"
     elif [ "$2" = "disable" ]
     then
       _warn "Disable plugin '$3'" 'CLI::Plugin'
       OMS_PLUGIN_NEW="$3"
-      sed -n "/OMS_PLUGIN=(/p" $HOME/.profile | sed "s/$OMS_PLUGIN_NEW //g" $HOME/.profile > "$OMS_CACHE/profile"
+      sed -n "/OMS_PLUGIN=(/p" $HOME/.profile | sed "s/\"$OMS_PLUGIN_NEW\" //g" $HOME/.profile > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
     elif [ "$2" = "restart" ]
     then
