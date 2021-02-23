@@ -23,7 +23,7 @@ OMS_CACHE='$OMS_CACHE'
 
 # OhMySh theme
 OMS_THEME='colorshell'
-OMS_PLUGIN=(helloworld)
+OMS_PLUGIN=()
 
 # OhMySh main script
 source \"\$OMS_DIR/main.sh\"
@@ -64,7 +64,7 @@ OMS_CACHE='$OMS_CACHE'
 
 # OhMySh theme
 OMS_THEME='colorshell'
-OMS_PLUGIN=(helloworld)
+OMS_PLUGIN=()
 
 # OhMySh main script
 source "\$OMS_DIR/main.sh"
