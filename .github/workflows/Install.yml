@@ -28,7 +28,11 @@ jobs:
       - name: Install OMS
         run: sh install.sh
         
+      - name: Bash runtime
+        run: echo ". ~/.profile" >> ~/.bashrc
+        
       - name: Run OMS
+        shell: bash
         run: |
-          . ~/.profile
+          # . ~/.profile
           oms -v
