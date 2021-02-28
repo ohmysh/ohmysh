@@ -4,7 +4,7 @@
 
 ## Creat a new theme by yourself
 
-1. Creat a folder and named with your theme name.
+1. Creat a folder and named with your theme name in `$OMS_DIR/usr/local/theme`.
 2. Creat a file and named `YOUR-THEME-NAME.theme.sh`
 3. Edit it
 
@@ -49,4 +49,12 @@ It will be: `USERNAME@HOSTNAME PATH $ `
 ### Colors
 
 See `/lib/theme.sh`
+
+## Publish to OhMySH official theme group
+
+If you want to publish to our official theme group, you may have to do this:
+
+1. Pull a request on `ohmysh/ohmysh` of GitHub repo.
+2. Move your theme folder into `$OMS_DIR/usr/theme/`
+
 

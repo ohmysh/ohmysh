@@ -24,13 +24,17 @@ source "$OMS_DIR/lib/alias.sh"
 
 source "$OMS_DIR/lib/ohmysh-cli.sh"
 
-# RUN THEME
-_theme_runner
-
 # RUN PLUGIN
 for _p in ${OMS_PLUGIN[@]}; do
   _plugin_runner "$_p"
 done
+
+# RUN THEME
+_theme_runner
+
+# RUN Runtime Script
+#source "$OMS_DIR/lib/runtime-script.sh"
+#rm -f "$OMS_CACHE/runtime-script/*.sh"
 
 cd ~
 
