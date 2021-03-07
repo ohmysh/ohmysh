@@ -111,7 +111,7 @@ then
   echo ' [ERROR 2] OhMySh::Installer : You had installed OhMySh!!! '
 fi
 echo ' >> Getting OMS'
-git clone https://github.com/ohmysh/ohmysh.git "$OMS"
+git clone https://github.com/ohmysh/ohmysh.git "$OMS" || exit 3
 echo ' >> Putting config file'
 if [ "$NF" = "NEWFILE" ] ; then
   omsconfig
