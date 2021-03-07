@@ -20,6 +20,7 @@ _helpcommand(){
          restart [PLUGIN]       :    Restart a plugin
     --pluginlist                :    Get list of plugins
     --alias [EDITOR]            :    Config aliases (EDITOR=vi)
+    --chsh [SHELL (sh|bash)]    :    Creat config file for [SHELL]
 
 OhMySh Command Line Interface $OMS_CLI_VER
 EOF
@@ -85,6 +86,8 @@ EOF
     fi
   elif [ "$1" = "--themelist" ]
   then
+    _info "You are using the theme: $OMS_THEME" 'CLI::Theme'
+    echo ' List of themes:'
     ls "$OMS_DIR/usr/theme"
   elif [ "$1" = "--plugin" ] || [ "$1" = "-p" ]
   then
@@ -112,6 +115,8 @@ EOF
     fi
   elif [ "$1" = "--pluginlist" ]
   then
+    _info "You are using these plugins: ${OMS_PLUGIN[@]}"
+    echo ' List of plugins:'
     ls "$OMS_DIR/usr/plugin"
   elif [ "$1" = "-a" ] || [ "$1" = "--alias" ]
   then
@@ -120,6 +125,21 @@ EOF
       vi "$OMS_CACHE/alias.ohmysh.sh"
     else
       $2 "$OMS_CACHE/alias.ohmysh.sh"
+    fi
+  elif [ "$1" = "--chsh"]
+  then
+    if [ -z "$2" ]
+    then
+      _error "Cannot read sub-option [SHELL]" 'CLI::Plugin'
+      _helpcommand
+    else
+      _warn "Changing your shell to $2" "CLI"
+      if [ "$2" = "sh" ] || [ "$2" = "/bin/sh" ]
+      then
+        echo '. ~/.profile' >> ~/.bashrc
+      else
+        echo '. ~/.profile' >> "~/."$2"rc"
+      fi
     fi
   else
     _error "Option '$1' not found" 'CLI' '2'
