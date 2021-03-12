@@ -66,6 +66,7 @@ OhMySh Theme        :  $OMS_THEME
 OhMySh Path         :  $OMS_DIR
 OhMySh Cache Path   :  $OMS_CACHE
 OhMySh Profile Path :  $HOME/.profile
+                       $HOME/.bashrc
 OhMySh Logged User  :  $USER
 System Shell        :  $SHELL
 
