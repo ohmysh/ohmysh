@@ -70,6 +70,7 @@ OMS_PLUGIN=()
 source "\$OMS_DIR/main.sh"
 
 EOF
+  echo ". $OMS_RC_D" >> "$HOME/.bashrc"
 }
 
 echo ' Welcome to OhMySh installer script! '
