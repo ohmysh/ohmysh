@@ -2,6 +2,8 @@
 
 <b>The Shell Framework</b></center>
 
+![Tag version](https://img.shields.io/github/v/tag/ohmysh/ohmysh?include_prereleases)   ![GitHub](https://img.shields.io/github/license/ohmysh/ohmysh)   ![GitHub last commit](https://img.shields.io/github/last-commit/ohmysh/ohmysh)   ![GitHub top language](https://img.shields.io/github/languages/top/ohmysh/ohmysh)
+
 [GitHub](https://github.com/ohmysh/ohmysh) | [Docs](https://ohmysh.github.io/docs-v2) | [Getting Started](https://ohmysh.github.io/docs-v2/#/getting-started/install) | [View the  License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)
 
 OhMySh is an excellent configuration tool for **SH** that allows you to change the theme of SH. OhMySh supports plugins. You can get them from the repository. OhMySh also supports plugins. You can get them from the repository too. For advanced users, OhMySh also supports customized themes and plugins!
