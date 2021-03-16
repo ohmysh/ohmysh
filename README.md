@@ -2,13 +2,13 @@
 
 <b>The Shell Framework</b></center>
 
-[GitHub](https://github.com/ohmysh/ohmysh) | [FAQ](https://ohmysh.github.io/docs-v2/#/other/faq) | [Getting Started](https://ohmysh.github.io/docs-v2/#/getting-started/install) | [View the  License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)
+[GitHub](https://github.com/ohmysh/ohmysh) | [Docs](https://ohmysh.github.io/docs-v2) | [Getting Started](https://ohmysh.github.io/docs-v2/#/getting-started/install) | [View the  License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)
 
 OhMySh is an excellent configuration tool for **SH** that allows you to change the theme of SH. OhMySh supports plugins. You can get them from the repository. OhMySh also supports plugins. You can get them from the repository too. For advanced users, OhMySh also supports customized themes and plugins!
 
 # Getting Started
 
-[More in our docs](https://ohmysh.github.io/docs/?file=001-Getting%20Started/001-Installation%20Guide)
+[More in our docs](https://ohmysh.github.io/docs-v2/#/getting-started/install)
 
 ## Preparation
 
@@ -16,7 +16,7 @@ OhMySh works with [SH shell (Bourne shell)](https://en.wikipedia.org/wiki/Bourne
 
 So make sure `sh (>=5.x.x)` was installed. There are some other dependences: `curl` `git` .
 
-## Installation
+## Quick Installation
 
 Run the following commands with SH.
 
@@ -25,35 +25,27 @@ curl https://raw.githubusercontent.com/ohmysh/ohmysh/main/install.sh > OMSInstal
 sh OMSInstaller.sh
 ```
 
-## Checking the Installation
-
-Run the following script with **any** shell.
-
-```sh
-sh --login
-```
-
-> ### Running SH with `--login` option
+> ### Some info for Chinese users
 > 
-> If you run SH with the `--login` option, SH will run OMS automatically.
+> [网络问题解决方案](https://ohmysh.github.io/docs-v2/#/zh_cn/getting-started/install?id=%e4%b8%ad%e5%9b%bd%e7%94%a8%e6%88%b7%e6%8f%90%e7%a4%ba)
 
 ## Getting ready to use
 
 If you didn't change default shell to SH while installing the OMS, you can run this comand and reboot your machine after that:
 
 ```sh
-chsh -s /bin/sh
+chsh -s /bin/bash
 ```
 
 **Or** run command `sh --login` if you want to use it.
 
 # Using OhMySh
 
-[See in Docs](https://ohmysh.github.io/docs)
+[See in Docs](https://ohmysh.github.io/docs-v2)
 
 # OhMySh FAQ
 
-[FAQ](https://ohmysh.github.io/docs/index.html?file=003-FAQ/001-FAQ)
+[FAQ](https://ohmysh.github.io/docs-v2/#/other/faq)
 
 # OhMySh Command Line Interface (CLI)
 
@@ -63,7 +55,7 @@ See `ohmysh --help` or `oms --help` .
 
 # More
 
-[Our Docs](https://ohmysh.github.io/docs)
+[Our Docs](https://ohmysh.github.io/docs-v2)
 
 # License
 
