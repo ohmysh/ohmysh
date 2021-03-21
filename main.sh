@@ -33,7 +33,7 @@ done
 _theme_runner
 
 # RUN Runtime Script
-#source "$OMS_DIR/lib/runtime-script.sh"
+source "$OMS_DIR/lib/runtime-script.sh"
 #rm -f "$OMS_CACHE/runtime-script/*.sh"
 
 cd ~

@@ -121,6 +121,7 @@ echo ' >> Creating cache'
 mkdir -p "$OMS_CACHE"
 date +%Y%m%d > $OMS_CACHE/update
 cp "$OMS/lib/alias.e.sh" "$OMS_CACHE/alias.ohmysh.sh"
+mkdir -p "$OMS_CACHE/runtime-script"
 
 echo ' OhMySh is already installed! '
 
