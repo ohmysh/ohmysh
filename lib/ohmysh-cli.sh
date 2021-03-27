@@ -22,6 +22,10 @@ _helpcommand(){
     --alias [EDITOR]            :    Config aliases (EDITOR=vi)
     --chsh [SHELL (sh|bash)]    :    Creat config file for [SHELL]
 
+More information about using OhMySh, visit our documents: 
+- https://ohmysh.github.io/docs-v2
+- https://ohmysh.gitee.io/docs-v2
+
 OhMySh Command Line Interface $OMS_CLI_VER
 EOF
 }

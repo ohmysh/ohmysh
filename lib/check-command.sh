@@ -7,3 +7,11 @@ checkcommand(){
   return 0
 }
 
+checkcmd(){
+    if command -v $1 >/dev/null 2>&1; then 
+        echo '1' 
+    else 
+        echo 'Command Not Found!' 
+    fi
+}
+
