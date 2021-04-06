@@ -11,6 +11,10 @@ if [ -z $OMS_CACHE ]
 then
   OMS_CACHE="$HOME/.ohmysh-cache"
 fi
+if [ -z $REPO ]
+then
+  REPO="https://github.com/ohmysh/ohmysh"
+fi
 
 OMS_RC="#
 # CREATED BY OhMySh <https://github.com/ohmysh/ohmysh>
@@ -93,6 +97,7 @@ then
 [Advanced Settings]
     OMS=XXX ./OMSInstaller.sh        :   Change OMS install path
     OMS_CACHE=XXX ./OMSInstaller.sh  :   Change OMS Cache path
+    REPO=XXX ./OMSInstaller.sh.      :   Change OMS repo
 
 OhMySh Installer Script
 EOF
@@ -112,7 +117,7 @@ then
   echo ' [ERROR 2] OhMySh::Installer : You had installed OhMySh!!! '
 fi
 echo ' >> Getting OMS'
-git clone https://github.com/ohmysh/ohmysh.git "$OMS" || exit 3
+git clone "$REPO" "$OMS" || exit 3
 echo ' >> Putting config file'
 if [ "$NF" = "NEWFILE" ] ; then
   omsconfig
