@@ -1,4 +1,4 @@
-<center><h1><img src="https://516wjy.xyz:516/OhMySh-width-new.png" alt="OhMySh Icon"></h1>
+<center><h1><img src="https://cdn.statically.io/gh/ohmysh/image/main/OhMySh-icon-2framework.png" alt="OhMySh Icon"></h1>
 
 <b>The Shell Framework</b></center>
 
