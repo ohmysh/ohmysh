@@ -6,8 +6,8 @@
 
 if [ -z "$OMS_DIR" ]
 then
-  echo " >> OMS settings error !!! "
-  exit 1
+  echo " [ERROR 3] OMS settings error !!! "
+  exit 3
 fi
 
 source "$OMS_DIR/lib/ohmysh-version.sh"

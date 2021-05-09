@@ -7,6 +7,6 @@ _plugin_runner(){
   then
     source "$OMS_DIR/usr/local/plugin/$plug/$plug.plugin.sh"
   else
-    _error "Cannot run plugin '$plug'" 'OhMySh' '2'
+    _error "Cannot run plugin '$plug'" 'OhMySh' '5'
   fi
 }
