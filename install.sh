@@ -136,7 +136,15 @@ echo ' Configing... '
 echo ' >> Checking shell'
 
 echo " [INFO] Your shell is $SHELL"
-echo ' [INFO] If your shell is not /bin/sh or /bin/bash, Run chsh -s /bin/sh'
+#echo ' [INFO] If your shell is not /bin/sh or /bin/bash, Run chsh -s /bin/sh'
+
+cat <<EOF
+Welcome to use OhMySh!
+  OhMySh official Documents is https://ohmysh.github.io/docs-v2
+  OhMySh official GitHub Repo is ohmysh/ohmysh <https://github.com/ohmysh/ohmysh>
+About configure:
+  View our docs: https://ohmysh.github.io/docs-v2
+EOF 
 
 source "$OMS/lib/ohmysh-version.sh"
 echo " Installed OhMySh Version $OMS_VER!"
