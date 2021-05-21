@@ -7,7 +7,7 @@ _helpcommand(){
     ohmysh [OPTIONS] OR oms [OPTIONS]
 
 [OPTIONS]: 
-    --update                    :    Update OhMySh
+    -u  --update                :    Update OhMySh
     --uninstall                 :    Uninstalling OhMySh
     -h  --help                  :    Ask help
     -v  --version               :    Check OhMySh Version
@@ -35,7 +35,7 @@ _maincommand(){
   then
     _error 'Option not found' 'CLI' '1'
     _helpcommand
-  elif [ "$1" = "--update" ]
+  elif [ "$1" = "--update" ] || [ "$1" = "-u" ]
   then
     _info 'Updating OhMySh' 'CLI'
     forceUpdate=1
@@ -69,8 +69,7 @@ OhMySh CLI Version  :  $OMS_CLI_VER
 OhMySh Theme        :  $OMS_THEME
 OhMySh Path         :  $OMS_DIR
 OhMySh Cache Path   :  $OMS_CACHE
-OhMySh Profile Path :  $HOME/.profile
-                       $HOME/.bashrc
+OhMySh Profile Path :  $HOME/.profile;$HOME/.bashrc
 OhMySh Logged User  :  $USER
 System Shell        :  $SHELL
 
