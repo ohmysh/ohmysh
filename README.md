@@ -43,7 +43,7 @@ chsh -s /bin/bash
 
 # Using OhMySh
 
-[See in Docs](https://ohmysh.github.io/docs-v2)
+[See in Docs](https://ohmysh.github.io/docs-v2) | [Docs for Chinese](https://ohmysh.gitee.io/docs-v2)
 
 # OhMySh FAQ
 
