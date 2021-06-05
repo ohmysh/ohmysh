@@ -64,6 +64,9 @@ _maincommand(){
            Version --- OhMySh
 OhMySh Version      :  $OMS_VER
 OhMySh CLI Version  :  $OMS_CLI_VER
+Last checked update :  $(cat $OMS_CACHE/update)
+Previous version    :  $(cat $OMS_CACHE/update-lastver)
+Previous update date:  $(cat $OMS_CACHE/update-lastdate)
 
        Environment --- OhMySh
 OhMySh Theme        :  $OMS_THEME
@@ -72,7 +75,6 @@ OhMySh Cache Path   :  $OMS_CACHE
 OhMySh Profile Path :  $HOME/.profile;$HOME/.bashrc
 OhMySh Logged User  :  $USER
 System Shell        :  $SHELL
-Last checked update :  $(cat $OMS_CACHE/update)
 
 OhMySh Command Line Interface $OMS_CLI_VER
 EOF
