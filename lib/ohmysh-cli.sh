@@ -72,6 +72,7 @@ OhMySh Cache Path   :  $OMS_CACHE
 OhMySh Profile Path :  $HOME/.profile;$HOME/.bashrc
 OhMySh Logged User  :  $USER
 System Shell        :  $SHELL
+Last checked update :  $(cat $OMS_CACHE/update)
 
 OhMySh Command Line Interface $OMS_CLI_VER
 EOF
