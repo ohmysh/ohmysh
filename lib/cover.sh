@@ -3,9 +3,9 @@
 
 if [ ! -f "$OMS_CACHE/cover.ohmysh.sh" ]
 then
-  if [ -f "$OMS_DIR/lib/cover.etc.sh" ]
+  if [ -f "$OMS_DIR/lib/etc/cover.etc.sh" ]
   then
-    cp "$OMS_DIR/lib/cover.etc.sh" "$OMS_CACHE/cover.ohmysh.sh"
+    cp "$OMS_DIR/lib/etc/cover.etc.sh" "$OMS_CACHE/cover.ohmysh.sh"
   else
     touch $OMS_CACHE/cover.ohmysh.sh
   fi
