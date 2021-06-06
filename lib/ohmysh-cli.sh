@@ -54,12 +54,14 @@ _maincommand(){
       _warn 'Uninstalling OhMySh' 'CLI'
       mv "$HOME/.profile" "$HOME/.ohmysh-backup"
       rm -rf "$OMS_DIR"
+      rm -rf "$OMS_CACHE"
       _info 'Uninstalled OhMySh, Thanks for use!' 'CLI'
     else
       _info 'You chose No' 'CLI'
     fi
   elif [ "$1" = "--version" ] || [ "$1" = "-v" ]
   then
+    _logo
     cat <<EOF
            Version --- OhMySh
 OhMySh Version      :  $OMS_VER
