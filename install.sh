@@ -138,6 +138,8 @@ echo ' >> Checking shell'
 echo " [INFO] Your shell is $SHELL"
 #echo ' [INFO] If your shell is not /bin/sh or /bin/bash, Run chsh -s /bin/sh'
 
+source "$OMS/lib/logo.sh"
+_logo
 cat <<EOF
 Welcome to use OhMySh!
   OhMySh official Documents is https://ohmysh.github.io/docs-v2
