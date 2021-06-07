@@ -1,4 +1,4 @@
-alias p='sudo pacman'
+alias pm='sudo pacman'
 
 alias ps='sudo pacman -S'
 alias pss='sudo pacman -Ss'

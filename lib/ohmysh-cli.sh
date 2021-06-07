@@ -15,6 +15,7 @@ _helpcommand(){
     --themelist                 :    Get list of themes
     -p  --plugin [OPT] [PLUGIN] :    Enable or disable plugin
     plugin::[OPT]:
+         start [PLUGIN]         :    Run a plugin in one go
          enable [PLUGIN]        :    Enable a plugin
          disable [PLUGIN]       :    Disable a plugin
          restart [PLUGIN]       :    Restart a plugin
@@ -104,6 +105,10 @@ EOF
     then
       _error "Cannot read sub-option" 'CLI::Plugin'
       _helpcommand
+    elif [ "$2" = "start" ]
+    then
+      _warn "Run plugin '$3'" 'CLI::Plugin'
+      _plugin_runner "$3"
     elif [ "$2" = "enable" ]
     then
       _warn "Enable plugin '$3'" 'CLI::Plugin'

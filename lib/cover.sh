@@ -10,6 +10,9 @@ then
     touch $OMS_CACHE/cover.ohmysh.sh
   fi
 fi
-source $OMS_CACHE/cover.ohmysh.sh
 
+if [ "$OMS_COVER" != "NONE" ]
+then
+  source $OMS_CACHE/cover.ohmysh.sh
+fi
 
