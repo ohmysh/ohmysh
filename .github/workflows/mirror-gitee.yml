@@ -3,9 +3,7 @@ name: Mirror to Gitee China Mirror
 # Controls when the action will run. 
 on:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
 
 jobs:
   # This workflow contains a single job called "build"
