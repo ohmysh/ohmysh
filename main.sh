@@ -30,13 +30,13 @@ source "$OMS_DIR/lib/opt/map.sh"
 # Load CLI
 source "$OMS_DIR/lib/ohmysh-cli.sh"
 
+# RUN THEME
+_theme_runner
+
 # RUN PLUGIN
 for _p in ${OMS_PLUGIN[@]}; do
   _plugin_runner "$_p"
 done
-
-# RUN THEME
-_theme_runner
 
 # RUN Startup Script
 source "$OMS_DIR/lib/startup-script.sh"
