@@ -146,7 +146,8 @@ Welcome to use OhMySh!
   OhMySh official GitHub Repo is ohmysh/ohmysh <https://github.com/ohmysh/ohmysh>
 About configure:
   View our docs: https://ohmysh.github.io/docs-v2
-EOF 
+
+EOF
 
 source "$OMS/lib/ohmysh-version.sh"
 echo " Installed OhMySh Version $OMS_VER!"
