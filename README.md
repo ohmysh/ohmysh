@@ -27,9 +27,15 @@ curl https://raw.githubusercontent.com/ohmysh/ohmysh/main/install.sh > OMSInstal
 sh OMSInstaller.sh
 ```
 
+> ### More options
+> 
+> [Here](https://ohmysh.github.io/docs-v2/#/getting-started/install?id=run-with-advanced-options)
+
+
 > ### Some info for Chinese users
 > 
 > [网络问题解决方案](https://ohmysh.github.io/docs-v2/#/zh_cn/getting-started/install?id=%e4%b8%ad%e5%9b%bd%e7%94%a8%e6%88%b7%e6%8f%90%e7%a4%ba)
+
 
 ## Getting ready to use
 
