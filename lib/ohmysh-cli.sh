@@ -130,7 +130,8 @@ EOF
     fi
   elif [ "$1" = "--pluginlist" ]
   then
-    _info "You are using these plugins: ${OMS_PLUGIN[@]}"
+    _info "You are using these plugins:"
+    echo "${OMS_PLUGIN[@]}"
     echo ' List of plugins:'
     ls "$OMS_DIR/usr/plugin"
   elif [ "$1" = "-a" ] || [ "$1" = "--alias" ]
