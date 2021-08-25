@@ -69,8 +69,6 @@ _maincommand(){
 OhMySh Version      :  $OMS_VER
 OhMySh CLI Version  :  $OMS_CLI_VER
 Last checked update :  $(cat $OMS_CACHE/update)
-Previous version    :  $(cat $OMS_CACHE/update-lastver)
-Previous update date:  $(cat $OMS_CACHE/update-lastdate)
 
        Environment --- OhMySh
 OhMySh Theme        :  $OMS_THEME

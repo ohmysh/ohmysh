@@ -10,6 +10,9 @@ then
   exit 3
 fi
 
+# Load Config file
+source "$OMS_DIR/lib/config.sh"
+
 # Load base script
 source "$OMS_DIR/lib/ohmysh-version.sh"
 source "$OMS_DIR/lib/logo.sh"

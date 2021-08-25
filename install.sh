@@ -125,7 +125,9 @@ fi
 echo ' >> Creating cache'
 mkdir -p "$OMS_CACHE"
 date +%Y%m%d > $OMS_CACHE/update
-cp "$OMS/lib/alias.e.sh" "$OMS_CACHE/alias.ohmysh.sh"
+cp "$OMS/lib/alias.etc.sh" "$OMS_CACHE/alias.ohmysh.sh"
+cp "$OMS/lib/cover.etc.sh" "$OMS_CACHE/cover.ohmysh.sh"
+cp "$OMS/lib/config.etc.sh" "$OMS_CACHE/config.ohmysh.sh"
 mkdir -p "$OMS_CACHE/runtime-script"
 mkdir -p "$OMS_CACHE/startup-script"
 
