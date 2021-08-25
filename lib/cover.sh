@@ -11,7 +11,7 @@ then
   fi
 fi
 
-if [ "$OMS_COVER" != "NONE" ]
+if [ "$OMS_COVER" != "NONE" ] && [ -z "$configCoverDisable" ]
 then
   source $OMS_CACHE/cover.ohmysh.sh
 fi
