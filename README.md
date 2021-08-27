@@ -45,6 +45,8 @@ If you didn't change default shell to SH while installing the OMS, you can run t
 chsh -s /bin/bash
 ```
 
+> If you want to use OhMySh in Zsh, [this will help you.](https://ohmysh.github.io/docs-v2/#/other/faq?id=zsh)
+
 **Or** run command `sh --login` if you want to use it.
 
 # Using OhMySh
