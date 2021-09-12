@@ -21,6 +21,7 @@ source "$OMS_DIR/lib/run-update.sh"
 source "$OMS_DIR/lib/update.sh"
 
 # Load functional script
+source "$OMS_DIR/lib/git-prompt.sh"
 source "$OMS_DIR/lib/color.sh"
 source "$OMS_DIR/lib/theme.sh"
 source "$OMS_DIR/lib/plugin.sh"
@@ -48,7 +49,10 @@ source "$OMS_DIR/lib/startup-script.sh"
 source "$OMS_DIR/lib/runtime-script.sh"
 #rm -f "$OMS_CACHE/runtime-script/*.sh"
 
-cd ~
-
-
-
+# Change to Start Path
+if [ ! -z "$configStartPath" ]
+then
+    cd "$configStartPath"
+else
+    cd ~
+fi

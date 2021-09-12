@@ -6,3 +6,4 @@
 ##### GLOBAL SETTINGS #####
 # configUpdateDisable=1
 # configCoverDisable=1
+configStartPath="$HOME/"

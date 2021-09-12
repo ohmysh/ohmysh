@@ -22,7 +22,7 @@ _helpcommand(){
     --pluginlist                :    Get list of plugins
     -a  --alias [EDITOR]        :    Config aliases (EDITOR=vi)
     -c  --cover [EDITOR]        :    Edit the cover (EDITOR=vi)
-    --chsh [SHELL (sh|bash)]    :    Creat config file for [SHELL]
+    --chsh [SHELL (sh|bash|zsh)]:    Creat config file for [SHELL]
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
@@ -160,7 +160,7 @@ EOF
       then
         echo '. ~/.profile' >> ~/.bashrc
       else
-	echo "OMS_OTHER_SHELL='$2'" >> "$HOME/."$2"rc"
+	    echo "OMS_OTHER_SHELL='$2'" >> "$HOME/."$2"rc"
         echo '. ~/.profile' >> "$HOME/."$2"rc"
       fi
     fi
