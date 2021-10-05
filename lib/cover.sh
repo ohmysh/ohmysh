@@ -1,5 +1,5 @@
 # OhMySH Starting covers
-# Starts on June, 2021 Updates
+# Starts in June 2021 Updates; Updated in October 2021.
 
 if [ ! -f "$OMS_CACHE/cover.ohmysh.sh" ]
 then
@@ -11,7 +11,7 @@ then
   fi
 fi
 
-if [ "$OMS_COVER" != "NONE" ] && [ -z "$configCoverDisable" ]
+if [ "$OMS_COVER" != "NONE" ] && [ -z "$configCoverDisable" ] && [ "$configCover" != "Disable" ]
 then
   source $OMS_CACHE/cover.ohmysh.sh
 fi

@@ -3,13 +3,24 @@
 # OhMySh Core Re-Map
 
 ## Map
-alias ls='ls --color'
-alias ll='ls -l'
-alias help='oms --help'
-alias cls='clear'
-alias dir='ls --color'
+if [ "$mapLs" != 'Disable' ]
+then
+    alias ls='ls --color'
+    alias ll='ls -l'
+fi
+if [ "$mapHelp" != 'Disable' ]
+then
+    alias help='oms --help'
+fi
+if [ "$mapMSDos" != 'Disable' ]
+then
+    alias cls='clear'
+    alias dir='ls --color'
+fi
 
 ## CSP 2021 S
+if [ "$mapCSP2021" != 'Disable' ]
+then
 alias all-f='all'
 alias all='_oms_all'
 _oms_all(){
@@ -24,9 +35,10 @@ The answer is A.
 'all' does not exist and the user is expected to remember ls as the correct command.
 EOF
 }
+fi
 
 
-if [ "$(checkcmd 'shopt --help')" = "1" ]
+if [ "$mapCd" != 'Disable' ] && [ "$(checkcmd 'shopt --help')" = "1" ]
 then
     shopt -s autocd
 fi

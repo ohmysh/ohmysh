@@ -9,7 +9,7 @@ fi
 
 if [ $(cat $OMS_CACHE/update) != $(date +%Y%m%d) ] || [ ! -z $forceUpdate ]
 then
-    if [ -z "$configUpdateDisable" ]
+    if [ -z "$configUpdateDisable" ] || [ "$configUpdate" != 'Disable' ]
     then
         echo " OhMySh::Updater : Getting update... "
         #source $OMS_DIR/lib/ohmysh-version.sh

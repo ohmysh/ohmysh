@@ -11,4 +11,16 @@ then
   fi
 fi
 
+##### GLOBAL SETTINGS #####
+# You can not edit the settings below.
+configUpdate='Auto'
+configCover='Enable'
+configStartPath="$HOME/"
+mapLs='Enable'
+mapCd='Enable'
+mapHelp='Enable'
+mapMSDos='Enable'
+mapCSP2021='Enable'
+
+##### PERSONAL SETTINGS #####
 source $OMS_CACHE/config.ohmysh.sh
