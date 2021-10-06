@@ -32,6 +32,14 @@ OhMySh Command Line Interface $OMS_CLI_VER
 EOF
 }
 
+_ohmyshdevwarn (){
+    if [ "$OMS_PRE" = "PRE" ]
+    then
+        _warn 'You are using the development version' 'CLI'
+        echo ' This version is still in testing and it is not an absolutely secure version. We strongly recommend that you do not use the development version.'
+    fi
+}
+
 _maincommand(){
   if [ -z $1 ]
   then
@@ -65,20 +73,23 @@ _maincommand(){
   then
     _logo
     cat <<EOF
-           Version --- OhMySh
-OhMySh Version      :  $OMS_VER
-OhMySh CLI Version  :  $OMS_CLI_VER
-Last checked update :  $(cat $OMS_CACHE/update)
 
-       Environment --- OhMySh
-OhMySh Theme        :  $OMS_THEME
-OhMySh Path         :  $OMS_DIR
-OhMySh Cache Path   :  $OMS_CACHE
-OhMySh Profile Path :  $HOME/.profile;$HOME/.bashrc
-OhMySh Logged User  :  $USER
-System Shell        :  $SHELL
+               Version --- OhMySh
+    OhMySh Version      :  $OMS_VER
+    OhMySh CLI Version  :  $OMS_CLI_VER
+    Last checked update :  $(cat $OMS_CACHE/update)
 
-OhMySh Command Line Interface $OMS_CLI_VER
+           Environment --- OhMySh
+    OhMySh Theme        :  $OMS_THEME
+    OhMySh Path         :  $OMS_DIR
+    OhMySh Cache Path   :  $OMS_CACHE
+    OhMySh Profile Path :  $HOME/.profile;$HOME/.bashrc
+    OhMySh Logged User  :  $USER
+    System Shell        :  $SHELL
+
+    OhMySh Command Line Interface $OMS_CLI_VER
+
+$(_ohmyshdevwarn)
 EOF
   elif [ "$1" = "--theme" ] || [ "$1" = "-t" ]
   then
