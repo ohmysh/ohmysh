@@ -1,3 +1,9 @@
+if [ "$(checkcmd 'declare --help')" != '1' ]
+then
+    _error 'Your shell is too old, please check if your shell support "declare".' 'OhMySh' '6'
+fi
+
+
 # set theme color
 declare -A COLOR
 COLOR[reset]='\033[0m'
