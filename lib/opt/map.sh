@@ -16,6 +16,10 @@ if [ "$mapMSDos" != 'Disable' ]
 then
     alias cls='clear'
     alias dir='ls --color'
+    alias fc='diff'
+    alias del='rm'
+    alias erase='rm'
+    alias tree='ls -R'
 fi
 
 ## CSP 2021 S

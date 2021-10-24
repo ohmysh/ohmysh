@@ -20,7 +20,7 @@ mapLs='Enable'
 mapCd='Enable'
 mapHelp='Enable'
 mapMSDos='Enable'
-mapCSP2021='Enable'
+mapCSP2021='Disable'
 
 ##### PERSONAL SETTINGS #####
 source $OMS_CACHE/config.ohmysh.sh
