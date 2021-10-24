@@ -25,5 +25,5 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Test OhMySh run
-        run: sh ./lib/workflow-build/testrun.sh
+        run: bash ./lib/workflow-build/testrun.sh
         
