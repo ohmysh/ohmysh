@@ -2,7 +2,7 @@
 
 _path=$(pwd)
 
-mkdir test/cache
+mkdir -p test/cache
 
 bash lib/whatshell.sh
 echo $_path
@@ -13,7 +13,7 @@ OMS_THEME='colorshell'
 OMS_PLUGIN=('helloworld' )
 source "$OMS_DIR/main.sh"
 
-
-echo "$PS1"
 oms --help
 oms -v
+echo "$PS1"
+
