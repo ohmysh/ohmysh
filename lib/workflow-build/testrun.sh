@@ -15,5 +15,5 @@ source "$OMS_DIR/main.sh"
 
 
 echo "$PS1"
-help
+oms --help
 oms -v
