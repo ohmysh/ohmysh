@@ -6,9 +6,7 @@ name: Run OhMySH
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -26,12 +24,6 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a set of commands using the runners shell
-      - name: Prepare config file
-        run: sh ./test/prepare.sh
-
-      - name: Test Configuration file
-        run: cat .oms
-
-      - name: Run OhMySH
-        run: . .oms
+      - name: Test OhMySh run
+        run: sh ./lib/workflow-build/testrun.sh
         
