@@ -1,4 +1,4 @@
-name: Mirror to Gitee China Mirror
+name: Mirror to Gitee China Mirror (v2-test)
 
 # Controls when the action will run. 
 on:
@@ -14,8 +14,21 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
-      - uses: spyoungtech/mirror-action@master
-        with:
-          REMOTE: 'https://gitee.com/ohmysh/ohmysh-mirror.git'
-          GIT_USERNAME: wujiayi516wjy
-          GIT_PASSWORD: ${{ secrets.GITEE_PASSWORD }}
+      - name: Configure Private Key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.GITEE_RSA_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "StrictHostKeyChecking no" >> ~/.ssh/config
+      - name: Push Mirror
+        env:
+          SOURCE_REPO: 'https://github.com/ohmysh/ohmysh.git'
+          DESTINATION_REPO: 'git@gitee.com:ohmysh/ohmysh-mirror.git'
+        run: |
+          git clone --mirror "$SOURCE_REPO" && cd `basename "$SOURCE_REPO"`
+          git remote set-url --push origin "$DESTINATION_REPO"
+          git fetch -p origin
+          git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
+          git push --mirror
