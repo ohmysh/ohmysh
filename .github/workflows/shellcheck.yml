@@ -27,3 +27,5 @@ jobs:
         uses: ludeeus/action-shellcheck@master
         env:
           SHELLCHECK_OPTS: -s bash
+        with:
+          ignore: whatshell.sh git-prompt.sh usr

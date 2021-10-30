@@ -8,6 +8,7 @@ then
 fi
 
 ls "$OMS_CACHE/runtime-script" | while IFS= read -r i
+do
     if [ "${i##*.}" = "sh" ]
     then
         . "${OMS_CACHE}/runtime-script/${i}"

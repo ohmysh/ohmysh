@@ -38,7 +38,7 @@ source "$OMS_DIR/lib/ohmysh-cli.sh"
 _theme_runner
 
 # RUN PLUGIN
-for _p in ${OMS_PLUGIN[@]}; do
+for _p in "${OMS_PLUGIN[@]}"; do
   _plugin_runner "$_p"
 done
 
@@ -50,7 +50,7 @@ source "$OMS_DIR/lib/runtime-script.sh"
 #rm -f "$OMS_CACHE/runtime-script/*.sh"
 
 # Change to Start Path
-if [ ! -z "$configStartPath" ]
+if [ -n "$configStartPath" ]
 then
     cd "$configStartPath"
 else

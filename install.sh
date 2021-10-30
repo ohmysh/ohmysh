@@ -1,6 +1,6 @@
-#/bin/sh
+#!/bin/bash
 
-# OhMySh
+# OhMySh Installer
 
 # config
 if [ -z $OMS ]
@@ -43,13 +43,13 @@ if [ -f "$HOME/.ohmysh-backup" ]
 then
   NF="OLDFILE"
   mv "$HOME/.ohmysh-backup" "$OMS_RC_D"
-  . $OMS_RC_D
-  $OMS=$OMS_DIR
+  . "$OMS_RC_D"
+  OMS="$OMS_DIR"
 fi  
 
 # lib
 checkcommand(){
-  if [ -n $2  ]; then
+  if [ -n "$2"  ]; then
     where="::$2"
   fi
   hash $1 2>/dev/null || { echo " >> OhMySh$where : ERROR cannot found command \"$1\", please insall it!!! "; return 1; }
@@ -81,7 +81,7 @@ echo ' Welcome to OhMySh installer script! '
 echo '   OhMySh <https://github.com/ohmysh/ohmysh>'
 
 # options
-if [ ! -z "$1" ]
+if [ -n "$1" ]
 then
   if [ "$1" = "--config" ]
   then
