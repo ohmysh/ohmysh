@@ -28,4 +28,4 @@ jobs:
         env:
           SHELLCHECK_OPTS: -s bash
         with:
-          ignore: lib/whatshell.sh lib/git-prompt.sh usr
+          ignore: tool usr
