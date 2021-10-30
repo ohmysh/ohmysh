@@ -1,4 +1,4 @@
-name: Mirror to Gitee China Mirror (v2-test)
+name: Mirror to Gitee China Mirror (v2-standard)
 
 # Controls when the action will run. 
 on:
@@ -15,8 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Configure Private Key
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.GITEE_RSA_PRIVATE_KEY }}" > ~/.ssh/id_rsa
