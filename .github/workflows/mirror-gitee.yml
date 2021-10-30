@@ -18,4 +18,4 @@ jobs:
         with:
           REMOTE: 'https://gitee.com/ohmysh/ohmysh-mirror.git'
           GIT_USERNAME: wujiayi516wjy
-          GIT_PASSWORD: ${{ secrets.GITEE_API_CODE }}
+          GIT_PASSWORD: ${{ secrets.GITEE_PASSWORD }}
