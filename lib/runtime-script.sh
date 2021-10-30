@@ -7,7 +7,7 @@ then
     mkdir -p "$OMS_CACHE/runtime-script"
 fi
 
-for i in "$(ls "$OMS_CACHE/runtime-script")" ;do
+ls "$OMS_CACHE/runtime-script" | while IFS= read -r i
     if [ "${i##*.}" = "sh" ]
     then
         . "${OMS_CACHE}/runtime-script/${i}"
