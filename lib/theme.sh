@@ -1,6 +1,6 @@
 if [ "$(checkcmd 'declare --help')" != '1' ]
 then
-    _error 'Your shell is too old, please check if your shell support "declare".' 'OhMySh' '6'
+    _error 'Your shell is too old, please check if your shell support "declare".' 'OhMySh' '8'
 fi
 
 
