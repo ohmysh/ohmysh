@@ -41,7 +41,7 @@ _theme_runner(){
   then
     source "$OMS_DIR/usr/local/theme/$OMS_THEME/$OMS_THEME.theme.sh"
   else
-    _error "Cannot found theme '$OMS_THEME'!!!" 'OhMySh' '4'
-    PS1="OhMySh::NoTheme \$ "
+    _error "Cannot found theme '$OMS_THEME'!!!" 'OhMySh::Theme' '4'
+    PS1="OhMySh Theme Not Found \$ "
   fi
 }
