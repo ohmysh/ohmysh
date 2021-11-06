@@ -63,12 +63,12 @@ omsconfig(){
 # OhMySh
 #
 # OhMySh work dir. Please don't edit it!
-OMS_DIR='$OMS'
-OMS_CACHE='$OMS_CACHE'
+export OMS_DIR='$OMS'
+export OMS_CACHE='$OMS_CACHE'
 
 # OhMySh theme
-OMS_THEME='colorshell'
-OMS_PLUGIN=()
+export OMS_THEME='colorshell'
+export OMS_PLUGIN=()
 
 # OhMySh main script
 source "\$OMS_DIR/main.sh"
