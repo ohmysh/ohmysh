@@ -15,6 +15,6 @@ export OMS_PLUGIN=('helloworld' )
 bash -v "$OMS_DIR/main.sh"
 
 help
-oms -v
+_maincommand -v
 echo "$PS1"
 
