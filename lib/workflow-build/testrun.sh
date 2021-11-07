@@ -15,8 +15,10 @@ export OMS_PLUGIN=('helloworld' )
 bash -v "$OMS_DIR/main.sh"
 source "$OMS_DIR/main.sh"
 
+echo "OMS Finished!"
 
-help
+oms -v
+oms -h
 _maincommand -v
 echo "$PS1"
 
