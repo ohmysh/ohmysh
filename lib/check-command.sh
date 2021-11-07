@@ -15,3 +15,4 @@ checkcmd(){
     fi
 }
 
+export -f checkcmd

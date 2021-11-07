@@ -17,7 +17,6 @@ source "$OMS_DIR/main.sh"
 
 echo "OMS Finished!"
 
-_maincommand -v
 oms -v
 oms -h
 echo "$PS1"

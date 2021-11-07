@@ -40,7 +40,7 @@ _ohmyshdevwarn (){
     fi
 }
 
-_maincommand(){
+oms(){
   if [ -z $1 ]
   then
     _error 'Missing parameters' 'OhMySh::CLI' '1'
@@ -182,8 +182,7 @@ EOF
   fi
 }
 
-alias ohmysh="_maincommand $1 $2 $3 $4"
-alias oms="_maincommand $1 $2 $3 $4"
+alias ohmysh="oms $1 $2 $3 $4"
 
-export -f _maincommand _helpcommand
-export ohmysh oms
+export -f oms _helpcommand
+export ohmysh

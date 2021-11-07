@@ -10,3 +10,5 @@ _plugin_runner(){
     _error "Cannot run plugin '$plug'" 'OhMySh::Plugin' '5'
   fi
 }
+
+export -f _plugin_runner

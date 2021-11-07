@@ -45,3 +45,5 @@ _theme_runner(){
     PS1="OhMySh Theme Not Found \$ "
   fi
 }
+
+export -f _theme_runner
