@@ -17,7 +17,6 @@ source "$OMS_DIR/lib/config.sh"
 source "$OMS_DIR/lib/ohmysh-version.sh"
 source "$OMS_DIR/lib/logo.sh"
 source "$OMS_DIR/lib/color.sh"
-source "$OMS_DIR/lib/dir.sh"
 source "$OMS_DIR/lib/run-update.sh"
 source "$OMS_DIR/lib/update.sh"
 
