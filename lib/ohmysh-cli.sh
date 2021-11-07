@@ -182,6 +182,8 @@ EOF
   fi
 }
 
+export -f _maincommand _helpcommand
+
 alias ohmysh="_maincommand $1 $2 $3 $4"
 alias oms="_maincommand $1 $2 $3 $4"
 
