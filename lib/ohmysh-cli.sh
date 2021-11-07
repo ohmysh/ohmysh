@@ -35,7 +35,7 @@ EOF
 _ohmyshdevwarn (){
     if [ "$OMS_PRE" = "PRE" ]
     then
-        _warn 'You are using the development version' 'OhMySh::CLI'
+        _warn 'You are using the development version' 'OhMySh'
         echo ' This version is still in testing and it is not an absolutely secure version. We strongly recommend that you do not use the development version.'
     fi
 }
