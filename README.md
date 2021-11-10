@@ -6,7 +6,7 @@
 
 [GitHub](https://github.com/ohmysh/ohmysh) | [Chinese Mirror](https://gitee.com/ohmysh/ohmysh-mirror) | [Docs](https://ohmysh.github.io/docs-v2) | [Chinese Mirror Docs](https://ohmysh.gitee.io/docs-v2) | [Getting Started](https://ohmysh.github.io/docs-v2/#/getting-started/install) | [View the  License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)  | [Change Log](https://ohmysh.github.io/docs-v2/#/other/changelog)
 
-OhMySh is an excellent configuration tool for **SH** that allows you to change the theme of SH. OhMySh supports plugins. You can get them from the repository. OhMySh also supports plugins. You can get them from the repository too. For advanced users, OhMySh also supports customized themes and plugins!
+OhMySh is an excellent configuration tool for **many different shells** that allows you to change the theme. OhMySh also supports plugins. You can get them from the repository too. For advanced users, OhMySh also supports customized themes and plugins!
 
 # Getting Started
 
@@ -14,9 +14,9 @@ OhMySh is an excellent configuration tool for **SH** that allows you to change t
 
 ## Preparation
 
-OhMySh works with [SH shell (Bourne shell)](https://en.wikipedia.org/wiki/Bourne_shell) and GNU-Bash. 
+OhMySh works on many different shells such as GNU-Bash, Z-sh. 
 
-So make sure `sh (>=5.x.x)` was installed. There are some other dependences: `curl` `git` .
+So make sure `bash (>=5.x.x)` was installed. There are some other dependences: `curl` `git` .
 
 ## Quick Installation
 
@@ -61,7 +61,7 @@ chsh -s /bin/bash
 
 OhMySh Command Line Interface (CLI) is a command line tool for OhMySh. You can use it to change the theme, run plugins and do more things!
 
-See `ohmysh --help` or `oms --help` .
+See `oms --help` .
 
 # More
 
