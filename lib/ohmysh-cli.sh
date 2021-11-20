@@ -1,3 +1,4 @@
+#!/bin/bash
 # OhMySh Command Interface (CLI)
 
 _helpcommand(){
@@ -173,8 +174,8 @@ EOF
       then
         echo '. ~/.profile' >> ~/.bashrc
       else
-	    echo "OMS_OTHER_SHELL='$2'" >> "$HOME/."$2"rc"
-        echo '. ~/.profile' >> "$HOME/."$2"rc"
+	      echo "OMS_OTHER_SHELL='$2'" >> "$HOME/.$2rc"
+        echo '. ~/.profile' >> "$HOME/.$2rc"
       fi
     fi
   else

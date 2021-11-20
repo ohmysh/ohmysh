@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ ! -f "$OMS_CACHE/alias.ohmysh.sh" ]
 then
   if [ -f "$OMS_DIR/lib/etc/alias.etc.sh" ]

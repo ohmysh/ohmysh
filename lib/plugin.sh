@@ -1,3 +1,5 @@
+#!/bin/bash
+
 _plugin_runner(){
   local plug=$1
   if [ -f "$OMS_DIR/usr/plugin/$plug/$plug.plugin.sh" ]

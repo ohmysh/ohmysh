@@ -1,3 +1,4 @@
+#!/bin/bash
 # OhMySH Starting covers
 # Starts in June 2021 Updates; Updated in October 2021.
 

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 checkcommand(){
   if [ -n "$2" ]; then
     where="::$2"

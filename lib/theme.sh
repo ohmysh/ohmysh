@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ "$(checkcmd 'declare --help')" != '1' ]
 then
     _error 'Your shell is too old, please check if your shell support "declare".' 'OhMySh' '8'
@@ -15,6 +17,7 @@ COLOR[blue]='\033[34m'
 COLOR[purple]='\033[35m'
 COLOR[cyan]='\033[36m'
 COLOR[white]='\033[37m'
+export COLOR
 
 # set theme background color
 declare -A BGCOLOR
@@ -26,6 +29,7 @@ BGCOLOR[blue]='\033[44m'
 BGCOLOR[purple]='\033[45m'
 BGCOLOR[cyan]='\033[46m'
 BGCOLOR[white]='\033[47m'
+export BGCOLOR
 
 rightprompt(){
   printf "%*s" $COLUMNS $1

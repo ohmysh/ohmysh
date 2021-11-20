@@ -1,3 +1,4 @@
+#!/bin/bash
 # OhMySH Config file reader
 # Starts on Augest, 2021 Updates
 

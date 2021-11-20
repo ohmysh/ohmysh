@@ -17,7 +17,7 @@ then
 fi
 
 OMS_RC_D="$HOME/.profile"
-OMS_RC_BASH="$HOME/.bashrc"
+#OMS_RC_BASH="$HOME/.bashrc"
 NF="NEWFILE"
 
 if [ -f "$HOME/.ohmysh-backup" ]
