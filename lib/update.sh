@@ -24,7 +24,7 @@ then
         date +%Y%m%d > "$OMS_CACHE/update"
         if [ "$_CACHE_VERSION" != "$OMS_VER" ]
         then
-            _run_update "$(($_CACHE_BUILD+1))" "$OMS_BUILD"
+            _run_update "$((_CACHE_BUILD+1))" "$OMS_BUILD"
             _info "Updated OhMySH to version $OMS_VER!" 'OhMySh::Updater'
             echo "$_CACHE_VERSION" > "$OMS_CACHE/update-lastver"
             date +%Y%m%d > "$OMS_CACHE/update-lastdate"
