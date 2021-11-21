@@ -51,17 +51,13 @@ chsh -s /bin/bash
 
 # Using OhMySh
 
-[See in Docs](https://ohmysh.github.io/docs-v2) | [Docs for Chinese](https://ohmysh.gitee.io/docs-v2)
-
-# OhMySh FAQ
-
-[FAQ](https://ohmysh.github.io/docs-v2/#/other/faq)
+[See in Docs](https://ohmysh.github.io/docs-v2) | [Docs for Chinese](https://ohmysh.gitee.io/docs-v2) | [FAQ](https://ohmysh.github.io/docs-v2/#/other/faq)
 
 # OhMySh Command Line Interface (CLI)
 
 OhMySh Command Line Interface (CLI) is a command line tool for OhMySh. You can use it to change the theme, run plugins and do more things!
 
-See `oms --help` .
+To get some helps, try `oms --help` .
 
 # More
 
@@ -69,13 +65,13 @@ See `oms --help` .
 
 # License
 
-OhMySh is under MIT-License.
+OhMySh is under [MIT-License](https://ohmysh.github.io/docs-v2/#/other/license).
 
-# Contributors
+# Contribution
 
 OhMySh is not the best. We need your help. Contact us by the following ways:
 
 - Email `wjy@516wjy.xyz`
-- PullRequest GitHub Repo `ohmysh/ohmysh`
+- Pullrequest our GitHub repo `ohmysh/ohmysh`
 
 Thanks!
