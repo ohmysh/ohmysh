@@ -1,11 +1,11 @@
 #!/bin/bash
 
-export _path=$(pwd)
+export _path="$(pwd)"
 
 mkdir -p test/cache
 
 bash lib/whatshell.sh
-echo $_path
+echo "$_path"
 
 export OMS_DIR="$_path"
 export OMS_CACHE="$_path/test/cache"

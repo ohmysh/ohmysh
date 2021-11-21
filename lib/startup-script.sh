@@ -9,7 +9,7 @@ fi
 
 ls "$OMS_CACHE/startup-script" | while IFS= read -r i
 do
-    if [ ${i##*.} = 'sh' ]
+    if [ "${i##*.}" = 'sh' ]
     then
         . "$OMS_CACHE/startup-script/$i"
     fi

@@ -2,12 +2,12 @@
 
 # OMS UPDATER
 
-if [ -z $(cat $OMS_CACHE/update) ]
+if [ -z "$(cat $OMS_CACHE/update)" ]
 then
     echo $(date +%Y%m%d > $OMS_CACHE/update)
 fi
 
-if [ $(cat $OMS_CACHE/update) != $(date +%Y%m%d) ] || [ ! -z $forceUpdate ]
+if [ $(cat $OMS_CACHE/update) != $(date +%Y%m%d) ] || [ ! -z "$forceUpdate" ]
 then
     if [ -z "$configUpdateDisable" ] || [ "$configUpdate" != 'Disable' ]
     then
@@ -18,16 +18,16 @@ then
         _CACHE_CLI_VERSION="$OMS_CLI_VER"
         #_CACHE_CLI_BUILD="$OMS_CLI_BUILD"
         #_CACHE_PLUGIN=(${OMS_PLUGIN[*]})
-        cd $OMS_DIR
+        cd "$OMS_DIR"
         git pull || _error 'ERROR cannot get update!!!' 'Updater' '6'
-        source $OMS_DIR/lib/ohmysh-version.sh
-        date +%Y%m%d > $OMS_CACHE/update
+        source "$OMS_DIR/lib/ohmysh-version.sh"
+        date +%Y%m%d > "$OMS_CACHE/update"
         if [ "$_CACHE_VERSION" != "$OMS_VER" ]
         then
-            _run_update $(expr $_CACHE_BUILD + 1) $OMS_BUILD
+            _run_update "$(($_CACHE_BUILD+1))" "$OMS_BUILD"
             _info "Updated OhMySH to version $OMS_VER!" 'OhMySh::Updater'
-            echo "$_CACHE_VERSION" > $OMS_CACHE/update-lastver
-            date +%Y%m%d > $OMS_CACHE/update-lastdate
+            echo "$_CACHE_VERSION" > "$OMS_CACHE/update-lastver"
+            date +%Y%m%d > "$OMS_CACHE/update-lastdate"
         fi
         if [ "$_CACHE_CLI_VERSION" != "$OMS_CLI_VER" ]
             then

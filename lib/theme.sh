@@ -32,7 +32,7 @@ BGCOLOR[white]='\033[47m'
 export BGCOLOR
 
 rightprompt(){
-  printf "%*s" $COLUMNS $1
+  printf "%*s" "$COLUMNS" "$1"
 }
 
 _theme_runner(){

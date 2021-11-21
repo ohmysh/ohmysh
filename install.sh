@@ -7,11 +7,11 @@ if [ -z $OMS ]
 then
   OMS="$HOME/.ohmysh"
 fi
-if [ -z $OMS_CACHE ]
+if [ -z "$OMS_CACHE" ]
 then
   OMS_CACHE="$HOME/.ohmysh-cache"
 fi
-if [ -z $REPO ]
+if [ -z "$REPO" ]
 then
   REPO="https://github.com/ohmysh/ohmysh"
 fi
@@ -33,7 +33,7 @@ checkcommand(){
   if [ -n "$2"  ]; then
     where="::$2"
   fi
-  hash $1 2>/dev/null || { echo " >> OhMySh$where : ERROR cannot found command \"$1\", please insall it!!! "; return 1; }
+  hash "$1" 2>/dev/null || { echo " >> OhMySh$where : ERROR cannot found command \"$1\", please insall it!!! "; return 1; }
  return 0
 }
 
@@ -105,7 +105,7 @@ if [ "$NF" = "NEWFILE" ] ; then
 fi
 echo ' >> Creating cache'
 mkdir -p "$OMS_CACHE"
-date +%Y%m%d > $OMS_CACHE/update
+date +%Y%m%d > "$OMS_CACHE/update"
 cp "$OMS/lib/etc/alias.etc.sh" "$OMS_CACHE/alias.ohmysh.sh"
 cp "$OMS/lib/etc/cover.etc.sh" "$OMS_CACHE/cover.ohmysh.sh"
 cp "$OMS/lib/etc/config.etc.sh" "$OMS_CACHE/config.ohmysh.sh"

@@ -42,7 +42,7 @@ _ohmyshdevwarn (){
 }
 
 oms(){
-  if [ -z $1 ]
+  if [ -z "$1" ]
   then
     _error 'Missing parameters' 'OhMySh::CLI' '1'
     _helpcommand
@@ -126,14 +126,14 @@ EOF
     then
       _warn "Enable plugin '$3'" 'OhMySh::Plugin'
       OMS_PLUGIN_NEW="$3"
-      sed -n "/OMS_PLUGIN=(/p" $HOME/.profile | sed "s/(/(\"$OMS_PLUGIN_NEW\" /" $HOME/.profile > "$OMS_CACHE/profile"
+      sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/(/(\"$OMS_PLUGIN_NEW\" /" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
       _plugin_runner "$OMS_PLUGIN_NEW"
     elif [ "$2" = "disable" ]
     then
       _warn "Disable plugin '$3'" 'OhMySh::Plugin'
       OMS_PLUGIN_NEW="$3"
-      sed -n "/OMS_PLUGIN=(/p" $HOME/.profile | sed "s/\"$OMS_PLUGIN_NEW\" //g" $HOME/.profile > "$OMS_CACHE/profile"
+      sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/\"$OMS_PLUGIN_NEW\" //g" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
     elif [ "$2" = "restart" ]
     then

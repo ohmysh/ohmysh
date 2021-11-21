@@ -7,7 +7,7 @@
 _run_update(){
     _s="$1"
     _e="$2"
-    for ((i=$_s;i<=$_e;i++))
+    for ((i=_s;i<=_e;i++))
     do
         if [ -f "$OMS_DIR/lib/opt/update/oms-build-$i.sh" ]
         then

@@ -6,8 +6,8 @@ then
   then
     cp "$OMS_DIR/lib/etc/alias.etc.sh" "$OMS_CACHE/alias.ohmysh.sh"
   else
-    touch $OMS_CACHE/alias.ohmysh.sh
+    touch "$OMS_CACHE/alias.ohmysh.sh"
   fi
 fi
-source $OMS_CACHE/alias.ohmysh.sh
+source "$OMS_CACHE/alias.ohmysh.sh"
 

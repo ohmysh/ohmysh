@@ -8,7 +8,7 @@ then
   then
     cp "$OMS_DIR/lib/etc/config.etc.sh" "$OMS_CACHE/config.ohmysh.sh"
   else
-    touch $OMS_CACHE/config.ohmysh.sh
+    touch "$OMS_CACHE/config.ohmysh.sh"
   fi
 fi
 
@@ -24,4 +24,4 @@ export mapMSDos='Enable'
 export mapCSP2021='Disable'
 
 ##### PERSONAL SETTINGS #####
-source $OMS_CACHE/config.ohmysh.sh
+source "$OMS_CACHE/config.ohmysh.sh"
