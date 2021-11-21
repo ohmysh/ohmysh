@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$(checkcmd 'declare --help')" != '1' ]
+if [ "$(checkcmd 'declare')" != '1' ]
 then
     _error 'Your shell is too old, please check if your shell support "declare".' 'OhMySh' '8'
 fi
