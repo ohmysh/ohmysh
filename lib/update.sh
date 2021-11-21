@@ -2,12 +2,12 @@
 
 # OMS UPDATER
 
-if [ -z "$(cat $OMS_CACHE/update)" ]
+if [ -z "$(cat "$OMS_CACHE/update")" ]
 then
-    echo $(date +%Y%m%d > $OMS_CACHE/update)
+    date +%Y%m%d > "$OMS_CACHE/update"
 fi
 
-if [ $(cat $OMS_CACHE/update) != $(date +%Y%m%d) ] || [ ! -z "$forceUpdate" ]
+if [ "$(cat $OMS_CACHE/update)" != "$(date +%Y%m%d)" ] || [ ! -z "$forceUpdate" ]
 then
     if [ -z "$configUpdateDisable" ] || [ "$configUpdate" != 'Disable' ]
     then

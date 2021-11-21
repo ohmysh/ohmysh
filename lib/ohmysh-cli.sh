@@ -78,7 +78,7 @@ oms(){
                Version --- OhMySh
     OhMySh Version      :  $OMS_VER
     OhMySh CLI Version  :  $OMS_CLI_VER
-    Last checked update :  $(cat $OMS_CACHE/update)
+    Last checked update :  $(cat "$OMS_CACHE/update")
 
            Environment --- OhMySh
     OhMySh Theme        :  $OMS_THEME
@@ -100,7 +100,7 @@ EOF
     else
       _warn "Change theme to '$2'" 'OhMySh::Theme'
       OMS_THEME_NEW="$2"
-      sed -n "/OMS_THEME='$OMS_THEME'/p" $HOME/.profile | sed "s/OMS_THEME='$OMS_THEME'/OMS_THEME='$OMS_THEME_NEW'/g" $HOME/.profile > "$OMS_CACHE/profile"
+      sed -n "/OMS_THEME='$OMS_THEME'/p" "$HOME/.profile" | sed "s/OMS_THEME='$OMS_THEME'/OMS_THEME='$OMS_THEME_NEW'/g" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
       OMS_THEME=$OMS_THEME_NEW
       _theme_runner

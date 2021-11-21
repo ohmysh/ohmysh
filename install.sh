@@ -3,7 +3,7 @@
 # OhMySh Installer
 
 # config
-if [ -z $OMS ]
+if [ -z "$OMS" ]
 then
   OMS="$HOME/.ohmysh"
 fi
