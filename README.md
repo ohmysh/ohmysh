@@ -1,6 +1,6 @@
 <center><h1><img src="https://cdn.statically.io/gh/ohmysh/image/main/OhMySh-icon-2framework.png" alt="OhMySh Icon"></h1>
 
-<b>The Shell Framework</b></center>
+<b>The Excellent Shell Framework</b></center>
 
 ![Tag version](https://img.shields.io/github/v/tag/ohmysh/ohmysh?include_prereleases)   ![GitHub](https://img.shields.io/github/license/ohmysh/ohmysh)   ![GitHub last commit](https://img.shields.io/github/last-commit/ohmysh/ohmysh)   ![GitHub top language](https://img.shields.io/github/languages/top/ohmysh/ohmysh)
 
