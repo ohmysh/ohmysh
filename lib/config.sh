@@ -1,3 +1,4 @@
+#!/bin/bash
 # OhMySH Config file reader
 # Starts on Augest, 2021 Updates
 
@@ -7,20 +8,20 @@ then
   then
     cp "$OMS_DIR/lib/etc/config.etc.sh" "$OMS_CACHE/config.ohmysh.sh"
   else
-    touch $OMS_CACHE/config.ohmysh.sh
+    touch "$OMS_CACHE/config.ohmysh.sh"
   fi
 fi
 
 ##### GLOBAL SETTINGS #####
 # You can not edit the settings below.
-configUpdate='Auto'
-configCover='Enable'
-configStartPath="$HOME/"
-mapLs='Enable'
-mapCd='Enable'
-mapHelp='Enable'
-mapMSDos='Enable'
-mapCSP2021='Disable'
+export configUpdate='Auto'
+export configCover='Enable'
+export configStartPath="$HOME/"
+export mapLs='Enable'
+export mapCd='Enable'
+export mapHelp='Enable'
+export mapMSDos='Enable'
+export mapCSP2021='Disable'
 
 ##### PERSONAL SETTINGS #####
-source $OMS_CACHE/config.ohmysh.sh
+source "$OMS_CACHE/config.ohmysh.sh"

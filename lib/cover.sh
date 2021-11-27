@@ -1,3 +1,4 @@
+#!/bin/bash
 # OhMySH Starting covers
 # Starts in June 2021 Updates; Updated in October 2021.
 
@@ -7,12 +8,12 @@ then
   then
     cp "$OMS_DIR/lib/etc/cover.etc.sh" "$OMS_CACHE/cover.ohmysh.sh"
   else
-    touch $OMS_CACHE/cover.ohmysh.sh
+    touch "$OMS_CACHE/cover.ohmysh.sh"
   fi
 fi
 
 if [ "$OMS_COVER" != "NONE" ] && [ -z "$configCoverDisable" ] && [ "$configCover" != "Disable" ]
 then
-  source $OMS_CACHE/cover.ohmysh.sh
+  source "$OMS_CACHE/cover.ohmysh.sh"
 fi
 

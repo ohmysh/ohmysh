@@ -7,8 +7,9 @@ then
     mkdir -p "$OMS_CACHE/startup-script"
 fi
 
-for i in `ls "$OMS_CACHE/startup-script"` ;do
-    if [ ${i##*.} = 'sh' ]
+ls "$OMS_CACHE/startup-script" | while IFS= read -r i
+do
+    if [ "${i##*.}" = 'sh' ]
     then
         . "$OMS_CACHE/startup-script/$i"
     fi

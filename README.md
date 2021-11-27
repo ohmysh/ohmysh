@@ -1,12 +1,12 @@
 <center><h1><img src="https://cdn.statically.io/gh/ohmysh/image/main/OhMySh-icon-2framework.png" alt="OhMySh Icon"></h1>
 
-<b>The Shell Framework</b></center>
+<b>The Excellent Shell Framework</b></center>
 
 ![Tag version](https://img.shields.io/github/v/tag/ohmysh/ohmysh?include_prereleases)   ![GitHub](https://img.shields.io/github/license/ohmysh/ohmysh)   ![GitHub last commit](https://img.shields.io/github/last-commit/ohmysh/ohmysh)   ![GitHub top language](https://img.shields.io/github/languages/top/ohmysh/ohmysh)
 
 [GitHub](https://github.com/ohmysh/ohmysh) | [Chinese Mirror](https://gitee.com/ohmysh/ohmysh-mirror) | [Docs](https://ohmysh.github.io/docs-v2) | [Chinese Mirror Docs](https://ohmysh.gitee.io/docs-v2) | [Getting Started](https://ohmysh.github.io/docs-v2/#/getting-started/install) | [View the  License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)  | [Change Log](https://ohmysh.github.io/docs-v2/#/other/changelog)
 
-OhMySh is an excellent configuration tool for **SH** that allows you to change the theme of SH. OhMySh supports plugins. You can get them from the repository. OhMySh also supports plugins. You can get them from the repository too. For advanced users, OhMySh also supports customized themes and plugins!
+OhMySh is an excellent configuration tool for **many different shells** that allows you to change the theme. OhMySh also supports plugins. You can get them from the repository too. For advanced users, OhMySh also supports customized themes and plugins!
 
 # Getting Started
 
@@ -14,9 +14,9 @@ OhMySh is an excellent configuration tool for **SH** that allows you to change t
 
 ## Preparation
 
-OhMySh works with [SH shell (Bourne shell)](https://en.wikipedia.org/wiki/Bourne_shell) and GNU-Bash. 
+OhMySh works on many different shells such as GNU-Bash, Z-sh. 
 
-So make sure `sh (>=5.x.x)` was installed. There are some other dependences: `curl` `git` .
+So make sure `bash (>=5.x.x)` was installed. There are some other dependences: `curl` `git` .
 
 ## Quick Installation
 
@@ -51,17 +51,13 @@ chsh -s /bin/bash
 
 # Using OhMySh
 
-[See in Docs](https://ohmysh.github.io/docs-v2) | [Docs for Chinese](https://ohmysh.gitee.io/docs-v2)
-
-# OhMySh FAQ
-
-[FAQ](https://ohmysh.github.io/docs-v2/#/other/faq)
+[See in Docs](https://ohmysh.github.io/docs-v2) | [Docs for Chinese](https://ohmysh.gitee.io/docs-v2) | [FAQ](https://ohmysh.github.io/docs-v2/#/other/faq)
 
 # OhMySh Command Line Interface (CLI)
 
 OhMySh Command Line Interface (CLI) is a command line tool for OhMySh. You can use it to change the theme, run plugins and do more things!
 
-See `ohmysh --help` or `oms --help` .
+To get some helps, try `oms --help` .
 
 # More
 
@@ -69,13 +65,13 @@ See `ohmysh --help` or `oms --help` .
 
 # License
 
-OhMySh is under MIT-License.
+OhMySh is under [MIT-License](https://ohmysh.github.io/docs-v2/#/other/license).
 
-# Contributors
+# Contribution
 
 OhMySh is not the best. We need your help. Contact us by the following ways:
 
 - Email `wjy@516wjy.xyz`
-- PullRequest GitHub Repo `ohmysh/ohmysh`
+- Pullrequest our GitHub repo `ohmysh/ohmysh`
 
 Thanks!

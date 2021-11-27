@@ -1,12 +1,13 @@
 #!/bin/sh
 # OhMySh CLI
 #   !!! You can NOT edit this file !!!
+#   build/PRE; x.x.x-build_(PRE)x
 
-OMS_VER='0.0.5-build_18'
-OMS_BUILD='18'
-OMS_PRE='build'
+export OMS_VER='0.0.5-build_PRE20'
+export OMS_BUILD='20'
+export OMS_PRE='PRE'
 
-OMS_CLI_VER='0.0.5-build_12'
-OMS_CLI_BUILD='12'
-OMS_CLI_PRE='build'
+export OMS_CLI_VER='0.0.5-build_PRE14'
+export OMS_CLI_BUILD='14'
+export OMS_CLI_PRE='PRE'
 

@@ -1,58 +1,39 @@
-#/bin/sh
+#!/bin/bash
 
-# OhMySh
+# OhMySh Installer
 
 # config
-if [ -z $OMS ]
+if [ -z "$OMS" ]
 then
   OMS="$HOME/.ohmysh"
 fi
-if [ -z $OMS_CACHE ]
+if [ -z "$OMS_CACHE" ]
 then
   OMS_CACHE="$HOME/.ohmysh-cache"
 fi
-if [ -z $REPO ]
+if [ -z "$REPO" ]
 then
   REPO="https://github.com/ohmysh/ohmysh"
 fi
 
-OMS_RC="#
-# CREATED BY OhMySh <https://github.com/ohmysh/ohmysh>
-# OhMySh
-#
-
-# OhMySh work dir. Please don't edit it!
-OMS_DIR='$OMS'
-OMS_CACHE='$OMS_CACHE'
-
-# OhMySh theme
-OMS_THEME='colorshell'
-OMS_PLUGIN=()
-
-# OhMySh main script
-source \"\$OMS_DIR/main.sh\"
-
-# Global defines
-# Such as 'alias XXXX=\"XXXX\"'
-"
 OMS_RC_D="$HOME/.profile"
-OMS_RC_BASH="$HOME/.bashrc"
+#OMS_RC_BASH="$HOME/.bashrc"
 NF="NEWFILE"
 
 if [ -f "$HOME/.ohmysh-backup" ]
 then
   NF="OLDFILE"
   mv "$HOME/.ohmysh-backup" "$OMS_RC_D"
-  . $OMS_RC_D
-  $OMS=$OMS_DIR
+  . "$OMS_RC_D"
+  OMS="$OMS_DIR"
 fi  
 
 # lib
 checkcommand(){
-  if [ -n $2  ]; then
+  if [ -n "$2"  ]; then
     where="::$2"
   fi
-  hash $1 2>/dev/null || { echo " >> OhMySh$where : ERROR cannot found command \"$1\", please insall it!!! "; return 1; }
+  hash "$1" 2>/dev/null || { echo " >> OhMySh$where : ERROR cannot found command \"$1\", please insall it!!! "; return 1; }
  return 0
 }
 
@@ -63,12 +44,12 @@ omsconfig(){
 # OhMySh
 #
 # OhMySh work dir. Please don't edit it!
-OMS_DIR='$OMS'
-OMS_CACHE='$OMS_CACHE'
+export OMS_DIR='$OMS'
+export OMS_CACHE='$OMS_CACHE'
 
 # OhMySh theme
-OMS_THEME='colorshell'
-OMS_PLUGIN=()
+export OMS_THEME='colorshell'
+export OMS_PLUGIN=()
 
 # OhMySh main script
 source "\$OMS_DIR/main.sh"
@@ -81,7 +62,7 @@ echo ' Welcome to OhMySh installer script! '
 echo '   OhMySh <https://github.com/ohmysh/ohmysh>'
 
 # options
-if [ ! -z "$1" ]
+if [ -n "$1" ]
 then
   if [ "$1" = "--config" ]
   then
@@ -124,10 +105,10 @@ if [ "$NF" = "NEWFILE" ] ; then
 fi
 echo ' >> Creating cache'
 mkdir -p "$OMS_CACHE"
-date +%Y%m%d > $OMS_CACHE/update
-cp "$OMS/lib/alias.etc.sh" "$OMS_CACHE/alias.ohmysh.sh"
-cp "$OMS/lib/cover.etc.sh" "$OMS_CACHE/cover.ohmysh.sh"
-cp "$OMS/lib/config.etc.sh" "$OMS_CACHE/config.ohmysh.sh"
+date +%Y%m%d > "$OMS_CACHE/update"
+cp "$OMS/lib/etc/alias.etc.sh" "$OMS_CACHE/alias.ohmysh.sh"
+cp "$OMS/lib/etc/cover.etc.sh" "$OMS_CACHE/cover.ohmysh.sh"
+cp "$OMS/lib/etc/config.etc.sh" "$OMS_CACHE/config.ohmysh.sh"
 mkdir -p "$OMS_CACHE/runtime-script"
 mkdir -p "$OMS_CACHE/startup-script"
 
@@ -138,17 +119,20 @@ echo ' Configing... '
 echo ' >> Checking shell'
 
 echo " [INFO] Your shell is $SHELL"
-#echo ' [INFO] If your shell is not /bin/sh or /bin/bash, Run chsh -s /bin/sh'
+echo ' [INFO] If your shell is not /bin/sh or /bin/bash,'
+echo ' [INFO]   you may need to run the following scrip.'
+echo ' [INFO]     > $ chsh -s /bin/bash'
+echo ' [INFO] '
 
 source "$OMS/lib/logo.sh"
 _logo
 cat <<EOF
-Welcome to use OhMySh!
-  OhMySh official Documents is https://ohmysh.github.io/docs-v2
-  OhMySh official GitHub Repo is ohmysh/ohmysh <https://github.com/ohmysh/ohmysh>
-About configure:
-  View our docs: https://ohmysh.github.io/docs-v2
-
+  Welcome to use OhMySh!
+    OhMySh official Documents is https://ohmysh.github.io/docs-v2
+    OhMySh official GitHub Repo is ohmysh/ohmysh <https://github.com/ohmysh/ohmysh>
+  About configure:
+    View our docs: https://ohmysh.github.io/docs-v2
+    Or Chinese:    https://ohmysh.gitee.io/docs-v2
 EOF
 
 source "$OMS/lib/ohmysh-version.sh"

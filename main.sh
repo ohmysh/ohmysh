@@ -17,16 +17,14 @@ source "$OMS_DIR/lib/config.sh"
 source "$OMS_DIR/lib/ohmysh-version.sh"
 source "$OMS_DIR/lib/logo.sh"
 source "$OMS_DIR/lib/color.sh"
-source "$OMS_DIR/lib/dir.sh"
 source "$OMS_DIR/lib/run-update.sh"
 source "$OMS_DIR/lib/update.sh"
 
 # Load functional script
 source "$OMS_DIR/lib/check-command.sh"
-source "$OMS_DIR/lib/git-prompt.sh"
+source "$OMS_DIR/lib/tool/git-prompt.sh"
 source "$OMS_DIR/lib/theme.sh"
 source "$OMS_DIR/lib/plugin.sh"
-source "$OMS_DIR/lib/git.sh"
 source "$OMS_DIR/lib/alias.sh"
 source "$OMS_DIR/lib/cover.sh"
 source "$OMS_DIR/lib/opt/map.sh"
@@ -38,7 +36,7 @@ source "$OMS_DIR/lib/ohmysh-cli.sh"
 _theme_runner
 
 # RUN PLUGIN
-for _p in ${OMS_PLUGIN[@]}; do
+for _p in "${OMS_PLUGIN[@]}"; do
   _plugin_runner "$_p"
 done
 
@@ -50,7 +48,7 @@ source "$OMS_DIR/lib/runtime-script.sh"
 #rm -f "$OMS_CACHE/runtime-script/*.sh"
 
 # Change to Start Path
-if [ ! -z "$configStartPath" ]
+if [ -n "$configStartPath" ]
 then
     cd "$configStartPath"
 else

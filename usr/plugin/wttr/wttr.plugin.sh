@@ -1,5 +1,5 @@
 checkcommand curl wttr
-if [ -n $? ]
+if [ -n "$?" ]
 then
   alias wttr="curl wttr.in"
 fi

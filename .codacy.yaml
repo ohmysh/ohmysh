@@ -1,0 +1,5 @@
+---
+exclude_paths:
+  - "lib/tool/**"
+  - "usr/**/**/**"
+  - "usr/**/**/**/**"

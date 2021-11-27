@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## blue to echo 
 function blue(){
     echo -e "\033[34m$1\033[0m"
@@ -31,10 +33,10 @@ function byellow(){
 }
 
 _error(){
-  if [ -z $2 ]
+  if [ -z "$2" ]
   then
     tp="[ERROR] OhMySh"
-  elif [ -z $3 ]
+  elif [ -z "$3" ]
   then
     tp="[ERROR] OhMySh::$2"
   else
@@ -44,7 +46,7 @@ _error(){
 }
 
 _warn(){
-  if [ -z $2  ]
+  if [ -z "$2"  ]
   then
     tp="[WARNING] OhMySh"
   else
@@ -54,7 +56,7 @@ _warn(){
 }
 
 _info(){
-    if [ -z $2  ]
+    if [ -z "$2"  ]
     then
         tp="[INFO] OhMySh"
     else
@@ -63,3 +65,4 @@ _info(){
     blue " $tp : $1"
 }
 
+export -f bred byellow blue _info _warn _error

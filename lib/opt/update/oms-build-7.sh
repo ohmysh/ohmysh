@@ -1,5 +1,7 @@
+#!/bin/bash
+
 _CACHE_P=${_CACHE_PLUGIN[*]}
-sed -n '/OMS_PLUGIN=/p' $HOME/.profile | sed "s/$_CACHE_P//g" $HOME/.profile > $OMS_CACHE/profile
+sed -n '/OMS_PLUGIN=/p' "$HOME/.profile" | sed "s/$_CACHE_P//g" "$HOME/.profile" > "$OMS_CACHE/profile"
 rm "$HOME/.profile"
 mv "$OMS_CACHE/profile" "$HOME/.profile"
 
