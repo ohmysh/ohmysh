@@ -1,6 +1,7 @@
 #!/bin/bash
 
-export _path="$(pwd)"
+_path="$(pwd)"
+export _path
 
 mkdir -p test/cache
 

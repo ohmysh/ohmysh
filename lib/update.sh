@@ -18,7 +18,7 @@ then
         _CACHE_CLI_VERSION="$OMS_CLI_VER"
         #_CACHE_CLI_BUILD="$OMS_CLI_BUILD"
         #_CACHE_PLUGIN=(${OMS_PLUGIN[*]})
-        cd "$OMS_DIR"
+        cd "$OMS_DIR" || exit
         git pull || _error 'ERROR cannot get update!!!' 'Updater' '6'
         source "$OMS_DIR/lib/ohmysh-version.sh"
         date +%Y%m%d > "$OMS_CACHE/update"
