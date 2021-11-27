@@ -7,7 +7,7 @@ then
     mkdir -p "$OMS_CACHE/runtime-script"
 fi
 
-ls "$OMS_CACHE/runtime-script" | while IFS= read -r i
+find "$OMS_CACHE/runtime-script" -maxdepth 1 -type f -printf "%f\n" | while IFS= read -r i
 do
     if [ "${i##*.}" = "sh" ]
     then

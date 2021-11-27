@@ -7,7 +7,7 @@ then
     date +%Y%m%d > "$OMS_CACHE/update"
 fi
 
-if [ "$(cat "$OMS_CACHE/update")" != "$(date +%Y%m%d)" ] || [ ! -z "$forceUpdate" ]
+if [ "$(cat "$OMS_CACHE/update")" != "$(date +%Y%m%d)" ] || [ -n "$forceUpdate" ]
 then
     if [ -z "$configUpdateDisable" ] || [ "$configUpdate" != 'Disable' ]
     then
