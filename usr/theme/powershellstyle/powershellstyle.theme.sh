@@ -1,1 +1,1 @@
-OMS_THEME_PS="SH \w> "
+PS1="SH \w> "

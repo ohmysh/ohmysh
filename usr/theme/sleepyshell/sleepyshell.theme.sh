@@ -1,1 +1,1 @@
-OMS_THEME_PS="${COLOR[cyan]}\w${COLOR[reset]} \$ "
+PS1="${COLOR[cyan]}\w${COLOR[reset]} \$ "

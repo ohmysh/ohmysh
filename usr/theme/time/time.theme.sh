@@ -1,1 +1,1 @@
-OMS_THEME_PS="[\$(date +%H%M%S) \w]\$ "
+PS1="[\$(date +%H%M%S) \w]\$ "

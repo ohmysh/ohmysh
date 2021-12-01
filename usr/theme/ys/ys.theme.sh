@@ -7,5 +7,5 @@ function _GIT_T(){
   fi
 }
 
-OMS_THEME_PS="\n${COLOR[blue]}#${COLOR[reset]} ${COLOR[cyan]}\u${COLOR[reset]} @ ${COLOR[green]}\h${COLOR[reset]} in ${COLOR[brown]}\w${COLOR[reset]} \$(_GIT_T) [\$(date +%H:%M:%S)]\n${COLOR[red]}\$${COLOR[reset]} "
+PS1="\n${COLOR[blue]}#${COLOR[reset]} ${COLOR[cyan]}\u${COLOR[reset]} @ ${COLOR[green]}\h${COLOR[reset]} in ${COLOR[brown]}\w${COLOR[reset]} \$(_GIT_T) [\$(date +%H:%M:%S)]\n${COLOR[red]}\$${COLOR[reset]} "
 

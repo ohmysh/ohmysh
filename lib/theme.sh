@@ -40,7 +40,7 @@ _theme_runner(){
   then
     source "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"
     #PS1="\[$(tput sc; rightprompt $OMS_THEME_RIGHT; tput rc)\]\[$(OMS_GIT)\]$OMS_THEME_PS"
-    PS1="$OMS_THEME_PS"
+    #PS1="$OMS_THEME_PS"
   elif [ -f "$OMS_DIR/usr/local/theme/$OMS_THEME/$OMS_THEME.theme.sh" ]
   then
     source "$OMS_DIR/usr/local/theme/$OMS_THEME/$OMS_THEME.theme.sh"

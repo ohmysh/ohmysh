@@ -22,7 +22,10 @@ source "$OMS_DIR/lib/update.sh"
 
 # Load functional script
 source "$OMS_DIR/lib/check-command.sh"
+source "$OMS_DIR/lib/tool/base.sh"
 source "$OMS_DIR/lib/tool/git-prompt.sh"
+source "$OMS_DIR/lib/tool/colours.theme.sh"
+source "$OMS_DIR/lib/tool/base.theme.sh"
 source "$OMS_DIR/lib/theme.sh"
 source "$OMS_DIR/lib/plugin.sh"
 source "$OMS_DIR/lib/alias.sh"
