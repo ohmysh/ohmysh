@@ -427,5 +427,5 @@ set_bash_prompt() {
     export PS1="$PR"
 }
 
-set_bash_prompt
+safe_append_prompt_command set_bash_prompt
 #PROMPT_COMMAND=set_bash_prompt

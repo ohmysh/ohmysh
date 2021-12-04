@@ -39,4 +39,4 @@ function prompt_command() {
 
 THEME_CLOCK_COLOR=${THEME_CLOCK_COLOR:-"${white}"}
 
-prompt_command
+safe_append_prompt_command prompt_command
