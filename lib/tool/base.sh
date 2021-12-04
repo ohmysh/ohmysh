@@ -107,10 +107,10 @@ zipf () { zip -r "$1".zip "$1" ; }           # zipf:         To create a ZIP arc
 
 #   del:  move files to hidden folder in tmp, that gets cleared on each reboot
 #   ---------------------------------------------------------
-    del() {
-      mkdir -p /tmp/.trash && mv "$@" /tmp/.trash;
-    }
-
+#    del() {
+#      mkdir -p /tmp/.trash && mv "$@" /tmp/.trash;
+#    }
+#
 #   mkiso:  creates iso from current dir in the parent dir (unless defined)
 #   ---------------------------------------------------------
     mkiso () {
