@@ -24,7 +24,7 @@ Run the following commands with SH.
 
 ```sh
 curl https://raw.githubusercontent.com/ohmysh/ohmysh/main/install.sh > OMSInstaller.sh
-sh OMSInstaller.sh
+bash OMSInstaller.sh
 ```
 
 > ### More options
@@ -41,7 +41,7 @@ sh OMSInstaller.sh
 
 If you didn't change default shell to SH while installing the OMS, you can run this comand and reboot your machine after that:
 
-```sh
+```bash
 chsh -s /bin/bash
 ```
 
