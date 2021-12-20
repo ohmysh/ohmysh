@@ -50,4 +50,4 @@ _theme_runner(){
   fi
 }
 
-export -f _theme_runner
+#export -f _theme_runner

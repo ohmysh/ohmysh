@@ -65,4 +65,4 @@ _info(){
     blue " $tp : $1"
 }
 
-export -f bred byellow blue _info _warn _error
+#export -f bred byellow blue _info _warn _error

@@ -21,4 +21,4 @@ type_exists () {
     type "$1" &> /dev/null ;
 }
 
-export -f checkcmd
+#export -f checkcmd

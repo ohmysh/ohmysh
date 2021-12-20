@@ -185,5 +185,5 @@ EOF
 
 alias ohmysh="oms $1 $2 $3 $4"
 
-export -f oms _helpcommand
-export ohmysh
+#export -f oms _helpcommand
+#export ohmysh

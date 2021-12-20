@@ -1,9 +1,10 @@
 #!/bin/bash
 #
-# Made by OhMySh Dev
-# main SH Script
+# Made by OhMySh <https://github.com/ohmysh/ohmysh>
+# Main Script
 # 
 
+# Check your settings
 if [ -z "$OMS_DIR" ]
 then
   echo " [ERROR 3] OMS settings error !!! "
@@ -48,7 +49,6 @@ source "$OMS_DIR/lib/startup-script.sh"
 
 # RUN Runtime Script
 source "$OMS_DIR/lib/runtime-script.sh"
-#rm -f "$OMS_CACHE/runtime-script/*.sh"
 
 # Change to Start Path
 if [ -n "$configStartPath" ]
