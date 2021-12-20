@@ -115,7 +115,7 @@ EOF
     if [ -z "$2" ] || [ -z "$3" ]
     then
       _error "Missing parameters" 'OhMySh::CLI' '7'
-    elif [ ! -f "$OMS_DIR/usr/local/plugin/$3/$3.plugin.sh" ]
+    elif [ ! -f "$OMS_DIR/usr/local/plugin/$3/$3.plugin.sh" ] && [ ! -f "$OMS_DIR/usr/plugin/$3/$3.plugin.sh" ]
     then
       _error "Plugin not found!" 'OhMySh::Plugin' '5'
     elif [ "$2" = "start" ]
