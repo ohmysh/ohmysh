@@ -27,9 +27,6 @@ jobs:
         uses: ludeeus/action-shellcheck@master
         env:
           SHELLCHECK_OPTS: -s bash
-<<<<<<< HEAD
-=======
         with:
           ignore: tool usr
           severity: error
->>>>>>> nov2021
