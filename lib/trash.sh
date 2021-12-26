@@ -86,13 +86,15 @@ rmtrash(){
             _warn "Deleting $RP..."
 #             echo $NP
 #             ls "$OMS_CACHE/trash/" | grep "$NP"
-            _rmlist=()
-            find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep $NP | while IFS= read -r i
-            do
-                _rmlist+=("$i")
-            done
+#             local _rmlist=()
+#             find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP" | while IFS= read -r i
+#             do
+#                 _rmlist=("${_rmlist[@]}" "$i")
+#                 echo "$i ${#_rmlist[@]}"
+#             done
+            _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
             _count="${#_rmlist[@]}"
-            _info "Found $_count result(s)."
+            _info "Found ${#_rmlist[@]} result(s)."
             if [ "$_count" = "0" ]
             then
                 _error "The path is not correct." "OhMySh::TrashManager"
@@ -118,6 +120,11 @@ rmtrash(){
                 done
                 _info "Which one do you want to delete? [0-$((_count-1))]"
                 read _delnum
+                if [ -z "${_rmlist[_delnum]}" ]
+                then
+                    _error "Invalid input."
+                    return
+                fi
                 fullfilename="${_rmlist[_delnum]//"_%^%_"/"/"}"
                 filename="${fullfilename%%"_%backup%_"*}"
                 _warn "Deleting ${filename}..."
