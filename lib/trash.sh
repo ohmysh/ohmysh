@@ -86,7 +86,11 @@ rmtrash(){
             _warn "Deleting $RP..."
 #             echo $NP
 #             ls "$OMS_CACHE/trash/" | grep "$NP"
-            _rmlist=($(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep $NP))
+            _rmlist=()
+            find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep $NP | while IFS= read -r i
+            do
+                _rmlist+=("$i")
+            done
             _count="${#_rmlist[@]}"
             _info "Found $_count result(s)."
             if [ "$_count" = "0" ]
@@ -131,9 +135,11 @@ retrash(){
         RP="$(realpath "$1")"
         NP="${RP//"/"/"_%^%_"}"
         _warn "Restoring $RP..."
-#             echo $NP
-#             ls "$OMS_CACHE/trash/" | grep "$NP"
-        _rmlist=($(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep $NP))
+        _rmlist=()
+        find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep $NP | while IFS= read -r i
+        do
+            _rmlist+=("$i")
+        done
         _count="${#_rmlist[@]}"
         _info "Found $_count result(s)."
         if [ "$_count" = "0" ]
