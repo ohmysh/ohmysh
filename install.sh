@@ -43,12 +43,17 @@ omsconfig(){
 # CREATED BY OhMySh <https://github.com/ohmysh/ohmysh>
 # OhMySh
 #
+
 # OhMySh work dir. Please don't edit it!
+# * Main working path
 export OMS_DIR='$OMS'
+# * Cache Directory
 export OMS_CACHE='$OMS_CACHE'
 
-# OhMySh theme
+# OhMySh theme & plugin
+# * You can edit themes by using 'oms -t THEME_NAME'
 export OMS_THEME='colorshell'
+# * You can edit plugins by using 'oms -p ...'
 export OMS_PLUGIN=()
 
 # OhMySh main script
@@ -87,6 +92,10 @@ EOF
 fi
 
 # install
+cloneerror(){
+    echo " [ERROR 3] OhMySh::Installer : Cannot reach OhMySh repo, check on FAQ."
+}
+
 echo ' >> Preparing Install'
 checkcommand git Installer
 if [ $? == 1 ] ; then
@@ -96,9 +105,10 @@ fi
 if [ -d "$OMS" ]
 then
   echo ' [ERROR 2] OhMySh::Installer : You had installed OhMySh!!! '
+  exit 2
 fi
 echo ' >> Getting OMS'
-git clone "$REPO" "$OMS" || exit 3
+git clone "$REPO" "$OMS" || ( cloneerror && exit 3 )
 echo ' >> Putting config file'
 if [ "$NF" = "NEWFILE" ] ; then
   omsconfig
@@ -121,7 +131,7 @@ echo ' >> Checking shell'
 echo " [INFO] Your shell is $SHELL"
 echo ' [INFO] If your shell is not /bin/sh or /bin/bash,'
 echo ' [INFO]   you may need to run the following scrip.'
-echo ' [INFO]     > $ chsh -s /bin/bash'
+echo ' [INFO]     > # chsh -s /bin/bash'
 echo ' [INFO] '
 
 source "$OMS/lib/logo.sh"
