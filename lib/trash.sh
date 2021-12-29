@@ -120,7 +120,7 @@ rmtrash(){
                 done
                 _info "Which one do you want to delete? [0-$((_count-1))]"
                 read _delnum
-                if [ -z "$_delnum" ] || [ $_delnum -lt 0 ] || [ $_delnum -ge $_count ]
+                if [ -z "$_delnum" ] || [ "$_delnum" -lt "0" ] || [ "$_delnum" -ge "$_count" ]
                 then
                     _error "Invalid input."
                     return
@@ -175,7 +175,7 @@ retrash(){
             done
             _info "Which one do you want to delete? [0-$((_count-1))]"
             read _delnum
-            if [ -z "$_delnum" ] || [ $_delnum -lt 0 ] || [ $_delnum -ge $_count ]
+            if [ -z "$_delnum" ] || [ "$_delnum" -lt "0" ] || [ "$_delnum" -ge "$_count" ]
             then
                 _error "Invalid input."
                 return
