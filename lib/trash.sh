@@ -33,8 +33,15 @@ trash(){
 
 lstrash(){
     # ls "$OMS_CACHE/trash"
+    if [ -n "$1" ]
+    then
+        search_1="$(realpath "$1")"
+        search="${search_1//"/"/"_%^%_"}"
+    else
+        search=""
+    fi
     printf " %-22s %s\n" "Date deleted" "File name"
-    find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | while IFS= read -r i
+    find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$search" | while IFS= read -r i
     do
         fullfilename="${i//"_%^%_"/"/"}"
         # echo $fullfilename
