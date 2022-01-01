@@ -22,6 +22,7 @@ export mapCd='Enable'
 export mapHelp='Enable'
 export mapMSDos='Enable'
 export mapCSP2021='Disable'
+export trashService='Enable'
 
 ##### PERSONAL SETTINGS #####
 source "$OMS_CACHE/config.ohmysh.sh"

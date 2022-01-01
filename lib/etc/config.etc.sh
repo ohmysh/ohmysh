@@ -15,3 +15,4 @@
 # mapHelp='Disable'
 # mapMSDos='Disable'
 # mapCSP2021='Disable'
+# trashService='Disable'
