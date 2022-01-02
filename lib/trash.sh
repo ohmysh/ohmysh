@@ -98,7 +98,7 @@ rmtrash(){
         if [ "$1" = "-a" ]
         then
             _warn "You are going to delete all the caching trashes. Are you sure? [y/n]" "TrashManager"
-            read -s -n1 _cfm
+            read -r -s -n1 _cfm
             if [ "$_cfm" = "y" ] || [ "$_cfm" = "Y" ]
             then
                 _warn "You chose yes." "TrashManager"
@@ -145,7 +145,7 @@ rmtrash(){
                     fi
                 done
                 _info "Which one do you want to delete? [0-$((_count-1))]"
-                read _delnum
+                read -r _delnum
                 if [ -z "$_delnum" ] || [ "$_delnum" -lt "0" ] || [ "$_delnum" -ge "$_count" ]
                 then
                     _error "Invalid input."
@@ -200,7 +200,7 @@ retrash(){
                 fi
             done
             _info "Which one do you want to delete? [0-$((_count-1))]"
-            read _delnum
+            read -r _delnum
             if [ -z "$_delnum" ] || [ "$_delnum" -lt "0" ] || [ "$_delnum" -ge "$_count" ]
             then
                 _error "Invalid input."
