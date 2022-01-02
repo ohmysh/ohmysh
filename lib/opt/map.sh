@@ -17,7 +17,6 @@ then
     alias cls='clear'
     alias dir='ls --color'
     alias fc='diff'
-    alias del='rm'
     alias erase='rm'
     alias tree='ls -R'
 fi
@@ -47,4 +46,12 @@ then
     shopt -s autocd
 fi
 
+if [ "$mapTrash" != 'Disable' ]
+then
+    alias del='trash'
+    alias rmt='rmtrash'
+    alias lst='lstrash'
+    alias ret='retrash'
+    alias rma='rmtrash -a'
+fi
 
