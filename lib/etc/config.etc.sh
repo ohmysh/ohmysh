@@ -16,3 +16,5 @@
 # mapMSDos='Disable'
 # mapCSP2021='Disable'
 # trashService='Disable'
+# trashAutoDeleteService='Enable'
+# trashAutoDeleteConfigDate='30'
