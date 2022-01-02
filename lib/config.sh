@@ -23,6 +23,8 @@ export mapHelp='Enable'
 export mapMSDos='Enable'
 export mapCSP2021='Disable'
 export trashService='Enable'
+export trashAutoDeleteService='Disable'
+export trashAutoDeleteConfigDate='30'
 
 ##### PERSONAL SETTINGS #####
 source "$OMS_CACHE/config.ohmysh.sh"

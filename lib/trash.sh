@@ -14,6 +14,29 @@ else
     mkdir -p "$OMS_CACHE/trash"
 fi
 
+# Trash-Auto-Deleting Service
+
+if [ -n "$trashAutoDeleteService" ] && [ "$trashAutoDeleteService" = "Enable" ]
+then
+    find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | while IFS= read -r i
+    do
+        fullfilename="${i//"_%^%_"/"/"}"
+        filename="${fullfilename%%"_%backup%_"*}"
+        timename="${fullfilename##*"_%backup%_"}"
+        if [ "$timename" != "$filename" ]
+        then
+            editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
+            secdate="$(date -d "$editdate" "+%s")"
+            time1=$((($(date +%s)-secdate)/86400))
+            if [ "$time1" -gt "$trashAutoDeleteConfigDate" ]
+            then
+                _warn "The file $filename last $trashAutoDeleteConfigDate, deleting..."
+                rm -rf "$fullfilename"
+            fi
+        fi
+    done
+fi
+
 helptrash(){
     cat <<EOF
               trash help:
