@@ -65,7 +65,7 @@ trash(){
         NP="${RP//"/"/"_%^%_"}"
         NP="${NP//" "/"_%SPACE%_"}"
         _info "Deleting '$RP'"
-        echo $NP
+        # echo $NP
         # if [ -f "$OMS_CACHE/trash/$NP" ] || [ -d "$OMS_CACHE/trash/$NP" ]
         # then
             # mv "$OMS_CACHE/trash/$NP" "$OMS_CACHE/trash/${NP}_%backup%_$(date +%Y%m%d_%H%M%S_%8N)"
