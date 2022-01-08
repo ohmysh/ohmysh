@@ -30,8 +30,8 @@ then
             time1=$((($(date +%s)-secdate)/86400))
             if [ "$time1" -gt "$trashAutoDeleteConfigDate" ]
             then
-                _warn "The file $filename last $trashAutoDeleteConfigDate, deleting..."
-                rm -rf "$fullfilename"
+                _warn "The file $filename last over $trashAutoDeleteConfigDate days, deleting..."
+                rm -rf "$OMS_CACHE/trash/$i"
             fi
         fi
     done
