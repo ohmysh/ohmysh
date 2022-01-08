@@ -44,15 +44,15 @@ trash:
   trash FILE       :  move a file/folder to the bin
 lstrash:
   lstrash          :  get a list of the bin
-  lstrash /KEY     :  search KEY
+  lstrash KEY      :  search KEY
   lstrash PATH     :  search file on PATH
 rmtrash:
   rmtrash FILE     :  remove FILE
-  rmtrash /KEY     :  search KEY to remove
+  rmtrash KEY      :  search KEY to remove
   rmtrash -a       :  remove all files
 retrash:
   retrash FILE     :  restore FILE
-  retrash /KEY     :  search KEY to restore
+  retrash KEY      :  search KEY to restore
 EOF
 }
 
