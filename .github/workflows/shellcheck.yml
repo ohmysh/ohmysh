@@ -29,4 +29,4 @@ jobs:
           SHELLCHECK_OPTS: -s bash
         with:
           ignore_paths: tool usr
-          #severity: error
+          severity: error
