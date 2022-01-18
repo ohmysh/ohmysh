@@ -10,6 +10,7 @@
 # configUpdate='Disable'
 # configCover='Disable'
 # configStartPath="$HOME/"
+# configPathEnv='FULLPATH1:FULLPATH2'
 # mapLs='Disable'
 # mapCd='Disable'
 # mapHelp='Disable'

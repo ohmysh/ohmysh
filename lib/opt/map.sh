@@ -55,3 +55,8 @@ then
     alias rma='rmtrash -a'
 fi
 
+if [ -n "$configPathEnv" ] && [ "$configPathEnv" != 'Disable' ]
+then
+    export PATH="$PATH:$configPathEnv"
+fi
+

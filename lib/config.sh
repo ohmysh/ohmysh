@@ -17,6 +17,7 @@ fi
 export configUpdate='Auto'
 export configCover='Enable'
 export configStartPath="$HOME/"
+export configPathEnv='Disable'
 export mapLs='Enable'
 export mapCd='Enable'
 export mapHelp='Enable'
