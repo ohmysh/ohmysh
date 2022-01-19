@@ -2,6 +2,50 @@
 
 # OhMySh Installer
 
+# Color Defines
+function blue(){
+    echo -e "\033[34m$1\033[0m"
+}
+function green(){
+    echo -e "\033[32m[ $1 ]\033[0m"
+}
+function bred(){
+    echo -e "\033[31m\033[01m$1\033[0m"
+}
+function byellow(){
+    echo -e "\033[33m\033[01m$1\033[0m"
+}
+_error(){
+  if [ -z "$2" ]
+  then
+    tp="[ERROR] OhMySh"
+  elif [ -z "$3" ]
+  then
+    tp="[ERROR] OhMySh::$2"
+  else
+    tp="[ERROR $3] OhMySh::$2"
+  fi
+  bred " $tp : $1"
+}
+_warn(){
+  if [ -z "$2"  ]
+  then
+    tp="[WARNING] OhMySh"
+  else
+    tp="[WARNING] OhMySh::$2"
+  fi
+  byellow " $tp : $1"
+}
+_info(){
+    if [ -z "$2"  ]
+    then
+        tp="[INFO] OhMySh"
+    else
+        tp="[INFO] OhMySh::$2"
+    fi
+    blue " $tp : $1"
+}
+
 # config
 if [ -z "$OMS" ]
 then
@@ -33,7 +77,7 @@ checkcommand(){
   if [ -n "$2"  ]; then
     where="::$2"
   fi
-  hash "$1" 2>/dev/null || { echo " >> OhMySh$where : ERROR cannot found command \"$1\", please insall it!!! "; return 1; }
+  hash "$1" 2>/dev/null || { _error "Cannot found command \"$1\", please insall it!!! " "Installer" "1"; return 1; }
  return 0
 }
 
@@ -63,15 +107,15 @@ EOF
   echo ". $OMS_RC_D" >> "$HOME/.bashrc"
 }
 
-echo ' Welcome to OhMySh installer script! '
-echo '   OhMySh <https://github.com/ohmysh/ohmysh>'
+blue ' Welcome to OhMySh installer script! '
+blue '   OhMySh <https://github.com/ohmysh/ohmysh>'
 
 # options
 if [ -n "$1" ]
 then
   if [ "$1" = "--config" ]
   then
-    echo ' >> Config Force'
+    _info 'Config Force'
     omsconfig
   else
     cat <<EOF
@@ -93,27 +137,27 @@ fi
 
 # install
 cloneerror(){
-    echo " [ERROR 3] OhMySh::Installer : Cannot reach OhMySh repo, check on FAQ."
+    _error "Cannot reach OhMySh repo, check on FAQ." "Installer" "3"
 }
 
-echo ' >> Preparing Install'
+_info 'Preparing to install'
 checkcommand git Installer
 if [ $? == 1 ] ; then
-  echo ' [ERROR 1] OhMySh::Installer : ERROR Failed to install OhMySh!!! '
+  _error 'Failed to install OhMySh!!! ' 'Installer' '1'
   exit 1
 fi
 if [ -d "$OMS" ]
 then
-  echo ' [ERROR 2] OhMySh::Installer : You had installed OhMySh!!! '
+  _error 'You had installed OhMySh!!! ' 'Installer' '2'
   exit 2
 fi
-echo ' >> Getting OMS'
+_info '  Getting OMS'
 git clone "$REPO" "$OMS" || ( cloneerror && exit 3 )
-echo ' >> Putting config file'
+_info 'Putting config file'
 if [ "$NF" = "NEWFILE" ] ; then
   omsconfig
 fi
-echo ' >> Creating cache'
+_info '  Creating cache'
 mkdir -p "$OMS_CACHE"
 date +%Y%m%d > "$OMS_CACHE/update"
 cp "$OMS/lib/etc/alias.etc.sh" "$OMS_CACHE/alias.ohmysh.sh"
@@ -122,11 +166,11 @@ cp "$OMS/lib/etc/config.etc.sh" "$OMS_CACHE/config.ohmysh.sh"
 mkdir -p "$OMS_CACHE/runtime-script"
 mkdir -p "$OMS_CACHE/startup-script"
 
-echo ' OhMySh is already installed! '
+_info 'OhMySh is already installed! '
 
 # config
-echo ' Configing... '
-echo ' >> Checking shell'
+_info 'Configing... '
+_info '  Checking shell'
 
 echo " [INFO] Your shell is $SHELL"
 echo ' [INFO] If your shell is not /bin/sh or /bin/bash,'
@@ -146,7 +190,7 @@ cat <<EOF
 EOF
 
 source "$OMS/lib/ohmysh-version.sh"
-echo " Installed OhMySh Version $OMS_VER!"
+_info "Installed OhMySh Version $OMS_VER!"
 
 # OhMySh Installer Script.
 
