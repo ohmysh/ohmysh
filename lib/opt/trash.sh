@@ -61,17 +61,22 @@ trash(){
     then
         _error 'Missing parameters' 'OhMySh::TrashManager' '10'
     else
-        RP="$(realpath "$1")"
-        NP="${RP//"/"/"_%^%_"}"
-        NP="${NP//" "/"_%SPACE%_"}"
-        _info "Deleting '$RP'"
-        # echo $NP
-        # if [ -f "$OMS_CACHE/trash/$NP" ] || [ -d "$OMS_CACHE/trash/$NP" ]
-        # then
-            # mv "$OMS_CACHE/trash/$NP" "$OMS_CACHE/trash/${NP}_%backup%_$(date +%Y%m%d_%H%M%S_%8N)"
-        # fi    
-        # mv "$RP" "$OMS_CACHE/trash/$NP"
-        mv "$RP" "$OMS_CACHE/trash/${NP}_%backup%_$(date +%Y%m%d_%H%M%S_%8N)"
+        if [ -f "$1" ] || [ -d "$1" ]
+        then
+            RP="$(realpath "$1")"
+            NP="${RP//"/"/"_%^%_"}"
+            NP="${NP//" "/"_%SPACE%_"}"
+            _info "Deleting '$RP'"
+            # echo $NP
+            # if [ -f "$OMS_CACHE/trash/$NP" ] || [ -d "$OMS_CACHE/trash/$NP" ]
+            # then
+                # mv "$OMS_CACHE/trash/$NP" "$OMS_CACHE/trash/${NP}_%backup%_$(date +%Y%m%d_%H%M%S_%8N)"
+            # fi
+            # mv "$RP" "$OMS_CACHE/trash/$NP"
+            mv "$RP" "$OMS_CACHE/trash/${NP}_%backup%_$(date +%Y%m%d_%H%M%S_%8N)"
+        else
+            _error "No such file or directory." "TrashManager"
+        fi
     fi
 }
 
