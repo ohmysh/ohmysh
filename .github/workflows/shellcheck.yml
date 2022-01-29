@@ -28,5 +28,5 @@ jobs:
         env:
           SHELLCHECK_OPTS: -s bash
         with:
-          ignore: tool usr
+          ignore_paths: tool usr
           severity: error

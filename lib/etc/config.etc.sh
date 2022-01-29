@@ -10,8 +10,13 @@
 # configUpdate='Disable'
 # configCover='Disable'
 # configStartPath="$HOME/"
+# configPathEnv='FULLPATH1:FULLPATH2'
 # mapLs='Disable'
 # mapCd='Disable'
 # mapHelp='Disable'
 # mapMSDos='Disable'
 # mapCSP2021='Disable'
+# mapTrash='Disable'
+# trashService='Disable'
+# trashAutoDeleteService='Enable'
+# trashAutoDeleteConfigDate='30'

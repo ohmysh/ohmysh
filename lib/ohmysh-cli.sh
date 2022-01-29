@@ -21,8 +21,9 @@ _helpcommand(){
          disable [PLUGIN]       :    Disable a plugin
          restart [PLUGIN]       :    Restart a plugin
     --pluginlist                :    Get list of plugins
-    -a  --alias [EDITOR]        :    Config aliases (EDITOR=vi)
-    -c  --cover [EDITOR]        :    Edit the cover (EDITOR=vi)
+    -a  --alias (EDITOR)        :    Config aliases (EDITOR=vi)
+    -c  --cover (EDITOR)        :    Edit the cover (EDITOR=vi)
+    -e  --advconfig (EDITOR)    :    Edit the cover (EDITOR=vi)
     --chsh [SHELL (sh|bash|zsh)]:    Creat config file for [SHELL]
 
 More information about using OhMySh, visit our documents: 
@@ -161,6 +162,14 @@ EOF
       vi "$OMS_CACHE/cover.ohmysh.sh"
     else
       $2 "$OMS_CACHE/cover.ohmysh.sh"
+    fi
+  elif [ "$1" = "-e" ] || [ "$1" = "--advconfig" ]
+  then
+    if [ -z "$2" ]
+    then
+      vi "$OMS_CACHE/config.ohmysh.sh"
+    else
+      $2 "$OMS_CACHE/config.ohmysh.sh"
     fi
   elif [ "$1" = "--chsh" ]
   then
