@@ -2,11 +2,20 @@
 
 <b>The Excellent Shell Framework</b></center>
 
+<!--
+
 ![Tag version](https://img.shields.io/github/v/tag/ohmysh/ohmysh?include_prereleases)   ![GitHub](https://img.shields.io/github/license/ohmysh/ohmysh)   ![GitHub last commit](https://img.shields.io/github/last-commit/ohmysh/ohmysh)   ![GitHub top language](https://img.shields.io/github/languages/top/ohmysh/ohmysh)
+
+-->
 
 [GitHub](https://github.com/ohmysh/ohmysh) | [Chinese Mirror](https://gitee.com/ohmysh/ohmysh-mirror) | [Docs](https://ohmysh.github.io/docs-v2) | [Chinese Mirror Docs](https://ohmysh.gitee.io/docs-v2) | [Getting Started](https://ohmysh.github.io/docs-v2/#/getting-started/install) | [View the  License](https://github.com/ohmysh/ohmysh/blob/main/LICENSE)  | [Change Log](https://ohmysh.github.io/docs-v2/#/other/changelog)
 
 OhMySh is an excellent configuration tool for **many different shells** that allows you to change the theme. OhMySh also supports plugins. You can get them from the repository too. For advanced users, OhMySh also supports customized themes and plugins!
+
+| Version | Status |
+| :--: | :--- |
+| Stable Version | ![GitHub release (latest by date)](https://img.shields.io/github/v/release/ohmysh/ohmysh?display_name=release)   ![GitHub last commit](https://img.shields.io/github/last-commit/ohmysh/ohmysh) |
+| Dev Version | ![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/ohmysh/ohmysh?include_prereleases&label=pre-build&sort=semver)    ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ohmysh/ohmysh/dev) |
 
 # Getting Started
 
