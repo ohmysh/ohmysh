@@ -194,5 +194,52 @@ EOF
 
 alias ohmysh="oms $1 $2 $3 $4"
 
+_oms_completion()
+{
+    local curr prev
+
+    COMPREPLY=()
+    curr=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+    pre2=${COMP_WORDS[COMP_CWORD-2]}
+#     blue "$curr $prev $pre2"
+
+    opts="-u --update --uninstall -h --help -v --version -t -p --themelist --pluginlist -a --alias -c --cover -e --advconfig --chsh"
+    if [[ ${COMP_CWORD} -eq 1 ]]; then
+        COMPREPLY=( $(compgen -W "${opts}" -- ${curr}) )
+    fi
+
+    case "${prev}" in
+        "-t"|"--theme")
+            COMPREPLY=( $(compgen -W "$(ls --color="never" "$OMS_DIR/usr/theme" && ls --color="never" "$OMS_DIR/usr/local/theme")" -- ${curr}) )
+            ;;
+        "-p"|"--plugin")
+            COMPREPLY=( $(compgen -W "start enable disable restart" -- ${curr}) )
+            ;;
+        "--chsh")
+            COMPREPLY=( $(compgen -W "bash sh zsh" -- ${curr}) )
+            ;;
+        "-a"|"--alias"|"-c"|"--cover"|"-e"|"--advconfig")
+            COMPREPLY=( $(compgen -W "vi vim nano" -- ${curr}) )
+            ;;
+        "hello")
+            COMPREPLY=( $(compgen -W "ldrow raboof" -- ${curr}) )
+            ;;
+        *)
+            ;;
+    esac
+    case "${pre2}" in
+        "-p"|"--plugin")
+            case "${prev}" in
+                "start"|"enable"|"disable"|"restart")
+                    COMPREPLY=( $(compgen -W "$(ls --color="never" "$OMS_DIR/usr/plugin" && ls --color="never" "$OMS_DIR/usr/local/plugin")" -- ${curr}) )
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+complete -F _oms_completion oms
+
 #export -f oms _helpcommand
 #export ohmysh
