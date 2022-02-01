@@ -18,6 +18,7 @@ export configUpdate='Auto'
 export configCover='Enable'
 export configStartPath="$HOME/"
 export configPathEnv='Disable'
+export configBashcompletion='Enable'
 export mapLs='Enable'
 export mapCd='Enable'
 export mapHelp='Enable'
@@ -27,6 +28,8 @@ export mapTrash='Enable'
 export trashService='Enable'
 export trashAutoDeleteService='Disable'
 export trashAutoDeleteConfigDate='30'
+export bashcompletionPathLinux='/usr/share/bash-completion/bash_completion'
+export bashcompletionPathMacOS='/sw/etc/bash_completion'
 
 ##### PERSONAL SETTINGS #####
 source "$OMS_CACHE/config.ohmysh.sh"

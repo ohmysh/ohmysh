@@ -11,6 +11,7 @@
 # configCover='Disable'
 # configStartPath="$HOME/"
 # configPathEnv='FULLPATH1:FULLPATH2'
+# configBashcompletion='Enable'
 # mapLs='Disable'
 # mapCd='Disable'
 # mapHelp='Disable'
@@ -20,3 +21,5 @@
 # trashService='Disable'
 # trashAutoDeleteService='Enable'
 # trashAutoDeleteConfigDate='30'
+# bashcompletionPathLinux='/usr/share/bash-completion/bash_completion'
+# bashcompletionPathMacOS='/sw/etc/bash_completion'
