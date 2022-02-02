@@ -32,4 +32,5 @@ export bashcompletionPathLinux='/usr/share/bash-completion/bash_completion'
 export bashcompletionPathMacOS='/sw/etc/bash_completion'
 
 ##### PERSONAL SETTINGS #####
+# You can edit your config under this file.
 source "$OMS_CACHE/config.ohmysh.sh"

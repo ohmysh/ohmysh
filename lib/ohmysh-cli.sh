@@ -88,6 +88,9 @@ oms(){
     OhMySh Profile Path :  $HOME/.profile;$HOME/.bashrc
     OhMySh Logged User  :  $USER
     System Shell        :  $SHELL
+    Completion Status   :  $OMSBC_status
+    Completion Platform :  $OMSBC_plat
+    Completion Path     :  $OMSBC_path
 
     OhMySh Command Line Interface $OMS_CLI_VER
 
