@@ -21,5 +21,7 @@
 # trashService='Disable'
 # trashAutoDeleteService='Enable'
 # trashAutoDeleteConfigDate='30'
+# bashcompletionPlatform='Custom'    # (Auto/Linux/MacOS/Custom)
 # bashcompletionPathLinux='/usr/share/bash-completion/bash_completion'
 # bashcompletionPathMacOS='/sw/etc/bash_completion'
+# bashcompletionPathCustom='Custom path'
