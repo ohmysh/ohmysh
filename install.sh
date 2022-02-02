@@ -74,9 +74,6 @@ fi
 
 # lib
 checkcommand(){
-  if [ -n "$2"  ]; then
-    where="::$2"
-  fi
   hash "$1" 2>/dev/null || { _error "Cannot found command \"$1\", please insall it!!! " "Installer" "1"; return 1; }
  return 0
 }
