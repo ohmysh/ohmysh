@@ -28,8 +28,10 @@ export mapTrash='Enable'
 export trashService='Enable'
 export trashAutoDeleteService='Disable'
 export trashAutoDeleteConfigDate='30'
+export bashcompletionPlatform='Auto'    # (Auto/Linux/MacOS/Custom)
 export bashcompletionPathLinux='/usr/share/bash-completion/bash_completion'
 export bashcompletionPathMacOS='/sw/etc/bash_completion'
+export bashcompletionPathCustom='Custom path'
 
 ##### PERSONAL SETTINGS #####
 # You can edit your config under this file.

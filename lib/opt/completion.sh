@@ -14,13 +14,24 @@ if [ "$configBashcompletion" = "Enable" ]
 then
     if [ "$SHELL" = '/bin/bash' ]
     then
-        if [ "$(uname -s)" = 'Linux' ]
+        if ([ "$bashcompletionPlatform" = 'Auto' ] && [ "$(uname -s)" = 'Linux' ]) || [ "$bashcompletionPlatform" = 'Linux' ]
         then
             export OMSBC_plat="Linux"
             export OMSBC_path="$bashcompletionPathLinux"
             if [ -f "$bashcompletionPathLinux" ]
             then
                 . "$bashcompletionPathLinux"
+                export OMSBC_status="Running"
+            else
+                export OMSBC_status="Error 11: No such file or directory."
+            fi
+        elif [ "$bashcompletionPlatform" = 'Custom' ]
+        then
+            export OMSBC_plat="Custom"
+            export OMSBC_plat="$bashcompletionPathCustom"
+            if [ -f "$bashcompletionPathCustom" ]
+            then
+                . "$bashcompletionPathCustom"
                 export OMSBC_status="Running"
             else
                 export OMSBC_status="Error 11: No such file or directory."
