@@ -523,11 +523,12 @@ function safe_append_prompt_command {
        return
     fi
 
-    if [[ ${PROMPT_COMMAND} =~ ${prompt_re} ]]; then
-      return
-    elif [[ -z ${PROMPT_COMMAND} ]]; then
+#     if [[ ${PROMPT_COMMAND} =~ ${prompt_re} ]]; then
+#         _warn ":527 ${PROMPT_COMMAND} ${prompt_re}"
+#       return
+#     elif [[ -z ${PROMPT_COMMAND} ]]; then
       PROMPT_COMMAND="${1}"
-    else
-      PROMPT_COMMAND="${1};${PROMPT_COMMAND}"
-    fi
+#     else
+#       PROMPT_COMMAND="${1};${PROMPT_COMMAND}"
+#     fi
 }
