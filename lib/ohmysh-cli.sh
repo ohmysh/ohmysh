@@ -132,6 +132,7 @@ EOF
       OMS_PLUGIN_NEW="$3"
       sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/(/(\"$OMS_PLUGIN_NEW\" /" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
+      OMS_PLUGIN+=("$OMS_PLUGIN_NEW")
       _plugin_runner "$OMS_PLUGIN_NEW"
     elif [ "$2" = "disable" ]
     then
@@ -139,6 +140,7 @@ EOF
       OMS_PLUGIN_NEW="$3"
       sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/\"$OMS_PLUGIN_NEW\" //g" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
+      _warn "Disabled. It will be applied after you restart."
     elif [ "$2" = "restart" ]
     then
       _warn "Restart plugin '$3'" "OhMySh::Plugin"
