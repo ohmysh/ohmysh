@@ -82,12 +82,14 @@ oms(){
     Last checked update :  $(cat "$OMS_CACHE/update")
 
            Environment --- OhMySh
-    OhMySh Theme        :  $OMS_THEME
     OhMySh Path         :  $OMS_DIR
     OhMySh Cache Path   :  $OMS_CACHE
     OhMySh Profile Path :  $HOME/.profile;$HOME/.bashrc
     OhMySh Logged User  :  $USER
     System Shell        :  $SHELL
+    OhMySh Theme        :  $OMS_THEME
+    OhMySh Plugins      :  ${OMS_PLUGIN[@]}
+    Completion Version  :  $(echo "${BASH_COMPLETION_VERSINFO[@]}" | sed 's/\ /./g')
     Completion Status   :  $OMSBC_status
     Completion Platform :  $OMSBC_plat ($bashcompletionPlatform)
     Completion Path     :  $OMSBC_path
