@@ -14,7 +14,7 @@ if [ "$configBashcompletion" = "Enable" ]
 then
     if [ "$SHELL" = '/bin/bash' ]
     then
-        if ([ "$bashcompletionPlatform" = 'Auto' ] && [ "$(uname -s)" = 'Linux' ]) || [ "$bashcompletionPlatform" = 'Linux' ]
+        if { [ "$bashcompletionPlatform" = 'Auto' ] && [ "$(uname -s)" = 'Linux' ]; } || [ "$bashcompletionPlatform" = 'Linux' ]
         then
             export OMSBC_plat="Linux"
             export OMSBC_path="$bashcompletionPathLinux"
