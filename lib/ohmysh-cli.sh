@@ -89,7 +89,7 @@ oms(){
     System Shell        :  $SHELL
     OhMySh Theme        :  $OMS_THEME
     OhMySh Plugins      :  ${OMS_PLUGIN[@]}
-    Completion Version  :  $(echo "${BASH_COMPLETION_VERSINFO[@]}" | sed 's/\ /./g')
+    Completion Version  :  $BCVER
     Completion Status   :  $OMSBC_status
     Completion Platform :  $OMSBC_plat ($bashcompletionPlatform)
     Completion Path     :  $OMSBC_path

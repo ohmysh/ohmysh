@@ -49,3 +49,9 @@ then
         fi
     fi
 fi
+
+if [ "$OMSBC_status" = "Running" ]
+then
+    _BCVER="${BASH_COMPLETION_VERSINFO[@]}"
+    export BCVER="${_BCVER//\ /.}"
+fi
