@@ -32,6 +32,8 @@ export bashcompletionPlatform='Auto'    # (Auto/Linux/MacOS/Custom)
 export bashcompletionPathLinux='/usr/share/bash-completion/bash_completion'
 export bashcompletionPathMacOS='/sw/etc/bash_completion'
 export bashcompletionPathCustom='Custom path'
+export dateFormat='%x'
+export timeFormat='%H:%M:%S'
 
 ##### PERSONAL SETTINGS #####
 # You can edit your config under this file.

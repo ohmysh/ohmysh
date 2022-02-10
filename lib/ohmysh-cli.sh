@@ -79,7 +79,7 @@ oms(){
                Version --- OhMySh
     OhMySh Version      :  $OMS_VER
     OhMySh CLI Version  :  $OMS_CLI_VER
-    Last checked update :  $(cat "$OMS_CACHE/update")
+    Last checked update :  $(date -d "$(cat "$OMS_CACHE/update")" "+$dateFormat")
 
            Environment --- OhMySh
     OhMySh Path         :  $OMS_DIR

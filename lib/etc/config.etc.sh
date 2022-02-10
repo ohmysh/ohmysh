@@ -4,7 +4,7 @@
 # Learn more on https://ohmysh.github.io/docs-v2/
 
 ##### GLOBAL SETTINGS #####
-# 'Enable' or 'Disable' are accepted.
+# 'Enable' or 'Disable' are accepted. And also path and values.
 # The default settings are in 'lib/config.sh'
 
 # configUpdate='Disable'
@@ -25,3 +25,5 @@
 # bashcompletionPathLinux='/usr/share/bash-completion/bash_completion'
 # bashcompletionPathMacOS='/sw/etc/bash_completion'
 # bashcompletionPathCustom='Custom path'
+# dateFormat='%x'   # See in 'date --help'
+# timeFormat='%H:%M:%S' # See in 'date --help'

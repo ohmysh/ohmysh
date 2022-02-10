@@ -109,7 +109,7 @@ lstrash(){
             # fi
         # else
             editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
-            outdate="$(date -d "$editdate" "+%F %H:%M:%S")"
+            outdate="$(date -d "$editdate" "+$dateFormat $timeFormat")"
             if [ -d "$OMS_CACHE/trash/$i" ]
             then
                 printf " %-22s \033[34m%s\033[0m\n" "$outdate" "$filename"
@@ -169,7 +169,7 @@ rmtrash(){
                     if [ "$timename" != "$filename" ]
                     then
                         editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
-                        outdate="$(date -d "$editdate" "+%F %H:%M:%S")"
+                        outdate="$(date -d "$editdate" "+$dateFormat $timeFormat")"
                         if [ -d "$OMS_CACHE/trash/${_rmlist[i]}" ]
                         then
                             printf " %-4s %-22s \033[34m%s\033[0m\n" "$i" "$outdate" "$filename"
@@ -229,7 +229,7 @@ retrash(){
                 if [ "$timename" != "$filename" ]
                 then
                     editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
-                    outdate="$(date -d "$editdate" "+%F %H:%M:%S")"
+                    outdate="$(date -d "$editdate" "+$dateFormat $timeFormat")"
                     if [ -d "$OMS_CACHE/trash/${_rmlist[i]}" ]
                     then
                         printf " %-4s %-22s \033[34m%s\033[0m\n" "$i" "$outdate" "$filename"
