@@ -84,8 +84,8 @@ lstrash(){
     # ls "$OMS_CACHE/trash"
     if [ -n "$1" ]
     then
-        search_1="$(realpath "$1")"
-        search="${search_1//"/"/"_%^%_"}"
+#         search_1="$(realpath "$1")"
+        search="${1//"/"/"_%^%_"}"
     else
         search=""
     fi
@@ -191,6 +191,33 @@ rmtrash(){
                 filename="${fullfilename%%"_%backup%_"*}"
                 _warn "Deleting ${filename}..."
                 rm -rf "$OMS_CACHE/trash/${_rmlist[_delnum]}"
+            else
+                fullfilename="${_rmlist[0]//"_%^%_"/"/"}"
+                fullfilename="${fullfilename//"_%SPACE%_"/" "}"
+                filename="${fullfilename%%"_%backup%_"*}"
+                timename="${fullfilename##*"_%backup%_"}"
+                if [ "$timename" != "$filename" ]
+                then
+                    editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
+                    outdate="$(date -d "$editdate" "+$dateFormat $timeFormat")"
+                    if [ -d "$OMS_CACHE/trash/${_rmlist[0]}" ]
+                    then
+                        printf " %-22s \033[34m%s\033[0m\n" "$outdate" "$filename"
+                    elif [ -f "$OMS_CACHE/trash/${_rmlist[0]}" ]
+                    then
+                        printf " %-22s %s\n" "$outdate" "$filename"
+                    fi
+                fi
+                _info "Do you really want to delete this file? [y/n]"
+                read -r -n1 _confirm
+                if [ "$_confirm" = "y" ] || [ "$_confirm" = "Y" ]
+                then
+                    fullfilename="${_rmlist[0]//"_%^%_"/"/"}"
+                    fullfilename="${fullfilename//"_%SPACE%_"/" "}"
+                    filename="${fullfilename%%"_%backup%_"*}"
+                    _warn "Deleting ${filename}..."
+                    rm -rf "$OMS_CACHE/trash/${_rmlist[0]}"
+                fi
             fi
         fi
 #     fi
@@ -251,6 +278,33 @@ retrash(){
             filename="${fullfilename%%"_%backup%_"*}"
             _warn "Restoring ${filename}..."
             mv -f "$OMS_CACHE/trash/${_rmlist[_delnum]}" "$filename"
+        else
+            fullfilename="${_rmlist[0]//"_%^%_"/"/"}"
+            fullfilename="${fullfilename//"_%SPACE%_"/" "}"
+            filename="${fullfilename%%"_%backup%_"*}"
+            timename="${fullfilename##*"_%backup%_"}"
+            if [ "$timename" != "$filename" ]
+            then
+                editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
+                outdate="$(date -d "$editdate" "+$dateFormat $timeFormat")"
+                if [ -d "$OMS_CACHE/trash/${_rmlist[0]}" ]
+                then
+                    printf " %-22s \033[34m%s\033[0m\n" "$outdate" "$filename"
+                elif [ -f "$OMS_CACHE/trash/${_rmlist[0]}" ]
+                then
+                    printf " %-22s %s\n" "$outdate" "$filename"
+                fi
+            fi
+            _info "Do you really want to restore this file? [y/n]"
+            read -r -n1 _confirm
+            if [ "$_confirm" = "y" ] || [ "$_confirm" = "Y" ]
+            then
+                fullfilename="${_rmlist[0]//"_%^%_"/"/"}"
+                fullfilename="${fullfilename//"_%SPACE%_"/" "}"
+                filename="${fullfilename%%"_%backup%_"*}"
+                _warn "Restoring ${filename}..."
+                mv -f "$OMS_CACHE/trash/${_rmlist[0]}" "$filename"
+            fi
         fi
 #     fi
 }
