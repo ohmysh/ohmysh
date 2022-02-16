@@ -194,6 +194,9 @@ EOF
         echo '. ~/.profile' >> "$HOME/.$2rc"
       fi
     fi
+  elif [ "$1" = "-r" ] || [ "$1" = "--reload" ]
+  then
+    oms_reload
   else
     _error "Parameters '$1' not found" 'CLI' '2'
   fi
