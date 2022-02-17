@@ -25,6 +25,7 @@ _helpcommand(){
     -c  --cover (EDITOR)        :    Edit the cover (EDITOR=vi)
     -e  --advconfig (EDITOR)    :    Edit the cover (EDITOR=vi)
     --chsh [SHELL (sh|bash|zsh)]:    Creat config file for [SHELL]
+    -r  --reload                :    Reload OhMySh
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
@@ -214,7 +215,7 @@ _oms_completion()
     pre2="${COMP_WORDS[COMP_CWORD-2]}"
 #     blue "$curr $prev $pre2"
 
-    opts="-u --update --uninstall -h --help -v --version -t -p --themelist --pluginlist -a --alias -c --cover -e --advconfig --chsh"
+    opts="-u --update --uninstall -h --help -v --version -t -p --themelist --pluginlist -a --alias -c --cover -e --advconfig --chsh -r --reload"
     if [[ "${COMP_CWORD}" -eq 1 ]]; then
         COMPREPLY=( $(compgen -W "${opts}" -- "${curr}") )
     fi

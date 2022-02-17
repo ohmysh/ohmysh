@@ -7,7 +7,7 @@ export OMS_VER='0.0.6-build_Beta37.220214'
 export OMS_BUILD='37'
 export OMS_PRE='PRE'
 
-export OMS_CLI_VER='0.0.6-build_Beta22.220214'
-export OMS_CLI_BUILD='22'
+export OMS_CLI_VER='0.0.6-build_Beta23.220217'
+export OMS_CLI_BUILD='23'
 export OMS_CLI_PRE='PRE'
 
