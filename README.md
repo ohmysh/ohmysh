@@ -31,7 +31,7 @@ So make sure `bash (>=5.x.x)` was installed. There are some other dependences: `
 
 Run the following commands with SH.
 
-```sh
+```bash
 curl https://raw.githubusercontent.com/ohmysh/ohmysh/main/install.sh > OMSInstaller.sh
 bash OMSInstaller.sh
 ```
