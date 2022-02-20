@@ -5,7 +5,8 @@ _helpcommand(){
   cat <<EOF
                           Help --- OhMySh
 [Usage]:
-    ohmysh [OPTIONS] OR oms [OPTIONS]
+    oms [OPTIONS]
+    ohmysh [OPTIONS]
 
 [OPTIONS]: 
     -u  --update                :    Update OhMySh
@@ -54,7 +55,7 @@ oms(){
     forceUpdate=1
     source "$OMS_DIR/lib/update.sh"
     unset forceUpdate
-    #. ~/.profile
+    oms_reload
   elif [ "$1" = "--help" ] || [ "$1" = "-h" ]
   then
     _helpcommand
