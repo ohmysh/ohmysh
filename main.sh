@@ -33,6 +33,7 @@ source "$OMS_DIR/lib/alias.sh"
 source "$OMS_DIR/lib/cover.sh"
 source "$OMS_DIR/lib/opt/map.sh"
 [ -n "$trashService" ] && [ "$trashService" = 'Enable' ] && source "$OMS_DIR/lib/opt/trash.sh"
+source "$OMS_DIR/lib/opt/completion.sh"
 
 # Load CLI
 source "$OMS_DIR/lib/ohmysh-cli.sh"

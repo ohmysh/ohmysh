@@ -14,7 +14,7 @@ OhMySh is an excellent configuration tool for **many different shells** that all
 
 | Version | Status |
 | :--: | :--- |
-| Stable Version | ![GitHub release (latest by date)](https://img.shields.io/github/v/release/ohmysh/ohmysh?display_name=release)   ![GitHub last commit](https://img.shields.io/github/last-commit/ohmysh/ohmysh) |
+| Stable Version | [![GitHub release (latest by date)](https://img.shields.io/github/v/release/ohmysh/ohmysh?display_name=release)](https://github.com/ohmysh/ohmysh/releases)   ![GitHub last commit](https://img.shields.io/github/last-commit/ohmysh/ohmysh) |
 | Dev Version | ![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/ohmysh/ohmysh?include_prereleases&label=pre-build&sort=semver)    ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ohmysh/ohmysh/dev) |
 
 # Getting Started
@@ -31,7 +31,7 @@ So make sure `bash (>=5.x.x)` was installed. There are some other dependences: `
 
 Run the following commands with SH.
 
-```sh
+```bash
 curl https://raw.githubusercontent.com/ohmysh/ohmysh/main/install.sh > OMSInstaller.sh
 bash OMSInstaller.sh
 ```
@@ -84,3 +84,4 @@ OhMySh is not the best. We need your help. Contact us by the following ways:
 - Pullrequest our GitHub repo `ohmysh/ohmysh`
 
 Thanks!
+

@@ -5,7 +5,8 @@ _helpcommand(){
   cat <<EOF
                           Help --- OhMySh
 [Usage]:
-    ohmysh [OPTIONS] OR oms [OPTIONS]
+    oms [OPTIONS]
+    ohmysh [OPTIONS]
 
 [OPTIONS]: 
     -u  --update                :    Update OhMySh
@@ -25,6 +26,7 @@ _helpcommand(){
     -c  --cover (EDITOR)        :    Edit the cover (EDITOR=vi)
     -e  --advconfig (EDITOR)    :    Edit the cover (EDITOR=vi)
     --chsh [SHELL (sh|bash|zsh)]:    Creat config file for [SHELL]
+    -r  --reload                :    Reload OhMySh
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
@@ -53,7 +55,7 @@ oms(){
     forceUpdate=1
     source "$OMS_DIR/lib/update.sh"
     unset forceUpdate
-    #. ~/.profile
+    oms_reload
   elif [ "$1" = "--help" ] || [ "$1" = "-h" ]
   then
     _helpcommand
@@ -79,15 +81,20 @@ oms(){
                Version --- OhMySh
     OhMySh Version      :  $OMS_VER
     OhMySh CLI Version  :  $OMS_CLI_VER
-    Last checked update :  $(cat "$OMS_CACHE/update")
+    Last checked update :  $(date -d "$(cat "$OMS_CACHE/update")" "+$dateFormat")
 
            Environment --- OhMySh
-    OhMySh Theme        :  $OMS_THEME
     OhMySh Path         :  $OMS_DIR
     OhMySh Cache Path   :  $OMS_CACHE
     OhMySh Profile Path :  $HOME/.profile;$HOME/.bashrc
     OhMySh Logged User  :  $USER
     System Shell        :  $SHELL
+    OhMySh Theme        :  $OMS_THEME
+    OhMySh Plugins      :  ${OMS_PLUGIN[@]}
+    Completion Version  :  $BCVER
+    Completion Status   :  $OMSBC_status
+    Completion Platform :  $OMSBC_plat ($bashcompletionPlatform)
+    Completion Path     :  $OMSBC_path
 
     OhMySh Command Line Interface $OMS_CLI_VER
 
@@ -129,6 +136,7 @@ EOF
       OMS_PLUGIN_NEW="$3"
       sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/(/(\"$OMS_PLUGIN_NEW\" /" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
+      OMS_PLUGIN+=("$OMS_PLUGIN_NEW")
       _plugin_runner "$OMS_PLUGIN_NEW"
     elif [ "$2" = "disable" ]
     then
@@ -136,6 +144,7 @@ EOF
       OMS_PLUGIN_NEW="$3"
       sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/\"$OMS_PLUGIN_NEW\" //g" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
+      _warn "Disabled. It will be applied after you restart."
     elif [ "$2" = "restart" ]
     then
       _warn "Restart plugin '$3'" "OhMySh::Plugin"
@@ -187,12 +196,62 @@ EOF
         echo '. ~/.profile' >> "$HOME/.$2rc"
       fi
     fi
+  elif [ "$1" = "-r" ] || [ "$1" = "--reload" ]
+  then
+    oms_reload
   else
     _error "Parameters '$1' not found" 'CLI' '2'
   fi
 }
 
 alias ohmysh="oms $1 $2 $3 $4"
+
+_oms_completion()
+{
+    local curr prev
+
+    COMPREPLY=()
+    curr="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    pre2="${COMP_WORDS[COMP_CWORD-2]}"
+#     blue "$curr $prev $pre2"
+
+    opts="-u --update --uninstall -h --help -v --version -t -p --themelist --pluginlist -a --alias -c --cover -e --advconfig --chsh -r --reload"
+    if [[ "${COMP_CWORD}" -eq 1 ]]; then
+        COMPREPLY=( $(compgen -W "${opts}" -- "${curr}") )
+    fi
+
+    case "${prev}" in
+        "-t"|"--theme")
+            COMPREPLY=( $(compgen -W "$(ls --color="never" "$OMS_DIR/usr/theme" && ls --color="never" "$OMS_DIR/usr/local/theme")" -- "${curr}") )
+            ;;
+        "-p"|"--plugin")
+            COMPREPLY=( $(compgen -W "start enable disable restart" -- "${curr}") )
+            ;;
+        "--chsh")
+            COMPREPLY=( $(compgen -W "bash sh zsh" -- "${curr}") )
+            ;;
+        "-a"|"--alias"|"-c"|"--cover"|"-e"|"--advconfig")
+            COMPREPLY=( $(compgen -W "vi vim nano" -- "${curr}") )
+            ;;
+#         "hello")
+#             COMPREPLY=( $(compgen -W "ldrow raboof" -- "${curr}") )
+#             ;;
+        *)
+            ;;
+    esac
+    case "${pre2}" in
+        "-p"|"--plugin")
+            case "${prev}" in
+                "start"|"enable"|"disable"|"restart")
+                    COMPREPLY=( $(compgen -W "$(ls --color="never" "$OMS_DIR/usr/plugin" && ls --color="never" "$OMS_DIR/usr/local/plugin")" -- "${curr}") )
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+complete -F _oms_completion oms
 
 #export -f oms _helpcommand
 #export ohmysh

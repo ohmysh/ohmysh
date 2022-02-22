@@ -60,3 +60,4 @@ then
     export PATH="$PATH:$configPathEnv"
 fi
 
+alias oms_reload='. ~/.profile'

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$OSH/themes/powerline/powerline.base.sh"
+source "$OMS_DIR/usr/theme/powerline/powerline.base.sh"
 
 function __powerline_last_status_prompt {
   [[ "$1" -ne 0 ]] && echo "$(set_color ${LAST_STATUS_THEME_PROMPT_COLOR} -) ${1} ${normal}"
