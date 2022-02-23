@@ -55,7 +55,7 @@ oms(){
     forceUpdate=1
     source "$OMS_DIR/lib/update.sh"
     unset forceUpdate
-    oms_reload
+#     oms_reload
   elif [ "$1" = "--help" ] || [ "$1" = "-h" ]
   then
     _helpcommand

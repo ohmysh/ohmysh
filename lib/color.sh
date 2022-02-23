@@ -65,4 +65,14 @@ _info(){
     blue " $tp : $1"
 }
 
+_log(){
+    if [ -z "$2" ]
+    then
+        tp="[LOG] OhMySh"
+    else
+        tp="[LOG] OhMySh::$2"
+    fi
+    echo " $tp : $1"
+}
+
 #export -f bred byellow blue _info _warn _error

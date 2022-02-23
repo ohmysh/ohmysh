@@ -13,7 +13,7 @@ _oms_update_new(){
     [ -d ".git" ] || _error "You are not in a git repository"
 
     # Fetching update
-    git remote update > "$OMS_CACHE/update_fetch.log" || _error "Cannot get updates"
+    git remote update > "$OMS_CACHE/update_fetch.log" || _error "Cannot get updates" "Updater" '6'
 
     # Getting branch information
 #     UPSTREAM="${1:-'@{u}'}"
@@ -34,14 +34,15 @@ _oms_update_new(){
 #     fi
 
     # Comparing version
-    _info "Your current version is $NOWV" >> "$OMS_CACHE/update_fetch.log"
-    _info "The latest version is   $LATEST" >> "$OMS_CACHE/update_fetch.log"
+    _log "Your current version is $NOWV" >> "$OMS_CACHE/update_fetch.log"
+    _log "The latest version is   $LATEST" >> "$OMS_CACHE/update_fetch.log"
     if [ "$LATEST" = "$NOWV" ]
     then
-        _info "No update available" >> "$OMS_CACHE/update_fetch.log"
+        _log "No update available" >> "$OMS_CACHE/update_fetch.log"
     else
         _info "Updating to version $LATEST"
         _oms_update_force
+       [ "$(checkcmd "oms_reload")" = "1" ] && oms_reload
     fi
 }
 
@@ -49,7 +50,7 @@ _oms_update_force(){
     # Running update
     if [ -d ".git" ]
     then
-        git pull || _error "Cannot get updates"
+        git pull || _error "Cannot get updates" "Updater" '6'
         _info "Updated. Press enter to quit."
     else
         _error "You are not in a git repository"
@@ -59,7 +60,6 @@ _oms_update_force(){
 # _oms_update_new
 
 _oms_update(){
-    _info 'Getting update...' 'Updater'
     #source $OMS_DIR/lib/ohmysh-version.sh
     _CACHE_VERSION="$OMS_VER"
     _CACHE_BUILD="$OMS_BUILD"
@@ -69,10 +69,10 @@ _oms_update(){
     cd "$OMS_DIR" || exit
 
     # Version 2 update
-    # _oms_update_new
+    _oms_update_new
 
     # Old version update
-    git pull || _error 'ERROR cannot get update!!!' 'Updater' '6'
+#     git pull || _error 'ERROR cannot get update!!!' 'Updater' '6'
 
 
 
@@ -96,7 +96,15 @@ if [ "$(cat "$OMS_CACHE/update")" != "$(date +%Y%m%d)" ] || [ -n "$forceUpdate" 
 then
     if [ -z "$configUpdateDisable" ] || [ "$configUpdate" != 'Disable' ]
     then
-        _oms_update
-#        _oms_update &
+        unset forceUpdate
+        _info 'Getting update...' 'Updater'
+
+        # Old version update
+#         _oms_update
+
+        # New version update
+       _oms_update &
+
+
     fi
 fi
