@@ -81,7 +81,8 @@ oms(){
                Version --- OhMySh
     OhMySh Version      :  $OMS_VER
     OhMySh CLI Version  :  $OMS_CLI_VER
-    Last checked update :  $(date -d "$(cat "$OMS_CACHE/update")" "+$dateFormat")
+    Update channel      :  $(cd "$OMS_DIR" && git rev-parse --abbrev-ref HEAD)
+    Last checked update :  $(date -d "$(cat "$OMS_CACHE/update")" "+$dateFormat") ($configUpdate)
 
            Environment --- OhMySh
     OhMySh Path         :  $OMS_DIR
