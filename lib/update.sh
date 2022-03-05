@@ -12,8 +12,12 @@ _oms_update_new(){
     # Checking if have .git/
     [ -d ".git" ] || _error "You are not in a git repository"
 
+    # Creating log file
+    _log "OhMySh Update ($(date "+%Y%m%d %H:%M:%S"))" > "$OMS_CACHE/update_fetch.log"
+    _log "Update via $(git remote get-url --all origin) ($(git rev-parse --abbrev-ref HEAD))." >> "$OMS_CACHE/update_fetch.log"
+
     # Fetching update
-    git remote update > "$OMS_CACHE/update_fetch.log" || _error "Cannot get updates" "Updater" '6'
+    git remote update >> "$OMS_CACHE/update_fetch.log" || _error "Cannot get updates" "Updater" '6'
 
     # Getting branch information
 #     UPSTREAM="${1:-'@{u}'}"
@@ -40,6 +44,7 @@ _oms_update_new(){
     then
         _log "No update available" >> "$OMS_CACHE/update_fetch.log"
     else
+        _log "Updating to version $LATEST..." >> "$OMS_CACHE/update_fetch.log"
         _info "Updating to version $LATEST"
         _oms_update_force
        [ "$(checkcmd "oms_reload")" = "1" ] && oms_reload
