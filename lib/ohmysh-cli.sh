@@ -31,8 +31,6 @@ _helpcommand(){
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
 - https://ohmysh.gitee.io/docs-v2
-
-OhMySh Command Line Interface $OMS_CLI_VER
 EOF
 }
 
@@ -96,8 +94,6 @@ oms(){
     Completion Status   :  $OMSBC_status
     Completion Platform :  $OMSBC_plat ($bashcompletionPlatform)
     Completion Path     :  $OMSBC_path
-
-    OhMySh Command Line Interface $OMS_CLI_VER
 
 $(_ohmyshdevwarn)
 EOF
