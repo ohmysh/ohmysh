@@ -154,6 +154,7 @@ _info 'Putting config file'
 if [ "$NF" = "NEWFILE" ] ; then
   omsconfig
 fi
+[ -f "$OMS/lib/opt/profile-update.sh" ] && source "$OMS/lib/opt/profile-update.sh"
 _info '  Creating cache'
 mkdir -p "$OMS_CACHE"
 date +%Y%m%d > "$OMS_CACHE/update"
@@ -162,6 +163,7 @@ cp "$OMS/lib/etc/cover.etc.sh" "$OMS_CACHE/cover.ohmysh.sh"
 cp "$OMS/lib/etc/config.etc.sh" "$OMS_CACHE/config.ohmysh.sh"
 mkdir -p "$OMS_CACHE/runtime-script"
 mkdir -p "$OMS_CACHE/startup-script"
+mkdir -p "$OMS_CACHE/trash"
 
 _info 'OhMySh is already installed! '
 
