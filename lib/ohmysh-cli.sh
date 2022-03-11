@@ -34,11 +34,20 @@ More information about using OhMySh, visit our documents:
 EOF
 }
 
-_ohmyshdevwarn (){
+_ohmyshdevwarn(){
     if [ "$OMS_PRE" = "PRE" ]
     then
         _warn 'You are using the development version' 'OhMySh'
         echo ' This version is still in testing and it is not an absolutely secure version. We strongly recommend that you do not use the development version.'
+    fi
+}
+
+_ohmyshprofile(){
+    if [ -n "${OMS_PROFILE[0]}" ]
+    then
+        echo "${OMS_PROFILE[0]}"
+    else
+        echo "$HOME/.profile"
     fi
 }
 
@@ -85,7 +94,7 @@ oms(){
            Environment --- OhMySh
     OhMySh Path         :  $OMS_DIR
     OhMySh Cache Path   :  $OMS_CACHE
-    OhMySh Profile Path :  $HOME/.profile;$HOME/.bashrc
+    OhMySh Profile Path :  $(_ohmyshprofile)
     OhMySh Logged User  :  $USER
     System Shell        :  $SHELL
     OhMySh Theme        :  $OMS_THEME
