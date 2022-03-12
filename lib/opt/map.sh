@@ -60,4 +60,13 @@ then
     export PATH="$PATH:$configPathEnv"
 fi
 
-alias oms_reload='. ~/.profile'
+_oms_getprofile(){
+    if [ -n "${OMS_PROFILE[0]}" ]
+    then
+        echo "${OMS_PROFILE[0]}"
+    else
+        echo "$HOME/.profile"
+    fi
+}
+
+alias oms_reload='. "$(_oms_getprofile)"'

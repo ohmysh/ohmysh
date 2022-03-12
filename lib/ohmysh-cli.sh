@@ -43,12 +43,7 @@ _ohmyshdevwarn(){
 }
 
 _ohmyshprofile(){
-    if [ -n "${OMS_PROFILE[0]}" ]
-    then
-        echo "${OMS_PROFILE[0]}"
-    else
-        echo "$HOME/.profile"
-    fi
+    _oms_getprofile
 }
 
 oms(){
