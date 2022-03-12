@@ -4,7 +4,7 @@
 
 _info "- Creating profile list..."
 
-[ -f "$HOME/.bashrc" ] && echo 'OMS_PROFILE+=("${BASH_SOURCE[0]}")' >> ~/.bashrc
-[ -f "$HOME/.profile" ] && echo 'OMS_PROFILE+=("${BASH_SOURCE[0]}")' >> ~/.profile
-[ -f "$HOME/.zshrc" ] && echo 'OMS_PROFILE+=("${BASH_SOURCE[0]}")' >> ~/.zshrc
+[ -f "$HOME/.bashrc" ] && echo "OMS_PROFILE+=(\"\${BASH_SOURCE[0]}\")" >> ~/.bashrc
+[ -f "$HOME/.profile" ] && echo "OMS_PROFILE+=(\"\${BASH_SOURCE[0]}\")" >> ~/.profile
+[ -f "$HOME/.zshrc" ] && echo "OMS_PROFILE+=(\"\${BASH_SOURCE[0]}\")" >> ~/.zshrc
 # Other supports need your help!

@@ -65,7 +65,7 @@ _oms_getprofile(){
     then
         echo "${OMS_PROFILE[0]}"
     else
-        echo "$HOME/.profile"
+        _error "ErrorNot found." "CLI" "12"
     fi
 }
 
