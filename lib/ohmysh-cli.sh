@@ -25,8 +25,9 @@ _helpcommand(){
     -a  --alias (EDITOR)        :    Config aliases (EDITOR=vi)
     -c  --cover (EDITOR)        :    Edit the cover (EDITOR=vi)
     -e  --advconfig (EDITOR)    :    Edit the cover (EDITOR=vi)
-    --chsh [SHELL (sh|bash|zsh)]:    Creat config file for [SHELL]
     -r  --reload                :    Reload OhMySh
+    --chsh [SHELL (sh|bash|zsh)]:    Creat config file for [SHELL]
+    --channel (stable/dev)      :    Join/leave development channel
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
@@ -200,6 +201,24 @@ EOF
   elif [ "$1" = "-r" ] || [ "$1" = "--reload" ]
   then
     oms_reload
+  elif [ "$1" = "--channel" ]
+  then
+    if [ -z "$2" ]
+    then
+      _error "Missing parameters" 'OhMySh::CLI' '7'
+      _helpcommand
+    else
+      case "${prev}" in
+        "stable"|"main")
+          _oms_update_channel "main"
+          ;;
+        "dev")
+          _oms_update_channel "dev"
+          ;;
+        *)
+          ;;
+      esac
+    fi
   else
     _error "Parameters '$1' not found" 'CLI' '2'
   fi
@@ -217,7 +236,7 @@ _oms_completion()
     pre2="${COMP_WORDS[COMP_CWORD-2]}"
 #     blue "$curr $prev $pre2"
 
-    opts="-u --update --uninstall -h --help -v --version -t -p --themelist --pluginlist -a --alias -c --cover -e --advconfig --chsh -r --reload"
+    opts="-u --update --uninstall -h --help -v --version -t -p --themelist --pluginlist -a --alias -c --cover -e --advconfig --chsh -r --reload --channel"
     if [[ "${COMP_CWORD}" -eq 1 ]]; then
         COMPREPLY=( $(compgen -W "${opts}" -- "${curr}") )
     fi
@@ -231,6 +250,9 @@ _oms_completion()
             ;;
         "--chsh")
             COMPREPLY=( $(compgen -W "bash sh zsh" -- "${curr}") )
+            ;;
+        "--channel")
+            COMPREPLY=( $(compgen -W "stable dev" -- "${curr}") )
             ;;
         "-a"|"--alias"|"-c"|"--cover"|"-e"|"--advconfig")
             COMPREPLY=( $(compgen -W "vi vim nano" -- "${curr}") )
