@@ -136,7 +136,7 @@ EOF
     then
       _warn "Enable plugin '$3'" 'OhMySh::Plugin'
       OMS_PLUGIN_NEW="$3"
-      sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/(/(\"$OMS_PLUGIN_NEW\" /" "$HOME/.profile" > "$OMS_CACHE/profile"
+      sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/PLUGIN=(/PLUGIN=(\"$OMS_PLUGIN_NEW\" /" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
       OMS_PLUGIN+=("$OMS_PLUGIN_NEW")
       _plugin_runner "$OMS_PLUGIN_NEW"
