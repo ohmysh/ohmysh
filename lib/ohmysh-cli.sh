@@ -25,23 +25,26 @@ _helpcommand(){
     -a  --alias (EDITOR)        :    Config aliases (EDITOR=vi)
     -c  --cover (EDITOR)        :    Edit the cover (EDITOR=vi)
     -e  --advconfig (EDITOR)    :    Edit the cover (EDITOR=vi)
-    --chsh [SHELL (sh|bash|zsh)]:    Creat config file for [SHELL]
     -r  --reload                :    Reload OhMySh
+    --chsh [SHELL (sh|bash|zsh)]:    Creat config file for [SHELL]
+    --channel (stable/dev)      :    Join/leave development channel
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
 - https://ohmysh.gitee.io/docs-v2
-
-OhMySh Command Line Interface $OMS_CLI_VER
 EOF
 }
 
-_ohmyshdevwarn (){
+_ohmyshdevwarn(){
     if [ "$OMS_PRE" = "PRE" ]
     then
         _warn 'You are using the development version' 'OhMySh'
         echo ' This version is still in testing and it is not an absolutely secure version. We strongly recommend that you do not use the development version.'
     fi
+}
+
+_ohmyshprofile(){
+    _oms_getprofile
 }
 
 oms(){
@@ -55,7 +58,7 @@ oms(){
     forceUpdate=1
     source "$OMS_DIR/lib/update.sh"
     unset forceUpdate
-    oms_reload
+#     oms_reload
   elif [ "$1" = "--help" ] || [ "$1" = "-h" ]
   then
     _helpcommand
@@ -81,12 +84,13 @@ oms(){
                Version --- OhMySh
     OhMySh Version      :  $OMS_VER
     OhMySh CLI Version  :  $OMS_CLI_VER
-    Last checked update :  $(date -d "$(cat "$OMS_CACHE/update")" "+$dateFormat")
+    Update channel      :  $(cd "$OMS_DIR" && git rev-parse --abbrev-ref HEAD)
+    Last checked update :  $(date -d "$(cat "$OMS_CACHE/update")" "+$dateFormat") ($configUpdate)
 
            Environment --- OhMySh
     OhMySh Path         :  $OMS_DIR
     OhMySh Cache Path   :  $OMS_CACHE
-    OhMySh Profile Path :  $HOME/.profile;$HOME/.bashrc
+    OhMySh Profile Path :  $(_ohmyshprofile)
     OhMySh Logged User  :  $USER
     System Shell        :  $SHELL
     OhMySh Theme        :  $OMS_THEME
@@ -95,8 +99,6 @@ oms(){
     Completion Status   :  $OMSBC_status
     Completion Platform :  $OMSBC_plat ($bashcompletionPlatform)
     Completion Path     :  $OMSBC_path
-
-    OhMySh Command Line Interface $OMS_CLI_VER
 
 $(_ohmyshdevwarn)
 EOF
@@ -134,7 +136,7 @@ EOF
     then
       _warn "Enable plugin '$3'" 'OhMySh::Plugin'
       OMS_PLUGIN_NEW="$3"
-      sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/(/(\"$OMS_PLUGIN_NEW\" /" "$HOME/.profile" > "$OMS_CACHE/profile"
+      sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/PLUGIN=(/PLUGIN=(\"$OMS_PLUGIN_NEW\" /" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
       OMS_PLUGIN+=("$OMS_PLUGIN_NEW")
       _plugin_runner "$OMS_PLUGIN_NEW"
@@ -199,6 +201,24 @@ EOF
   elif [ "$1" = "-r" ] || [ "$1" = "--reload" ]
   then
     oms_reload
+  elif [ "$1" = "--channel" ]
+  then
+    if [ -z "$2" ]
+    then
+      _error "Missing parameters" 'OhMySh::CLI' '7'
+      _helpcommand
+    else
+      case "${prev}" in
+        "stable"|"main")
+          _oms_update_channel "main"
+          ;;
+        "dev")
+          _oms_update_channel "dev"
+          ;;
+        *)
+          ;;
+      esac
+    fi
   else
     _error "Parameters '$1' not found" 'CLI' '2'
   fi
@@ -216,7 +236,7 @@ _oms_completion()
     pre2="${COMP_WORDS[COMP_CWORD-2]}"
 #     blue "$curr $prev $pre2"
 
-    opts="-u --update --uninstall -h --help -v --version -t -p --themelist --pluginlist -a --alias -c --cover -e --advconfig --chsh -r --reload"
+    opts="-u --update --uninstall -h --help -v --version -t -p --themelist --pluginlist -a --alias -c --cover -e --advconfig --chsh -r --reload --channel"
     if [[ "${COMP_CWORD}" -eq 1 ]]; then
         COMPREPLY=( $(compgen -W "${opts}" -- "${curr}") )
     fi
@@ -230,6 +250,9 @@ _oms_completion()
             ;;
         "--chsh")
             COMPREPLY=( $(compgen -W "bash sh zsh" -- "${curr}") )
+            ;;
+        "--channel")
+            COMPREPLY=( $(compgen -W "stable dev" -- "${curr}") )
             ;;
         "-a"|"--alias"|"-c"|"--cover"|"-e"|"--advconfig")
             COMPREPLY=( $(compgen -W "vi vim nano" -- "${curr}") )
