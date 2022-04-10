@@ -21,7 +21,7 @@ OhMySh is an excellent configuration tool for **many different shells** that all
 
 [More in our docs](https://ohmysh.github.io/docs-v2/#/getting-started/install)
 
-## Preparation
+## Requirements
 
 OhMySh works on many different shells such as GNU-Bash, Z-sh. 
 
@@ -29,7 +29,7 @@ So make sure `bash (>=5.x.x)` was installed. There are some other dependences: `
 
 ## Quick Installation
 
-Run the following commands with SH.
+Run the following commands in your shell.
 
 ```bash
 curl https://raw.githubusercontent.com/ohmysh/ohmysh/main/install.sh > OMSInstaller.sh
@@ -72,11 +72,11 @@ To get some helps, try `oms --help` .
 
 [Our Docs](https://ohmysh.github.io/docs-v2)
 
-# License
+# Privacy Statement
 
 OhMySh is under [MIT-License](https://ohmysh.github.io/docs-v2/#/other/license).
 
-# Contribution
+# Contributing
 
 OhMySh is not the best. We need your help. Contact us by the following ways:
 
