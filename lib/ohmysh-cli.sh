@@ -208,7 +208,7 @@ EOF
       _error "Missing parameters" 'OhMySh::CLI' '7'
       _helpcommand
     else
-      case "${prev}" in
+      case "${2}" in
         "stable"|"main")
           _oms_update_channel "main"
           ;;
