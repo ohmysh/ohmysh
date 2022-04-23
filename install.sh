@@ -85,16 +85,16 @@ omsconfig(){
 # OhMySh
 #
 
-# OhMySh work dir. Please don't edit it!
+# OhMySh work dir. Please do NOT modify it!
 # * Main working path
 export OMS_DIR='$OMS'
 # * Cache Directory
 export OMS_CACHE='$OMS_CACHE'
 
 # OhMySh theme & plugin
-# * You can edit themes by using 'oms -t THEME_NAME'
+# * You can change themes by using 'oms -t THEME_NAME'
 export OMS_THEME='colorshell'
-# * You can edit plugins by using 'oms -p ...'
+# * You can change plugins by using 'oms -p ...'
 export OMS_PLUGIN=()
 
 # OhMySh main script
@@ -145,7 +145,7 @@ if [ $? == 1 ] ; then
 fi
 if [ -d "$OMS" ]
 then
-  _error 'You had installed OhMySh!!! ' 'Installer' '2'
+  _error 'OhMySh has been installed on your device ' 'Installer' '2'
   exit 2
 fi
 _info '  Getting OMS'
@@ -181,11 +181,11 @@ source "$OMS/lib/logo.sh"
 _logo
 cat <<EOF
   Welcome to use OhMySh!
-    OhMySh official Documents is https://ohmysh.github.io/docs-v2
-    OhMySh official GitHub Repo is ohmysh/ohmysh <https://github.com/ohmysh/ohmysh>
-  About configure:
-    View our docs: https://ohmysh.github.io/docs-v2
-    Or Chinese:    https://ohmysh.gitee.io/docs-v2
+    OhMySh official documents - https://ohmysh.github.io/docs-v2
+    OhMySh official GitHub Repo - ohmysh/ohmysh <https://github.com/ohmysh/ohmysh>
+  About configuring:
+    Visit our docs: https://ohmysh.github.io/docs-v2
+    Or Chinese:     https://ohmysh.gitee.io/docs-v2
 EOF
 
 source "$OMS/lib/ohmysh-version.sh"
