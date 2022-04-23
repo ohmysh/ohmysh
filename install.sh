@@ -100,8 +100,12 @@ export OMS_PLUGIN=()
 # OhMySh main script
 source "\$OMS_DIR/main.sh"
 
+# OhMySh profile list defining
+OMS_PROFILE+=("${BASH_SOURCE[0]}")
+
 EOF
   echo ". $OMS_RC_D" >> "$HOME/.bashrc"
+  echo "OMS_PROFILE+=(\"\${BASH_SOURCE[0]}\")" >> "$HOME/.bashrc"
 }
 
 blue ' Welcome to OhMySh installer script! '
