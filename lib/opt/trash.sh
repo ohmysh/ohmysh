@@ -59,7 +59,7 @@ EOF
 trash(){
     if [ -z "$1" ]
     then
-        _error 'Missing parameters' 'OhMySh::TrashManager' '10'
+        _error 'Missing parameters' 'TrashManager' '10'
     else
         if [ -f "$1" ] || [ -d "$1" ]
         then
@@ -124,7 +124,7 @@ lstrash(){
 rmtrash(){
 #     if [ -z "$1" ]
 #     then
-#         _error 'Missing parameters' 'OhMySh::TrashManager' '10'
+#         _error 'Missing parameters' 'TrashManager' '10'
 #     else
         if [ "$1" = "-a" ]
         then
@@ -154,7 +154,7 @@ rmtrash(){
             _info "Found ${#_rmlist[@]} result(s)."
             if [ "$_count" = "0" ]
             then
-                _error "The path is not correct." "OhMySh::TrashManager"
+                _error "The path is not correct." "TrashManager"
                 return
                 _error "Command return is broken!"
             elif [ "$_count" != "1" ]
@@ -226,7 +226,7 @@ rmtrash(){
 retrash(){
 #     if [ -z "$1" ]
 #     then
-#         _error 'Missing parameters' 'OhMySh::TrashManager' '10'
+#         _error 'Missing parameters' 'TrashManager' '10'
 #     else
         RP="$1"
         NP="${RP//"/"/"_%^%_"}"
@@ -241,7 +241,7 @@ retrash(){
         _info "Found $_count result(s)."
         if [ "$_count" = "0" ]
         then
-            _error "The path is not correct." "OhMySh::TrashManager"
+            _error "The path is not correct." "TrashManager"
             return
             _error "Command return is broken!"
         elif [ "$_count" != "1" ]
