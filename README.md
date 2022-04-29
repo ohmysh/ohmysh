@@ -17,6 +17,18 @@ OhMySh is an excellent configuration tool for **many different shells** that all
 | Stable Version | [![GitHub release (latest by date)](https://img.shields.io/github/v/release/ohmysh/ohmysh?display_name=release)](https://github.com/ohmysh/ohmysh/releases)   ![GitHub last commit](https://img.shields.io/github/last-commit/ohmysh/ohmysh) |
 | Dev Version | ![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/ohmysh/ohmysh?include_prereleases&label=pre-build&sort=semver)    ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ohmysh/ohmysh/dev) |
 
+# Features
+
+OhMySh now provides these features that can be updated automatically.
+
+- Plenty of themes.
+- Many of plugins.
+- Running with bash, sh, zsh, etc.
+- Supported auto completion.
+- Supported command aliases.
+- Supported trash manager
+- Supported many based tools.
+
 # Getting Started
 
 [More in our docs](https://ohmysh.github.io/docs-v2/#/getting-started/install)
@@ -62,13 +74,13 @@ chsh -s /bin/bash
 
 [See in Docs](https://ohmysh.github.io/docs-v2) | [Docs for Chinese](https://ohmysh.gitee.io/docs-v2) | [FAQ](https://ohmysh.github.io/docs-v2/#/other/faq)
 
-# OhMySh Command Line Interface (CLI)
+## OhMySh Command Line Interface (CLI)
 
 OhMySh Command Line Interface (CLI) is a command line tool for OhMySh. You can use it to change the theme, run plugins and do more things!
 
 To get some helps, try `oms --help` .
 
-# More
+## More
 
 [Our Docs](https://ohmysh.github.io/docs-v2)
 
