@@ -55,7 +55,13 @@ _oms_update_force(){
     # Running update
     if [ -d ".git" ]
     then
-        git pull || _error "Cannot get updates" "Updater" '6'
+        if [ "$configUpdate" = "Force" ]
+        then
+            git pull || _error "Cannot get updates" "Updater" '6'
+            _info "Forced updated to latest version."
+        else
+            git checkout "$LATEST" || _error "Git refused request" "Updater" "6"
+        fi
         _info "Updated. Press enter to quit."
     else
         _error "You are not in a git repository"
