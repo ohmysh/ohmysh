@@ -7,6 +7,29 @@ then
     date +%Y%m%d > "$OMS_CACHE/update"
 fi
 
+_oms_update_channel_fetch(){
+
+
+    # Checking channel config
+    if [ ! -f "$OMS_CACHE/update-channel" ]
+    then
+        echo "$(cd "$OMS_DIR" && git rev-parse --abbrev-ref HEAD)" > "$OMS_CACHE/update-channel"
+    fi
+    _es="$(cat "$OMS_CACHE/update-channel")"
+    case $_es in
+        "main")
+            echo "main"
+            ;;
+        "dev")
+            echo "dev"
+            ;;
+        *)
+            echo "main" > "$OMS_CACHE/update-channel"
+            echo "main"
+            ;;
+    esac
+}
+
 _oms_update_new(){
 
     # Checking if have .git/
@@ -57,10 +80,14 @@ _oms_update_force(){
     then
         if [ "$configUpdate" = "Force" ]
         then
+            git checkout "$(_oms_update_channel_fetch)"
             git pull || _error "Cannot get updates" "Updater" '6'
             _info "Forced updated to latest version."
         else
-            git checkout "$LATEST" || _error "Git refused request" "Updater" "6"
+#             git checkout "$LATEST" || _error "Git refused request" "Updater" "6"
+            git checkout "$(_oms_update_channel_fetch)"
+            git pull
+            git checkout "$LATEST"
         fi
         _info "Updated. Press enter to quit."
     else
