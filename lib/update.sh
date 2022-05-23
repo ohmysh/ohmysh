@@ -151,6 +151,7 @@ fi
 _oms_update_channel(){
     _rpath="$(pwd)"
     cd "$OMS_DIR" || _error "Unknown Error."
+    echo "$1" > "$OMS_CACHE/update-channel"
     git checkout "$1" || _error "The behavior is forbidden by Git."
     cd "$_rpath"
 }
