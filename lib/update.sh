@@ -13,7 +13,8 @@ _oms_update_channel_fetch(){
     # Checking channel config
     if [ ! -f "$OMS_CACHE/update-channel" ]
     then
-        echo "$(cd "$OMS_DIR" && git rev-parse --abbrev-ref HEAD)" > "$OMS_CACHE/update-channel"
+        _target="$(cd "$OMS_DIR" && git rev-parse --abbrev-ref HEAD)"
+        echo "$_target"> "$OMS_CACHE/update-channel"
     fi
     _es="$(cat "$OMS_CACHE/update-channel")"
     case $_es in
