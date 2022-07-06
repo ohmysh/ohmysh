@@ -21,24 +21,24 @@ then
 #     alias tree='ls -R'        # conflit is found in #21.
 fi
 
-## CSP 2021 S
-if [ "$mapCSP2021" != 'Disable' ]
-then
-alias all-f='all'
-alias all='_oms_all'
-_oms_all(){
-cat <<EOF
-You entered the command 'all', this command does not exist. If you want to force this command, use 'all-force'.
-
-Do you know NOI-CSP? In the 2021 exam mentioned above, the first question is
-Which of the following commands is a command to view files and subdirectories within a directory?
-A. ls    B. cd    C. cp    D. all
-The answer is A.
-
-'all' does not exist and the user is expected to remember ls as the correct command.
-EOF
-}
-fi
+# ## CSP 2021 S
+# if [ "$mapCSP2021" != 'Disable' ]
+# then
+# alias all-f='all'
+# alias all='_oms_all'
+# _oms_all(){
+# cat <<EOF
+# You entered the command 'all', this command does not exist. If you want to force this command, use 'all-force'.
+#
+# Do you know NOI-CSP? In the 2021 exam mentioned above, the first question is
+# Which of the following commands is a command to view files and subdirectories within a directory?
+# A. ls    B. cd    C. cp    D. all
+# The answer is A.
+#
+# 'all' does not exist and the user is expected to remember ls as the correct command.
+# EOF
+# }
+# fi
 
 
 if [ "$mapCd" != 'Disable' ] && [ "$(checkcmd 'shopt --help')" = "1" ]
