@@ -18,7 +18,7 @@ then
     alias dir='ls --color'
     alias fc='diff'
     alias erase='rm'
-    alias tree='ls -R'
+#     alias tree='ls -R'        # conflit is found in #21.
 fi
 
 ## CSP 2021 S
