@@ -65,7 +65,7 @@ _oms_getprofile(){
     then
         echo "${OMS_PROFILE[0]}"
     else
-        _error "ErrorNot found." "CLI" "12"
+        _error "Error not found." "CLI" "12"
     fi
 }
 
