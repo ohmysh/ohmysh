@@ -83,7 +83,6 @@ oms(){
 
                Version --- OhMySh
     OhMySh Version      :  $OMS_VER
-    OhMySh CLI Version  :  $OMS_CLI_VER
     Update channel      :  $(_oms_update_channel_fetch)
     Last checked update :  $(date -d "$(cat "$OMS_CACHE/update")" "+$dateFormat") ($configUpdate)
 
