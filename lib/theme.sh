@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# OhMySh theme & title provider.
+
 if [ "$(checkcmd 'declare')" != '1' ]
 then
     _error 'Your shell is too old, please check if your shell support "declare".' 'OhMySh' '8'
@@ -35,6 +37,14 @@ rightprompt(){
   printf "%*s" "$COLUMNS" "$1"
 }
 
+_title_runner(){
+    if [ -z "$OMS_TITLE" ]
+    then
+        OMS_TITLE='${PWD##*/}'
+    fi
+    echo -n -e "\033]0;$OMS_TITLE\007"
+}
+
 _theme_runner(){
   if [ -f "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"  ]
   then
@@ -48,6 +58,7 @@ _theme_runner(){
     _error "Cannot found theme '$OMS_THEME'!!!" 'OhMySh::Theme' '4'
     PS1="OhMySh Theme Not Found \$ "
   fi
+  PS1="\$(_title_runner)$PS1"
 }
 
 #export -f _theme_runner
