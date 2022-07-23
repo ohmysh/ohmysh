@@ -37,6 +37,17 @@ rightprompt(){
   printf "%*s" "$COLUMNS" "$1"
 }
 
+if [ ! -f "$OMS_CACHE/title.ohmysh.sh" ]
+then
+  if [ -f "$OMS_DIR/lib/etc/title.etc.sh" ]
+  then
+    cp "$OMS_DIR/lib/etc/title.etc.sh" "$OMS_CACHE/title.ohmysh.sh"
+  else
+    touch "$OMS_CACHE/title.ohmysh.sh"
+  fi
+fi
+source "$OMS_CACHE/title.ohmysh.sh"
+
 _title_runner(){
     if [ -z "$OMS_TITLE" ]
     then
@@ -58,7 +69,10 @@ _theme_runner(){
     _error "Cannot found theme '$OMS_THEME'!!!" 'OhMySh::Theme' '4'
     PS1="OhMySh Theme Not Found \$ "
   fi
-  PS1="\$(_title_runner)$PS1"
+  if [ "$OMS_TITLE" != "Disable" ]
+  then
+    PS1="\$(_title_runner)$PS1"
+  fi
 }
 
 #export -f _theme_runner
