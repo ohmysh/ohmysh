@@ -7,7 +7,7 @@
 # 'Enable' or 'Disable' are accepted. And also path and values.
 # The default settings are in 'lib/config.sh'
 
-# configUpdate='Disable'
+# configUpdate='Disable'    # Or 'Force' to update fast-forward
 # configCover='Disable'
 # configStartPath="$HOME/"
 # configPathEnv='FULLPATH1:FULLPATH2'

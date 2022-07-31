@@ -101,8 +101,6 @@ export OMS_PLUGIN=()
 source "\$OMS_DIR/main.sh"
 
 # OhMySh profile list defining
-OMS_PROFILE+=("${BASH_SOURCE[0]}")
-
 EOF
   echo ". $OMS_RC_D" >> "$HOME/.bashrc"
   echo "OMS_PROFILE+=(\"\${BASH_SOURCE[0]}\")" >> "$HOME/.bashrc"
@@ -175,12 +173,16 @@ _info 'OhMySh is already installed! '
 _info 'Configing... '
 _info '  Checking shell'
 
-echo " [INFO] Your shell is $SHELL"
-echo ' [INFO] If your shell is not /bin/sh or /bin/bash,'
-echo ' [INFO]   you may need to run the following scrip.'
-echo ' [INFO]     > # chsh -s /bin/bash'
-echo ' [INFO] '
+# shell info
+cat <<EOF
+ [INFO] Your shell is $SHELL
+ [INFO] If your shell is not /bin/sh or /bin/bash,
+ [INFO]   you may need to run the following script.
+ [INFO]     > # chsh -s /bin/bash
+ [INFO] 
+EOF
 
+# logo
 source "$OMS/lib/logo.sh"
 _logo
 cat <<EOF
