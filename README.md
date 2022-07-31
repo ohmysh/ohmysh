@@ -39,6 +39,8 @@ OhMySh works on many different shells such as GNU-Bash, Z-sh.
 
 So make sure `bash (>=5.x.x)` was installed. There are some other dependences: `curl` `git` .
 
+> ### [Tips for macOS users](https://ohmysh.github.io/docs-v2/#/getting-started/install?id=for-macos-users)
+
 ## Quick Installation
 
 Run the following commands in your shell.
