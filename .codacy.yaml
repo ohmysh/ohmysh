@@ -1,6 +1,6 @@
 ---
 exclude_paths:
   - "lib/tool/**"
-  - "lib/etc/**"
+  - "lib/etc/***"
   - "usr/**/**/**"
   - "usr/**/**/**/**"
