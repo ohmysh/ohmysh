@@ -47,6 +47,20 @@ _ohmyshprofile(){
     _oms_getprofile
 }
 
+_comp_output(){
+    if [ -n "$BCVER" ]
+    then
+        cat <<EOX
+    Completion Version  :  $BCVER
+    Completion Status   :  $OMSBC_status
+    Completion Platform :  $OMSBC_plat ($bashcompletionPlatform)
+    Completion Path     :  $OMSBC_path
+EOX
+    else
+        echo "    Completion Status   :  Disable"
+    fi
+}
+
 oms(){
   if [ -z "$1" ]
   then
@@ -94,10 +108,7 @@ oms(){
     System Shell        :  $SHELL
     OhMySh Theme        :  $OMS_THEME
     OhMySh Plugins      :  ${OMS_PLUGIN[@]}
-    Completion Version  :  $BCVER
-    Completion Status   :  $OMSBC_status
-    Completion Platform :  $OMSBC_plat ($bashcompletionPlatform)
-    Completion Path     :  $OMSBC_path
+$(_comp_output)
 
 $(_ohmyshdevwarn)
 EOF
