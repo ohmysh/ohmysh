@@ -169,7 +169,8 @@ EOF
       _plugin_runner "$3"
     elif [ "$2" = "list" ]
     then
-      _info "You are using these plugins: ${OMS_PLUGIN[@]}"
+      _info "You are using these plugins:"
+      echo "${OMS_PLUGIN[@]}"
       _log ' List of plugins:'
       ls "$OMS_DIR/usr/plugin"
       # echo !("readme.md")
