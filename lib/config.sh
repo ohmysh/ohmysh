@@ -35,6 +35,11 @@ export bashcompletionPathCustom='Custom path'
 export dateFormat='%x'
 export timeFormat='%H:%M:%S'
 
+##### GLOBAL DEFINES #####
+# Do not edit it.
+shopt -s globstar
+shopt -s extglob 
+
 ##### PERSONAL SETTINGS #####
 # You can edit your config under this file.
 source "$OMS_CACHE/config.ohmysh.sh"

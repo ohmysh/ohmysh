@@ -14,14 +14,14 @@ _helpcommand(){
     -h  --help                  :    Ask help
     -v  --version               :    Check OhMySh Version
     -t  --theme [THEME]         :    Change theme
-    --themelist                 :    Get list of themes
+                list            :    Get list of themes
     -p  --plugin [OPT] [PLUGIN] :    Enable or disable plugin
     plugin::[OPT]:
          start [PLUGIN]         :    Run a plugin in one go
          enable [PLUGIN]        :    Enable a plugin
          disable [PLUGIN]       :    Disable a plugin
          restart [PLUGIN]       :    Restart a plugin
-    --pluginlist                :    Get list of plugins
+         list                   :    Get list of plugins
     -a  --alias (EDITOR)        :    Config aliases (EDITOR=vi)
     -c  --cover (EDITOR)        :    Edit the cover (EDITOR=vi)
     -e  --advconfig (EDITOR)    :    Edit the cover (EDITOR=vi)
@@ -117,6 +117,12 @@ EOF
     if [ -z "$2" ]
     then
       _error "Missing parameters" 'OhMySh::CLI' '7'
+    elif [ "$2" = "list" ]
+    then
+      _info "You are using the theme: $OMS_THEME" 'OhMySh::Theme'
+      _log ' List of themes:'
+      ls "$OMS_DIR/usr/theme"
+      # echo $(cd "$OMS_DIR/usr/theme" && echo !("readme.md"))
     else
       _warn "Change theme to '$2'" 'OhMySh::Theme'
       OMS_THEME_NEW="$2"
@@ -161,6 +167,12 @@ EOF
     then
       _warn "Restart plugin '$3'" "OhMySh::Plugin"
       _plugin_runner "$3"
+    elif [ "$2" = "list" ]
+    then
+      _info "You are using these plugins: ${OMS_PLUGIN[@]}"
+      _log ' List of plugins:'
+      ls "$OMS_DIR/usr/plugin"
+      # echo !("readme.md")
     fi
   elif [ "$1" = "--pluginlist" ]
   then
@@ -246,17 +258,17 @@ _oms_completion()
     pre2="${COMP_WORDS[COMP_CWORD-2]}"
 #     blue "$curr $prev $pre2"
 
-    opts="-u --update --uninstall -h --help -v --version -t -p --themelist --pluginlist -a --alias -c --cover -e --advconfig --chsh -r --reload --channel"
+    opts="-u --update --uninstall -h --help -v --version -t --theme -p --theme -a --alias -c --cover -e --advconfig --chsh -r --reload --channel"
     if [[ "${COMP_CWORD}" -eq 1 ]]; then
         COMPREPLY=( $(compgen -W "${opts}" -- "${curr}") )
     fi
 
     case "${prev}" in
         "-t"|"--theme")
-            COMPREPLY=( $(compgen -W "$(ls --color="never" "$OMS_DIR/usr/theme" && ls --color="never" "$OMS_DIR/usr/local/theme")" -- "${curr}") )
+            COMPREPLY=( $(compgen -W "list $(ls --color="never" "$OMS_DIR/usr/theme" && ls --color="never" "$OMS_DIR/usr/local/theme")" -- "${curr}") )
             ;;
         "-p"|"--plugin")
-            COMPREPLY=( $(compgen -W "start enable disable restart" -- "${curr}") )
+            COMPREPLY=( $(compgen -W "start enable disable restart list" -- "${curr}") )
             ;;
         "--chsh")
             COMPREPLY=( $(compgen -W "bash sh zsh" -- "${curr}") )
