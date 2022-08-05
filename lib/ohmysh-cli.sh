@@ -20,18 +20,17 @@ _helpcommand(){
          start [PLUGIN]         :    Run a plugin in one go
          enable [PLUGIN]        :    Enable a plugin
          disable [PLUGIN]       :    Disable a plugin
-         restart [PLUGIN]       :    Restart a plugin
          list                   :    Get list of plugins
     -a  --alias (EDITOR)        :    Config aliases (EDITOR=vi)
     -c  --cover (EDITOR)        :    Edit the cover (EDITOR=vi)
     -e  --advconfig (EDITOR)    :    Edit the cover (EDITOR=vi)
     -r  --reload                :    Reload OhMySh
-    --chsh [SHELL (sh|bash|zsh)]:    Creat config file for [SHELL]
+    --chsh [SHELL (sh/bash/zsh)]:    Creat config file for [SHELL]
     --channel (stable/dev)      :    Join/leave development channel
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
-- https://ohmysh.gitee.io/docs-v2
+- https://ohmysh.gitee.io/docs-v2 (for Chinese)
 EOF
 }
 
@@ -122,6 +121,7 @@ EOF
       _info "You are using the theme: $OMS_THEME" 'OhMySh::Theme'
       _log ' List of themes:'
       ls "$OMS_DIR/usr/theme"
+      ls "$OMS_DIR/usr/local/theme"
       # echo $(cd "$OMS_DIR/usr/theme" && echo !("readme.md"))
     else
       _warn "Change theme to '$2'" 'OhMySh::Theme'
@@ -136,9 +136,21 @@ EOF
     _info "You are using the theme: $OMS_THEME" 'OhMySh::Theme'
     echo ' List of themes:'
     ls "$OMS_DIR/usr/theme"
+    _warn "The option \"--themelist\" has already expired. Use \"oms -t list\""
   elif [ "$1" = "--plugin" ] || [ "$1" = "-p" ]
   then
-    if [ -z "$2" ] || [ -z "$3" ]
+    if [ -z "$2" ]
+    then
+      _error "Missing parameters" 'OhMySh::CLI' '7'
+    elif [ "$2" = "list" ]
+    then
+      _info "You are using these plugins:"
+      echo "${OMS_PLUGIN[@]}"
+      _log ' List of plugins:'
+      ls "$OMS_DIR/usr/plugin"
+      ls "$OMS_DIR/usr/local/plugin"
+      # echo !("readme.md")
+    elif [ -z "$3" ]
     then
       _error "Missing parameters" 'OhMySh::CLI' '7'
     elif [ ! -f "$OMS_DIR/usr/local/plugin/$3/$3.plugin.sh" ] && [ ! -f "$OMS_DIR/usr/plugin/$3/$3.plugin.sh" ]
@@ -163,17 +175,6 @@ EOF
       sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/\"$OMS_PLUGIN_NEW\" //g" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
       _warn "Disabled. It will be applied after you restart."
-    elif [ "$2" = "restart" ]
-    then
-      _warn "Restart plugin '$3'" "OhMySh::Plugin"
-      _plugin_runner "$3"
-    elif [ "$2" = "list" ]
-    then
-      _info "You are using these plugins:"
-      echo "${OMS_PLUGIN[@]}"
-      _log ' List of plugins:'
-      ls "$OMS_DIR/usr/plugin"
-      # echo !("readme.md")
     fi
   elif [ "$1" = "--pluginlist" ]
   then
@@ -181,6 +182,7 @@ EOF
     echo "${OMS_PLUGIN[@]}"
     echo ' List of plugins:'
     ls "$OMS_DIR/usr/plugin"
+    _warn "The option \"--pluginlist\" has already expired. Use \"oms -p list\""
   elif [ "$1" = "-a" ] || [ "$1" = "--alias" ]
   then
     if [ -z "$2" ]
@@ -269,7 +271,7 @@ _oms_completion()
             COMPREPLY=( $(compgen -W "list $(ls --color="never" "$OMS_DIR/usr/theme" && ls --color="never" "$OMS_DIR/usr/local/theme")" -- "${curr}") )
             ;;
         "-p"|"--plugin")
-            COMPREPLY=( $(compgen -W "start enable disable restart list" -- "${curr}") )
+            COMPREPLY=( $(compgen -W "start enable disable list" -- "${curr}") )
             ;;
         "--chsh")
             COMPREPLY=( $(compgen -W "bash sh zsh" -- "${curr}") )
@@ -280,16 +282,13 @@ _oms_completion()
         "-a"|"--alias"|"-c"|"--cover"|"-e"|"--advconfig")
             COMPREPLY=( $(compgen -W "vi vim nano" -- "${curr}") )
             ;;
-#         "hello")
-#             COMPREPLY=( $(compgen -W "ldrow raboof" -- "${curr}") )
-#             ;;
         *)
             ;;
     esac
     case "${pre2}" in
         "-p"|"--plugin")
             case "${prev}" in
-                "start"|"enable"|"disable"|"restart")
+                "start"|"enable"|"disable")
                     COMPREPLY=( $(compgen -W "$(ls --color="never" "$OMS_DIR/usr/plugin" && ls --color="never" "$OMS_DIR/usr/local/plugin")" -- "${curr}") )
                     ;;
             esac
