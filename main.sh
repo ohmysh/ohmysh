@@ -13,6 +13,7 @@ fi
 
 # Load Config file
 source "$OMS_DIR/lib/config.sh"
+source "$OMS_DIR/lib/debug.sh"
 
 # Load base script
 source "$OMS_DIR/lib/ohmysh-version.sh"

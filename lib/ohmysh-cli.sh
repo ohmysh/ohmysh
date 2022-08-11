@@ -118,13 +118,13 @@ EOF
       _error "Missing parameters" 'OhMySh::CLI' '7'
     elif [ "$2" = "list" ]
     then
-      _info "You are using the theme: $OMS_THEME" 'OhMySh::Theme'
+      _info "You are using the theme: $OMS_THEME" 'Theme'
       _log ' List of themes:'
       ls "$OMS_DIR/usr/theme"
       ls "$OMS_DIR/usr/local/theme"
       # echo $(cd "$OMS_DIR/usr/theme" && echo !("readme.md"))
     else
-      _warn "Change theme to '$2'" 'OhMySh::Theme'
+      _warn "Change theme to '$2'" 'Theme'
       OMS_THEME_NEW="$2"
       sed -n "/OMS_THEME='$OMS_THEME'/p" "$HOME/.profile" | sed "s/OMS_THEME='$OMS_THEME'/OMS_THEME='$OMS_THEME_NEW'/g" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
@@ -133,7 +133,7 @@ EOF
     fi
   elif [ "$1" = "--themelist" ]
   then
-    _info "You are using the theme: $OMS_THEME" 'OhMySh::Theme'
+    _info "You are using the theme: $OMS_THEME" 'Theme'
     echo ' List of themes:'
     ls "$OMS_DIR/usr/theme"
     _warn "The option \"--themelist\" has already expired. Use \"oms -t list\""
@@ -141,7 +141,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      _error "Missing parameters" 'OhMySh::CLI' '7'
+      _error "Missing parameters" 'CLI' '7'
     elif [ "$2" = "list" ]
     then
       _info "You are using these plugins:"
@@ -155,14 +155,14 @@ EOF
       _error "Missing parameters" 'OhMySh::CLI' '7'
     elif [ ! -f "$OMS_DIR/usr/local/plugin/$3/$3.plugin.sh" ] && [ ! -f "$OMS_DIR/usr/plugin/$3/$3.plugin.sh" ]
     then
-      _error "Plugin not found!" 'OhMySh::Plugin' '5'
+      _error "Plugin not found!" 'Plugin' '5'
     elif [ "$2" = "start" ]
     then
-      _warn "Run plugin '$3'" 'OhMySh::Plugin'
+      _warn "Run plugin '$3'" 'Plugin'
       _plugin_runner "$3"
     elif [ "$2" = "enable" ]
     then
-      _warn "Enable plugin '$3'" 'OhMySh::Plugin'
+      _warn "Enable plugin '$3'" 'Plugin'
       OMS_PLUGIN_NEW="$3"
       sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/PLUGIN=(/PLUGIN=(\"$OMS_PLUGIN_NEW\" /" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
@@ -170,7 +170,7 @@ EOF
       _plugin_runner "$OMS_PLUGIN_NEW"
     elif [ "$2" = "disable" ]
     then
-      _warn "Disable plugin '$3'" 'OhMySh::Plugin'
+      _warn "Disable plugin '$3'" 'Plugin'
       OMS_PLUGIN_NEW="$3"
       sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/\"$OMS_PLUGIN_NEW\" //g" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
@@ -211,7 +211,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      _error "Missing parameters" 'OhMySh::CLI' '7'
+      _error "Missing parameters" 'CLI' '7'
       _helpcommand
     else
       _warn "Changing your shell to $2" "CLI"
@@ -230,7 +230,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      _error "Missing parameters" 'OhMySh::CLI' '7'
+      _error "Missing parameters" 'CLI' '7'
       _helpcommand
     else
       case "${2}" in
@@ -243,6 +243,24 @@ EOF
         *)
           ;;
       esac
+    fi
+  elif [ "$1" = "--debug" ]
+  then
+    if [ -z "$2" ]
+    then
+      _error "Missing parameters" 'CLI' '7'
+      _helpcommand
+    else
+      if [ -z "$3" ]
+      then
+        _debug_check "$2"
+      elif [ "$3" = "on" ]
+      then 
+        _debug_start "$2"
+      elif [ "$3" = "off" ]
+      then
+        _debug_stop "$2"
+      fi
     fi
   else
     _error "Parameters '$1' not found" 'CLI' '2'

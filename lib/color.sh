@@ -65,6 +65,16 @@ _info(){
     blue " $tp : $1"
 }
 
+_debug(){
+    if [ -z "$2"  ]
+    then
+        tp="[DEBUG] OhMySh"
+    else
+        tp="[DEBUG] OhMySh::$2"
+    fi
+    blue " $tp : $1"
+}
+
 _log(){
     if [ -z "$2" ]
     then

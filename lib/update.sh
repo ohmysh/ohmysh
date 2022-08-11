@@ -32,16 +32,23 @@ _oms_update_channel_fetch(){
 }
 
 _oms_update_new(){
+    # Debug
+    [ -n "$_DEBUG_UPDATE" ] && _debug "Cought flag UPDATE."
 
     # Checking if have .git/
     [ -d ".git" ] || _error "You are not in a git repository"
 
     # Creating log file
     _log "OhMySh Update ($(date "+%Y%m%d %H:%M:%S"))" > "$OMS_CACHE/update_fetch.log"
+    [ -n "$_DEBUG_UPDATE" ] && _debug "OhMySh Update ($(date "+%Y%m%d %H:%M:%S"))"
     _log "Update via $(git remote get-url --all origin) ($(git rev-parse --abbrev-ref HEAD))." >> "$OMS_CACHE/update_fetch.log"
+    [ -n "$_DEBUG_UPDATE" ] && _debug"Update via $(git remote get-url --all origin) ($(git rev-parse --abbrev-ref HEAD))."
 
     # Fetching update
-    git remote update >> "$OMS_CACHE/update_fetch.log" || _error "Cannot get updates" "Updater" '6'
+    git remote update > "$OMS_CACHE/update_remote_fetch.log" || _error "Cannot get updates" "Updater" '6'
+
+    [ -n "$_DEBUG_UPDATE" ] && cat "$OMS_CACHE/update_remote_fetch.log"
+    cat "$OMS_CACHE/update_remote_fetch.log" >> "$OMS_CACHE/update_fetch.log"
 
     # Getting branch information
 #     UPSTREAM="${1:-'@{u}'}"
@@ -63,15 +70,22 @@ _oms_update_new(){
 
     # Comparing version
     _log "Your current version is $NOWV" >> "$OMS_CACHE/update_fetch.log"
+    [ -n "$_DEBUG_UPDATE" ] && _debug "Your current version is $NOWV"
     _log "The latest version is   $LATEST" >> "$OMS_CACHE/update_fetch.log"
+    [ -n "$_DEBUG_UPDATE" ] && _debug "The latest version is   $LATEST"
+
     if [ "$LATEST" = "$NOWV" ]
     then
-        _log "No update available" >> "$OMS_CACHE/update_fetch.log"
+        _log "No update available." >> "$OMS_CACHE/update_fetch.log"
+        [ -n "$_DEBUG_UPDATE" ] && _debug "No update available."
     else
         _log "Updating to version $LATEST..." >> "$OMS_CACHE/update_fetch.log"
         _info "Updating to version $LATEST"
+        [ -n "$_DEBUG_UPDATE" ] && _debug "Starting update..."
         _oms_update_force
-       [ "$(checkcmd "oms_reload")" = "1" ] && oms_reload
+        [ -n "$_DEBUG_UPDATE" ] && _debug "Updated.  Reloading..."
+        [ "$(checkcmd "oms_reload")" = "1" ] && oms_reload
+        [ -n "$_DEBUG_UPDATE" ] && _debug "Reloaded. Updating debug finished."
     fi
 }
 
@@ -81,14 +95,22 @@ _oms_update_force(){
     then
         if [ "$configUpdate" = "Force" ]
         then
+            [ -n "$_DEBUG_UPDATE" ] && _debug "Force updating to the branch latest commit..."
+            [ -n "$_DEBUG_UPDATE" ] && _debug "Checkout."
             git checkout "$(_oms_update_channel_fetch)"
+            [ -n "$_DEBUG_UPDATE" ] && _debug "Pull."
             git pull || _error "Cannot get updates" "Updater" '6'
             _info "Forced updated to latest version."
         else
 #             git checkout "$LATEST" || _error "Git refused request" "Updater" "6"
+            [ -n "$_DEBUG_UPDATE" ] && _debug "Updating to the latest tag..."
+            [ -n "$_DEBUG_UPDATE" ] && _debug "Checkout."
             git checkout "$(_oms_update_channel_fetch)"
+            [ -n "$_DEBUG_UPDATE" ] && _debug "Pull."
             git pull
+            [ -n "$_DEBUG_UPDATE" ] && _debug "Checkout."
             git checkout "$LATEST"
+            [ -n "$_DEBUG_UPDATE" ] && _debug "Done."
         fi
         _info "Updated. Press enter to quit."
     else
