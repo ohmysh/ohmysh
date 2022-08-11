@@ -27,6 +27,7 @@ _helpcommand(){
     -r  --reload                :    Reload OhMySh
     --chsh [SHELL (sh/bash/zsh)]:    Creat config file for [SHELL]
     --channel (stable/dev)      :    Join/leave development channel
+    --debug [NAME] (-/on/off)   :    [TESTING] Set/unset a debug flag.
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
@@ -279,7 +280,7 @@ _oms_completion()
     pre2="${COMP_WORDS[COMP_CWORD-2]}"
 #     blue "$curr $prev $pre2"
 
-    opts="-u --update --uninstall -h --help -v --version -t --theme -p --theme -a --alias -c --cover -e --advconfig --chsh -r --reload --channel"
+    opts="-u --update --uninstall -h --help -v --version -t --theme -p --theme -a --alias -c --cover -e --advconfig --chsh -r --reload --channel --debug"
     if [[ "${COMP_CWORD}" -eq 1 ]]; then
         COMPREPLY=( $(compgen -W "${opts}" -- "${curr}") )
     fi
@@ -299,6 +300,9 @@ _oms_completion()
             ;;
         "-a"|"--alias"|"-c"|"--cover"|"-e"|"--advconfig")
             COMPREPLY=( $(compgen -W "vi vim nano" -- "${curr}") )
+            ;;
+        "--debug")
+            COMPREPLY=( $(compgen -W "${_OMS_DEBUG_LIST[@]}" -- "${curr}") )
             ;;
         *)
             ;;
