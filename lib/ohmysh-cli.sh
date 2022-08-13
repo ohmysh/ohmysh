@@ -306,7 +306,7 @@ _oms_completion()
             COMPREPLY=( $(compgen -W "vi vim nano" -- "${curr}") )
             ;;
         "--debug")
-            COMPREPLY=( $(compgen -W "list ${!_OMS_DEBUG_LIST[@]}" -- "${curr}") )
+            COMPREPLY=( $(compgen -W "list ${!_OMS_DEBUG_LIST[*]}" -- "${curr}") )
             ;;
         *)
             ;;

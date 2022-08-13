@@ -38,10 +38,10 @@ _debug_stop(){
 
 _debug_list(){
     _info "These options are available:"
-    echo "${!_OMS_DEBUG_LIST[@]}"
+    echo "${!_OMS_DEBUG_LIST[*]}"
 }
 
-for i in "${OMS_DEBUG[@]}"
+for i in "${OMS_DEBUG[*]}"
 do
     _debug_start "$i"
 done
