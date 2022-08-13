@@ -9,7 +9,7 @@ _OMS_DEBUG_LIST[update]='UPDATE'
 export _OMS_DEBUG_LIST
 
 _debug_check(){
-    if [ -n '$'"_DEBUG_${_OMS_DEBUG_LIST[${1}]}" ] && [ "$(eval echo '$'"_DEBUG_${_OMS_DEBUG_LIST[${1}]}")" = "DEBUG" ]
+    if [ -n "$(eval echo '$'"_DEBUG_${_OMS_DEBUG_LIST[${1}]}")" ] && [ "$(eval echo '$'"_DEBUG_${_OMS_DEBUG_LIST[${1}]}")" = "DEBUG" ]
     then
         _info "Element \"$1\" (\"_DEBUG_${_OMS_DEBUG_LIST[${1}]}\") : Debug ON."
     else
