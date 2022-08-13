@@ -28,6 +28,7 @@ _helpcommand(){
     --chsh [SHELL (sh/bash/zsh)]:    Creat config file for [SHELL]
     --channel (stable/dev)      :    Join/leave development channel
     --debug [NAME] (-/on/off)   :    [TESTING] Set/unset a debug flag.
+            list                :    [TESTING] Get debug flags list.
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
@@ -252,7 +253,10 @@ EOF
       _error "Missing parameters" 'CLI' '7'
       _helpcommand
     else
-      if [ -z "$3" ]
+      if [ "$2" = "list" ]
+      then
+        _debug_list
+      elif [ -z "$3" ]
       then
         _debug_check "$2"
       elif [ "$3" = "on" ]
@@ -302,7 +306,7 @@ _oms_completion()
             COMPREPLY=( $(compgen -W "vi vim nano" -- "${curr}") )
             ;;
         "--debug")
-            COMPREPLY=( $(compgen -W "${_OMS_DEBUG_LIST[@]}" -- "${curr}") )
+            COMPREPLY=( $(compgen -W "list ${!_OMS_DEBUG_LIST[@]}" -- "${curr}") )
             ;;
         *)
             ;;

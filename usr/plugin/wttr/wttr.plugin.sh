@@ -28,4 +28,4 @@ wttr() {
   curl -fGsS -H "Accept-Language: ${LANG%_*}" $args --compressed "wttr.in/${location}"
 }
 
-wttr "$@"
+# wttr "$@"
