@@ -41,7 +41,7 @@ _debug_list(){
     echo "${!_OMS_DEBUG_LIST[*]}"
 }
 
-for i in "${OMS_DEBUG[*]}"
+for i in "${OMS_DEBUG[@]}"
 do
     _debug_start "$i"
 done
