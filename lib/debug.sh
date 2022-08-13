@@ -36,3 +36,7 @@ _debug_stop(){
     fi
 }
 
+for i in "${OMS_DEBUG[@]}"
+do
+    _debug_start "$i"
+done
