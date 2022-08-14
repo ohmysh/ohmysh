@@ -5,6 +5,9 @@
 
 declare -A _OMS_DEBUG_LIST
 _OMS_DEBUG_LIST[update]='UPDATE'
+_OMS_DEBUG_LIST[update.run]='UPDATERUN'
+_OMS_DEBUG_LIST[theme]='THEME'
+_OMS_DEBUG_LIST[plugin]='PLUGIN'
 
 export _OMS_DEBUG_LIST
 
