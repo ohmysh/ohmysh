@@ -167,6 +167,13 @@ mkdir -p "$OMS_CACHE/runtime-script"
 mkdir -p "$OMS_CACHE/startup-script"
 mkdir -p "$OMS_CACHE/trash"
 
+# install lolcat with apt-get if not found
+if [ ! -f "$OMS/lib/bin/lolcat" ]
+then
+  _info '  Installing lolcat'
+  sudo apt-get install lolcat
+fi
+
 _info 'OhMySh is already installed! '
 
 # config
