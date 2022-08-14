@@ -26,5 +26,5 @@ _des(){
        OhMySh - The Shell Framework
 EOF
 }
-_des
-#export -f _logo _des
+
+export -f _logo _des
