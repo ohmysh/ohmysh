@@ -12,11 +12,16 @@ _OMS_DEBUG_LIST[plugin]='PLUGIN'
 export _OMS_DEBUG_LIST
 
 _debug_check(){
-    if [ -n "$(eval echo '$'"_DEBUG_${_OMS_DEBUG_LIST[${1}]}")" ] && [ "$(eval echo '$'"_DEBUG_${_OMS_DEBUG_LIST[${1}]}")" = "DEBUG" ]
+    if [ -n "${_OMS_DEBUG_LIST[${1}]}" ]
     then
-        _info "Element \"$1\" (\"_DEBUG_${_OMS_DEBUG_LIST[${1}]}\") : Debug ON."
+        if [ -n "$(eval echo '$'"_DEBUG_${_OMS_DEBUG_LIST[${1}]}")" ] && [ "$(eval echo '$'"_DEBUG_${_OMS_DEBUG_LIST[${1}]}")" = "DEBUG" ]
+        then
+            _info "Element \"$1\" (\"_DEBUG_${_OMS_DEBUG_LIST[${1}]}\") : Debug ON."
+        else
+            _info "Element \"$1\" : Off."
+        fi
     else
-        _info "Element \"$1\" : Off."
+        _error "Failed to get the status of \"$1\"." "Debug" "13"
     fi
 }
 
@@ -34,8 +39,9 @@ _debug_stop(){
     if [ -n "${_OMS_DEBUG_LIST[${1}]}" ] && [ -n "$(eval echo '$'"_DEBUG_${_OMS_DEBUG_LIST[${1}]}")" ]
     then
         unset eval "_DEBUG_${_OMS_DEBUG_LIST[${1}]}"
+        _debug "Signed ${_OMS_DEBUG_LIST[${1}]} Off."
     else
-        _error "Failed to start \"$1\"." "Debug" "13"
+        _error "Failed to stop \"$1\"." "Debug" "13"
     fi
 }
 

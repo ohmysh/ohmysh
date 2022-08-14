@@ -42,7 +42,7 @@ _oms_update_new(){
     _log "OhMySh Update ($(date "+%Y%m%d %H:%M:%S"))" > "$OMS_CACHE/update_fetch.log"
     [ -n "$_DEBUG_UPDATE" ] && _debug "OhMySh Update ($(date "+%Y%m%d %H:%M:%S"))"
     _log "Update via $(git remote get-url --all origin) ($(git rev-parse --abbrev-ref HEAD))." >> "$OMS_CACHE/update_fetch.log"
-    [ -n "$_DEBUG_UPDATE" ] && _debug"Update via $(git remote get-url --all origin) ($(git rev-parse --abbrev-ref HEAD))."
+    [ -n "$_DEBUG_UPDATE" ] && _debug "Update via $(git remote get-url --all origin) ($(git rev-parse --abbrev-ref HEAD))."
 
     # Fetching update
     git remote update > "$OMS_CACHE/update_remote_fetch.log" || _error "Cannot get updates" "Updater" '6'
