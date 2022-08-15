@@ -13,7 +13,8 @@ checkcmd(){
     if command -v "${1%% *}" >/dev/null 2>&1; then 
         echo '1' 
     else 
-        echo 'Command Not Found!' 
+        # echo the text 'Command Not Found!' in red color, the text 'Command Not Found!' is not printed in red color to stderr
+        echo "\033[31mCommand Not Found!\033[0m" >&2
     fi
 }
 
