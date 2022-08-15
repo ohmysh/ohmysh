@@ -1,6 +1,6 @@
 #!/bin/bash
 
-_logo(){
+_logo_display(){
 cat <<EOF
         ____  __   __  ___     ___ _
        / __ \/ /  /  |/  /_ __/ __| |_
@@ -11,20 +11,23 @@ cat <<EOF
 EOF
 }
 
-_des(){
-  # play 3 time an bell sound
-  for i in {1..3}; do
-    echo -e "\a"
-  done
+_logo(){
+  if [ "$(checkcmd lolcat)" = "1" ]
+  then
+    # play 3 time an bell sound
+    for i in {1..3}; do
+      echo -e "\a"
+    done
   
-  # print logo in rainbow color
-  _logo | /usr/games/lolcat -a -d 10
+    # print logo in rainbow color
+    _logo_display | lolcat -a -d 10
 
+  else
+    _logo_display
+  fi
 
   cat <<EOF
 
        OhMySh - The Shell Framework
 EOF
 }
-
-export -f _logo _des
