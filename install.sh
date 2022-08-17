@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+# check if snapd.service is in untis list from systemctl
+SNAPD_SERVICE_STATE=$(systemctl list-units | grep "snapd.service" | wc -l)
+
 # OhMySh Installer
 
 # Color Defines
@@ -179,29 +183,81 @@ then
     then
       if grep -q "Ubuntu" "/etc/lsb-release"
       then
-        # install lolcat with apt-get if snap is not installed or if snapd not running
-        # so if snap is installed and snapd is running, we will use snap to install lolcat 
-        if [[ -e "/usr/bin/snap " ]] && [[ -f "/usr/bin/snap" ]] && [[ -e "/usr/lib/snapd" ]] && [[ -d "/usr/lib/snapd"]]
+        if [[ "$SNAPD_SERVICE_STATE" == "1" ]]
+        # if $SNAPD_SERVICE_STATE == "1" (snapd is running) 
         then
-          #later ...an idea: verify if systemd have snapd running
-          _info ' Snap is installed, you can installing lolcat with snap !'
-          # ask if user want to install lolcat with snap
-
-          echo -n "Proceed? [y/n]: "
-          read answer
-          if [[ $answer == "y" ]] || [[ $answer == "Y" ]] || [[ $answer == "yes" ]] || [[ $answer == "Yes" ]]
+          # probably useless over verification because snapd is running
+          # install lolcat with apt-get if snap is not installed or if snapd not running
+          # so if snap is installed and snapd is running, we will use snap to install lolcat 
+          if [[ -e "/usr/bin/snap " ]] && [[ -f "/usr/bin/snap" ]] && [[ -e "/usr/lib/snapd" ]] && [[ -d "/usr/lib/snapd"]]
           then
-            # install lolcat with snap if the user want to use snap
-            _info '    Installing lolcat with snap'
-            snap install lolcat-c
+            _info ' Snap is installed, you can installing lolcat with snap !'
+            # ask if user want to install lolcat with snap
+
+            echo -n "Proceed? [y/n]: "
+            read answer
+            if [[ $answer == "y" ]] || [[ $answer == "Y" ]] || [[ $answer == "yes" ]] || [[ $answer == "Yes" ]]
+            then
+              # install lolcat with snap if the user want to use snap
+              _info '    Installing lolcat with snap'
+              snap install lolcat-c
+            else
+              _info '  Skipping lolcat installation'
+              _info '  Intalling lolcat with apt-get'
+              apt-get install -y lolcat
+            fi
+          # else lolcat install with apt-get
           else
-            _info '  Skipping lolcat installation'
-            _info '  Intalling lolcat with apt-get'
             apt-get install -y lolcat
           fi
-        # else lolcat install with apt-get
         else
-          apt-get install -y lolcat
+          if [[ "$SNAPD_SERVICE_STATE" == "0" ]] || [[ "$SNAPD_SERVICE_STATE" != "1" ]]
+            # read input and ask if user want to install snap and enable now snapd 
+            # the text into ask is ' snapd is not running, do you want to enable it now ? ' if snapd is not running but installed
+            # the text into ask is ' snapd is not installed, do you want to install it now ? ' if snapd is not installed and not running
+            if [[ -e "/usr/bin/snap " ]] && [[ -f "/usr/bin/snap" ]] && [[ -e "/usr/lib/snapd" ]] && [[ -d "/usr/lib/snapd"]]
+            then
+              _info ' Snap is installed but not running, you can enable and start snapd + installing lolcat with snap !'
+              echo -n "Proceed? [y/n]: "
+              read answer
+              if [[ $answer == "y" ]] || [[ $answer == "Y" ]] || [[ $answer == "yes" ]] || [[ $answer == "Yes" ]]
+              then
+                _info '    Enabling snapd'
+                systemctl enable snapd
+                _info '    Starting snapd'
+                systemctl start snapd
+                _info '    Status of snapd:'
+                systemctl status snapd
+                _info '    Installing lolcat with snap'
+                snap install lolcat-c
+              else
+                _info ' Snap is not installed, you can installing snap with apt-get to install lolcat with snap !'
+                echo -n "Proceed? [y/n]: "
+                read answer
+                if [[ $answer == "y" ]] || [[ $answer == "Y" ]] || [[ $answer == "yes" ]] || [[ $answer == "Yes" ]]
+                then
+                  _info '    Installing snap'
+                  apt-get install -y snap
+                  _info '    Enabling snapd'
+                  systemctl enable snapd
+                  _info '    Starting snapd'
+                  systemctl start snapd
+                  _info '    Status of snapd:'
+                  systemctl status snapd
+                  _info '    Installing lolcat with snap'
+                  snap install lolcat-c
+                else
+                  _info '  Skipping lolcat installation'
+                  _info '  Intalling lolcat with apt-get'
+                  apt-get install -y lolcat
+                fi
+              fi
+            else
+              _info '  Skipping lolcat installation'
+              _info '  Intalling lolcat with apt-get'
+              apt-get install -y lolcat
+            fi
+          fi
         fi
       fi
     else
