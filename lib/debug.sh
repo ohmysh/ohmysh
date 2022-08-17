@@ -50,6 +50,16 @@ _debug_list(){
     echo "${!_OMS_DEBUG_LIST[*]}"
 }
 
+_debug_list_on(){
+    for i in ${!_OMS_DEBUG_LIST[*]}
+    do
+        if [ -n "$(eval echo '$'"_DEBUG_${_OMS_DEBUG_LIST[${i}]}")" ] && [ "$(eval echo '$'"_DEBUG_${_OMS_DEBUG_LIST[${i}]}")" = "DEBUG" ]
+        then
+            echo -n "$i "
+        fi
+    done
+}
+
 for i in "${OMS_DEBUG[@]}"
 do
     _debug_start "$i"

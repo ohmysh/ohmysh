@@ -62,6 +62,15 @@ EOX
     fi
 }
 
+_cli_debug_output(){
+  if [ -n "$(_debug_list_on)" ]
+  then
+    cat <<EOX
+    Debug list          :  $(_debug_list_on)
+EOX
+  fi
+}
+
 oms(){
   if [ -z "$1" ]
   then
@@ -110,6 +119,7 @@ oms(){
     OhMySh Theme        :  $OMS_THEME
     OhMySh Plugins      :  ${OMS_PLUGIN[@]}
 $(_comp_output)
+$(_cli_debug_output)
 
 $(_ohmyshdevwarn)
 EOF
