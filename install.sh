@@ -170,8 +170,93 @@ mkdir -p "$OMS_CACHE/trash"
 # install lolcat with apt-get if not found
 if [ ! -f "$OMS/lib/bin/lolcat" ]
 then
-  _info '  Installing lolcat'
-  sudo apt-get install lolcat
+  _info '  Installing lolcat...'
+  # install lolcat with apt-get if operating system is debian/ubuntu or based on debian/ubuntu
+  if [ -e "/etc/debian_version" ]
+  then
+    # check if is ubuntu
+    if [ -e "/etc/lsb-release" ]
+    then
+      if grep -q "Ubuntu" "/etc/lsb-release"
+      then
+        # install lolcat with apt-get if snap is not installed or if snapd not running
+        # so if snap is installed and snapd is running, we will use snap to install lolcat 
+        if [[ -e "/usr/bin/snap " ]] && [[ -f "/usr/bin/snap" ]] && [[ -e "/usr/lib/snapd" ]] && [[ -d "/usr/lib/snapd"]]
+        then
+          #later ...an idea: verify if systemd have snapd running
+          _info ' Snap is installed, you can installing lolcat with snap !'
+          # ask if user want to install lolcat with snap
+
+          echo -n "Proceed? [y/n]: "
+          read answer
+          if [[ $answer == "y" ]] || [[ $answer == "Y" ]] || [[ $answer == "yes" ]] || [[ $answer == "Yes" ]]
+          then
+            # install lolcat with snap if the user want to use snap
+            _info '    Installing lolcat with snap'
+            snap install lolcat-c
+          else
+            _info '  Skipping lolcat installation'
+            _info '  Intalling lolcat with apt-get'
+            apt-get install -y lolcat
+          fi
+        # else lolcat install with apt-get
+        else
+          apt-get install -y lolcat
+        fi
+      fi
+    else
+      apt-get install -y lolcat
+    fi
+  fi
+  # install lolcat with yum if operating system is centos/redhat/fedora or based on centos/redhat/fedora
+  if [ -e "/etc/redhat-release" ]
+  then
+    yum install -y lolcat
+  fi
+  # install lolcat with AUR if operating system is archlinux
+  if [ -e "/etc/arch-release" ]
+  then
+    git clone https://aur.archlinux.org/packages/c-lolcat
+    cd c-lolcat 
+    makepkg -csi
+    cd ..
+    rm -rf c-lolcat
+  fi
+  # install lolcat with pacman if operating system is manjaro
+  if [ -e "/etc/manjaro-release" ]
+  then
+    pacman -S --noconfirm lolcat
+  fi
+  # install lolcat with the command 'dnf install lolcat' using dnf if operating system is fedora
+  if [ -e "/etc/fedora-release" ]
+  then
+    dnf install -y lolcat
+  fi
+  # install lolcat with apk if operating system is alpine
+  if [ -e "/etc/alpine-release" ]
+  then
+    apk add -U --no-cache --virtual .lolcat-dev lolcat
+  fi
+  # install lolcat from source if operating system is other
+  if [ ! -f "/etc/debian_version" ] && [ ! -f "/etc/redhat-release" ] && [ ! -f "/etc/arch-release" ] && [ ! -f "/etc/manjaro-release" ] && [ ! -f "/etc/SuSE-release" ] && [ ! -f "/etc/slackware-version" ] && [ ! -f "/etc/alpine-release" ]
+  then
+    _info '  Installing lolcat from source'
+    git clone https://github.com/jaseg/lolcat.git
+    cd lolcat
+    # verify if OS is MACOS or not
+    if [ -e "/usr/bin/sw_vers" ]
+    then
+      # put info message 'Ho an APPLE !'
+      _info '  Ho an APPLE !'
+      _info 'Build loclcat... (using make)'
+      make && _info 'now put the resulting binary at a place of your choice.(lolcat)'
+      cd ..
+    else
+      make && sudo make install && _info '  Installing lolcat from source done'
+      cd ..
+      _info '  Remove lolcat source code'
+      rm -rf lolcat
+    fi
 fi
 
 _info 'OhMySh is already installed! '
