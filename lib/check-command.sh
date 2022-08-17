@@ -14,7 +14,7 @@ checkcmd(){
         echo '1' 
     else 
         # echo the text 'Command Not Found!' in red color, the text 'Command Not Found!' is not printed in red color to stderr
-        echo "\033[31mCommand Not Found!\033[0m" >&2
+        echo -e "\033[31mCommand Not Found!\033[0m" >&2
     fi
 }
 
