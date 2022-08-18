@@ -2,6 +2,56 @@
 
 # OhMySh Installer
 
+_logo_display_installer(){
+cat <<EOF
+
+      ___           ___                    ___           ___                    ___           ___              
+     /\  \         /\__\                  /\__\         |\__\                  /\  \         /\__\             
+    /::\  \       /:/  /                 /::|  |        |:|  |                /::\  \       /:/  /             
+   /:/\:\  \     /:/__/                 /:|:|  |        |:|  |               /:/\ \  \     /:/__/              
+  /:/  \:\  \   /::\  \ ___            /:/|:|__|__      |:|__|__            _\:\~\ \  \   /::\  \ ___          
+ /:/__/ \:\__\ /:/\:\  /\__\          /:/ |::::\__\     /::::\__\          /\ \:\ \ \__\ /:/\:\  /\__\         
+ \:\  \ /:/  / \/__\:\/:/  /          \/__/~~/:/  /    /:/~~/~             \:\ \:\ \/__/ \/__\:\/:/  /         
+  \:\  /:/  /       \::/  /                 /:/  /    /:/  /                \:\ \:\__\        \::/  /          
+   \:\/:/  /        /:/  /                 /:/  /     \/__/                  \:\/:/  /        /:/  /           
+    \::/  /        /:/  /                 /:/  /                              \::/  /        /:/  /            
+     \/__/         \/__/                  \/__/                                \/__/         \/__/             
+
+EOF
+}
+
+_logo_installer(){
+  if [ "$(checkcmd lolcat)" = "1" ]
+  then
+    # play an sound wav file in the folder /install/sounds
+    #play /install/sounds/ohmysh.wav
+    # display logo in rainbow color during 10 seconds step by step with lolcat
+    _logo_display_installer | lolcat -a -d 10
+
+  else
+    _logo_display_installer
+  fi
+
+  cat <<EOF
+       INSTALL OF ...
+       OhMySh - The Shell Framework 
+EOF
+}
+
+# function to update an package manager from debian or arch or redhat
+linux_update_package_manager(){
+    if [ -f /etc/debian_version ]; then
+        sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y
+    elif [ -f /etc/arch-release ]; then
+        sudo pacman -Syu
+    elif [ -f /etc/redhat-release ]; then
+        sudo yum update
+    else
+        echo "OS not supported"
+        exit 1
+    fi
+}
+
 # Color Defines
 function blue(){
     echo -e "\033[34m$1\033[0m"
@@ -146,6 +196,9 @@ fi
 cloneerror(){
     _error "Cannot reach OhMySh repo, check on FAQ." "Installer" "3"
 }
+
+_info "Update package manager"
+linux_update_package_manager
 
 _info 'Preparing to install'
 checkcommand git Installer
