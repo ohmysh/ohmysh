@@ -33,7 +33,7 @@ function byellow(){
 }
 
 ## info in green to blue to echo
-function bgreen(){
+function bblue(){
     echo -e "\033[34m\033[01m$1\033[0m"
 }
 
@@ -67,7 +67,7 @@ _info(){
     else
         tp="[INFO] OhMySh::$2"
     fi
-    bgreen " $tp : $1"
+    bblue " $tp : $1"
 }
 
 _debug(){
