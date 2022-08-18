@@ -38,6 +38,23 @@ _logo_installer(){
 EOF
 }
 
+# function to install with the appropriate package manager from debian or ubuntu or archlinux or redhat 
+linux_install_with_package_manager() {
+  # if the OS is debian/ubuntu use apt-get to install $1
+    if [ -f /etc/debian_version ]; then
+        sudo apt-get install -y $1
+    # elif the OS is archlinux use pacman to install $1
+    elif [ -f /etc/arch-release ]; then
+        sudo pacman -S --noconfirm $1
+    # elif the OS is redhat/fedora use yum to install $1
+    elif [ -f /etc/redhat-release ]; then
+        sudo yum install -y $1
+    else
+        echo "OS not supported"
+        exit 1
+    fi
+}
+
 # function to update an package manager from debian or arch or redhat
 linux_update_package_manager(){
     if [ -f /etc/debian_version ]; then
