@@ -2,6 +2,38 @@
 
 # OhMySh Installer
 
+
+# function to install with the appropriate package manager from debian or ubuntu or archlinux or redhat 
+linux_install_with_package_manager() {
+  # if the OS is debian/ubuntu use apt-get to install $1
+    if [ -f /etc/debian_version ]; then
+        sudo apt-get install -y $1
+    # elif the OS is archlinux use pacman to install $1
+    elif [ -f /etc/arch-release ]; then
+        sudo pacman -S --noconfirm $1
+    # elif the OS is redhat/fedora use yum to install $1
+    elif [ -f /etc/redhat-release ]; then
+        sudo yum install -y $1
+    else
+        echo "OS not supported"
+        exit 1
+    fi
+}
+
+# function to update an package manager from debian or arch or redhat
+linux_update_package_manager(){
+    if [ -f /etc/debian_version ]; then
+        sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y
+    elif [ -f /etc/arch-release ]; then
+        sudo pacman -Syu
+    elif [ -f /etc/redhat-release ]; then
+        sudo yum update
+    else
+        echo "OS not supported"
+        exit 1
+    fi
+}
+
 # Check if lolcat is installed
 check_lolcat_is_installed(){
   if [[ "$(which lolcat | wc -l)" != "0" ]]
@@ -12,8 +44,28 @@ check_lolcat_is_installed(){
   fi
 }
 
-# 
+# use check_lolcat_is_installed function to check if lolcat is installed
+# if lolcat is installed display the text 'lolcat is installed' in rainbow color with an delay of 3 seconds
+if [ "$(check_lolcat_is_installed)" = "1" ]
+then
+  echo "lolcat is installed" | lolcat -a -d 3
+else
+  echo "lolcat is not installed.\nDo You Want Install lolcat? (y/n)"
+  read -r answer
+  if [ "$answer" = "y" ] || [ "$answer" = "Y" ] || [ "$answer" = "yes" ] || [ "$answer" = "Yes" ]
+  then
+    echo "Installing lolcat"
+    # here use linux_update_package_manager to update the appropriate package manager
+    linux_update_package_manager
+    # here use linux_install_with_package_manager to install lolcat
+    linux_install_with_package_manager lolcat
+    echo "lolcat is installed" | lolcat -a -d 3
+  else
+    echo "Aborting installation of lolcat.\nYou can install lolcat manually if you want to use it(rainbow colors feature)."
+  fi
+fi
 
+# function to display logo of the install
 _logo_display_installer(){
 cat <<EOF
 
@@ -48,37 +100,6 @@ _logo_installer(){
        INSTALL OF ...
        OhMySh - The Shell Framework 
 EOF
-}
-
-# function to install with the appropriate package manager from debian or ubuntu or archlinux or redhat 
-linux_install_with_package_manager() {
-  # if the OS is debian/ubuntu use apt-get to install $1
-    if [ -f /etc/debian_version ]; then
-        sudo apt-get install -y $1
-    # elif the OS is archlinux use pacman to install $1
-    elif [ -f /etc/arch-release ]; then
-        sudo pacman -S --noconfirm $1
-    # elif the OS is redhat/fedora use yum to install $1
-    elif [ -f /etc/redhat-release ]; then
-        sudo yum install -y $1
-    else
-        echo "OS not supported"
-        exit 1
-    fi
-}
-
-# function to update an package manager from debian or arch or redhat
-linux_update_package_manager(){
-    if [ -f /etc/debian_version ]; then
-        sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y
-    elif [ -f /etc/arch-release ]; then
-        sudo pacman -Syu
-    elif [ -f /etc/redhat-release ]; then
-        sudo yum update
-    else
-        echo "OS not supported"
-        exit 1
-    fi
 }
 
 # Color Defines
@@ -257,96 +278,7 @@ mkdir -p "$OMS_CACHE/runtime-script"
 mkdir -p "$OMS_CACHE/startup-script"
 mkdir -p "$OMS_CACHE/trash"
 
-# install lolcat with apt-get if not found
-if [ "$(checkcmd lolcat)" != "1" ]
-then
-  echo "ohmysh currently supports lolcat, it will make your terminal more beautiful and we strongly recommend you to install it. Do you wish to install it now that an automatic installation scheme is available?"
-  echo -n "[y/n]"
-  read -n1 answer
-  if [ "$answer" = "y" ] || [ "$answer" = "Y" ]
-  then
-    _info 'Installing lolcat...'
-    # install lolcat with apt-get if operating system is debian/ubuntu or based on debian/ubuntu
-    if [ -e "/etc/debian_version" ]
-    then
-      # check if is ubuntu
-      if [ -e "/etc/lsb-release" ]
-      then
-        if grep -q "Ubuntu" "/etc/lsb-release"
-        then
-          # install lolcat with apt-get if snap is not installed or if snapd not running
-          # so if snap is installed and snapd is running, we will use snap to install lolcat 
-          if [ -e "/usr/bin/snap " ] && [ -f "/usr/bin/snap" ] && [ -e "/usr/lib/snapd" ] && [ -d "/usr/lib/snapd"]
-          then
-            #later ...an idea: verify if systemd have snapd running
-            _info 'Snap is installed, you can installing lolcat with snap !'
-            # ask if user want to install lolcat with snap
-  
-            echo -n "Proceed? [y/n]: "
-            read -n1 answer
-            if [ "$answer" == "y" ] || [ "$answer" == "Y" ]
-            then
-              # install lolcat with snap if the user want to use snap
-              _info 'Installing lolcat with snap'
-              snap install lolcat-c
-            else
-              _info 'Skipping lolcat installation'
-              _info 'Intalling lolcat with apt-get'
-              apt-get install -y lolcat
-            fi
-          # else lolcat install with apt-get
-          else
-            apt-get install -y lolcat
-          fi
-        fi
-      else
-        apt-get install -y lolcat
-      fi
-    # install lolcat with yum if operating system is centos/redhat/fedora or based on centos/redhat/fedora
-    elif [ -e "/etc/redhat-release" ]
-    then
-      yum install -y lolcat
-    # install lolcat with pacman if operating system is archlinux
-    elif [ -e "/etc/arch-release" ]
-    then
-      sudo pacman -S --noconfirm lolcat
-    # install lolcat with pacman if operating system is manjaro
-    elif [ -e "/etc/manjaro-release" ]
-    then
-      pacman -S --noconfirm lolcat
-    # install lolcat with the command 'dnf install lolcat' using dnf if operating system is fedora
-    elif [ -e "/etc/fedora-release" ]
-    then
-      dnf install -y lolcat
-    # install lolcat with apk if operating system is alpine
-    elif [ -e "/etc/alpine-release" ]
-    then
-      apk add -U --no-cache --virtual .lolcat-dev lolcat
-    # install lolcat from source if operating system is other
-    elif [ ! -f "/etc/debian_version" ] && [ ! -f "/etc/redhat-release" ] && [ ! -f "/etc/arch-release" ] && [ ! -f "/etc/manjaro-release" ] && [ ! -f "/etc/SuSE-release" ] && [ ! -f "/etc/slackware-version" ] && [ ! -f "/etc/alpine-release" ]
-    then
-      _info 'Installing lolcat from source'
-      git clone https://github.com/jaseg/lolcat.git
-      cd lolcat
-      # verify if OS is MACOS or not
-      if [ -e "/usr/bin/sw_vers" ]
-      then
-        # put info message 'Ho an APPLE !'
-        _info 'Ho an APPLE !'
-        _info 'Build loclcat... (using make)'
-        make && _info 'now put the resulting binary at a place of your choice.(lolcat)'
-        cd ..
-      else
-        make && sudo make install && _info '  Installing lolcat from source done'
-        cd ..
-        _info 'Remove lolcat source code'
-        rm -rf lolcat
-      fi
-    fi
-  else
-    _info "You chose no."
-  fi
-fi
+
 
 _info 'OhMySh is already installed! '
 
