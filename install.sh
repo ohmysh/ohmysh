@@ -2,6 +2,18 @@
 
 # OhMySh Installer
 
+# Check if lolcat is installed
+check_lolcat_is_installed(){
+  if [[ "$(which lolcat | wc -l)" != "0" ]]
+  then
+    return 1
+  else
+    return 0
+  fi
+}
+
+# 
+
 _logo_display_installer(){
 cat <<EOF
 
