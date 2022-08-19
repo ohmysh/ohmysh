@@ -16,7 +16,8 @@ _logo(){
   then
     # play 3 time an bell sound
     for i in {1..3}; do
-      echo -e "\a"
+      # echo -e "\a"
+      tput bel
     done
   
     # print logo in rainbow color
