@@ -16,7 +16,7 @@ linux_install_with_package_manager() {
         sudo yum install -y $1
     else
         echo "OS not supported"
-        exit 1
+        return 1
     fi
 }
 
@@ -30,7 +30,7 @@ linux_update_package_manager(){
         sudo yum update
     else
         echo "OS not supported"
-        exit 1
+        return 1
     fi
 }
 
@@ -50,37 +50,30 @@ if [ "$(check_lolcat_is_installed)" = "1" ]
 then
   echo "lolcat is installed" | lolcat -a -d 3
 else
-  echo "lolcat is not installed.\nDo You Want Install lolcat? (y/n)"
-  read -r answer
-  if [ "$answer" = "y" ] || [ "$answer" = "Y" ] || [ "$answer" = "yes" ] || [ "$answer" = "Yes" ]
+  echo "[Optional] lolcat is not installed.\n[Optional] Do You Want Install lolcat? (y/n)"
+  read -n1 -r answer
+  # Read a char with -n1
+  if [ "$answer" = "y" ] || [ "$answer" = "Y" ]
   then
-    echo "Installing lolcat"
+    echo "Installing lolcat..."
     # here use linux_update_package_manager to update the appropriate package manager
     linux_update_package_manager
     # here use linux_install_with_package_manager to install lolcat
     linux_install_with_package_manager lolcat
     echo "lolcat is installed" | lolcat -a -d 3
   else
-    echo "Aborting installation of lolcat.\nYou can install lolcat manually if you want to use it(rainbow colors feature)."
+    echo "Aborting installation of lolcat.\nYou can install lolcat manually if you want to use it (rainbow colors feature)."
   fi
 fi
 
 # function to display logo of the install
 _logo_display_installer(){
 cat <<EOF
-
-      ___           ___                    ___           ___                    ___           ___              
-     /\  \         /\__\                  /\__\         |\__\                  /\  \         /\__\             
-    /::\  \       /:/  /                 /::|  |        |:|  |                /::\  \       /:/  /             
-   /:/\:\  \     /:/__/                 /:|:|  |        |:|  |               /:/\ \  \     /:/__/              
-  /:/  \:\  \   /::\  \ ___            /:/|:|__|__      |:|__|__            _\:\~\ \  \   /::\  \ ___          
- /:/__/ \:\__\ /:/\:\  /\__\          /:/ |::::\__\     /::::\__\          /\ \:\ \ \__\ /:/\:\  /\__\         
- \:\  \ /:/  / \/__\:\/:/  /          \/__/~~/:/  /    /:/~~/~             \:\ \:\ \/__/ \/__\:\/:/  /         
-  \:\  /:/  /       \::/  /                 /:/  /    /:/  /                \:\ \:\__\        \::/  /          
-   \:\/:/  /        /:/  /                 /:/  /     \/__/                  \:\/:/  /        /:/  /           
-    \::/  /        /:/  /                 /:/  /                              \::/  /        /:/  /            
-     \/__/         \/__/                  \/__/                                \/__/         \/__/             
-
+        ____  __   __  ___     ___ _
+       / __ \/ /  /  |/  /_ __/ __| |_
+      / /_/ / _ \/ /|_/ / // /\__ \ . \  
+      \____/_//_/_/  /_/\_, / |___/_||_| [] [] []
+                       /___/
 EOF
 }
 
@@ -247,8 +240,9 @@ cloneerror(){
     _error "Cannot reach OhMySh repo, check on FAQ." "Installer" "3"
 }
 
-_info "Update package manager"
-linux_update_package_manager
+# The update has been checked when installing lolcat.
+# _info "Update package manager"
+# linux_update_package_manager
 
 _info 'Preparing to install'
 checkcommand git Installer
