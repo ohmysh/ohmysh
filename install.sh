@@ -7,13 +7,13 @@
 linux_install_with_package_manager() {
   # if the OS is debian/ubuntu use apt-get to install $1
     if [ -f /etc/debian_version ]; then
-        sudo apt-get install -y $1
+        sudo apt-get install -y "$1"
     # elif the OS is archlinux use pacman to install $1
     elif [ -f /etc/arch-release ]; then
-        sudo pacman -S --noconfirm $1
+        sudo pacman -S --noconfirm "$1"
     # elif the OS is redhat/fedora use yum to install $1
     elif [ -f /etc/redhat-release ]; then
-        sudo yum install -y $1
+        sudo yum install -y "$1"
     else
         echo "OS not supported"
         return 1
@@ -50,7 +50,8 @@ if [ "$(check_lolcat_is_installed)" = "1" ]
 then
   echo "lolcat is installed" | lolcat -a -d 3
 else
-  echo "[Optional] lolcat is not installed.\n[Optional] Do You Want Install lolcat? (y/n)"
+  echo "[Optional] lolcat is not installed."
+  echo "[Optional] Do You Want Install lolcat? (y/n)"
   read -n1 -r answer
   # Read a char with -n1
   if [ "$answer" = "y" ] || [ "$answer" = "Y" ]
@@ -62,7 +63,8 @@ else
     linux_install_with_package_manager lolcat
     echo "lolcat is installed" | lolcat -a -d 3
   else
-    echo "Aborting installation of lolcat.\nYou can install lolcat manually if you want to use it (rainbow colors feature)."
+    echo "Aborting installation of lolcat."
+    echo "You can install lolcat manually if you want to use it (rainbow colors feature)."
   fi
 fi
 
