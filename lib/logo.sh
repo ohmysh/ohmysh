@@ -15,7 +15,7 @@ _logo(){
   if [ "$(checkcmd lolcat)" = "1" ]
   then
     # play 3 time an bell sound
-    for _ in {1..3}; do
+    for _ in {1..5}; do
       # echo -e "\a"
       tput bel
     done
