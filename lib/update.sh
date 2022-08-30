@@ -55,8 +55,17 @@ _oms_update_new(){
 #     LOCAL="$(git rev-parse @)"
 #     REMOTE="$(git rev-parse "$UPSTREAM")"
 #     BASE="$(git merge-base @ "$UPSTREAM")"
-    LATEST="$(git describe --abbrev=0 --tags)"
+    
+    # LATEST="$(git describe --abbrev=0 --tags)"
     NOWV="$OMS_VER"
+
+    # Get new version from main/dev branch.
+    BRCH="$(_oms_update_channel_fetch)"
+    [ -n "$_DEBUG_UPDATE" ] && _debug "Checking out to branch $BRCH to get the latest version."
+    git checkout "$BRCH" &> /dev/null
+    git pull > "$OMS_CACHE/update_remote_fetch.log" || _error "Cannot get updates" "Updater" '6'
+    . "$OMS_DIR/lib/ohmysh-version.sh"
+    LATEST="$OMS_VER"
 
 #     if [ $LOCAL = $REMOTE ]; then
 #         echo "Up-to-date"
@@ -78,6 +87,7 @@ _oms_update_new(){
     then
         _log "No update available." >> "$OMS_CACHE/update_fetch.log"
         [ -n "$_DEBUG_UPDATE" ] && _debug "No update available."
+        git checkout "$NOWV" &> /dev/null
     else
         _log "Updating to version $LATEST..." >> "$OMS_CACHE/update_fetch.log"
         _info "Updating to version $LATEST"
@@ -96,20 +106,20 @@ _oms_update_force(){
         if [ "$configUpdate" = "Force" ]
         then
             [ -n "$_DEBUG_UPDATE" ] && _debug "Force updating to the branch latest commit..."
-            [ -n "$_DEBUG_UPDATE" ] && _debug "Checkout."
-            git checkout "$(_oms_update_channel_fetch)"
+            # [ -n "$_DEBUG_UPDATE" ] && _debug "Checkout."
+            # git checkout "$(_oms_update_channel_fetch)"
             [ -n "$_DEBUG_UPDATE" ] && _debug "Pull."
             git pull || _error "Cannot get updates" "Updater" '6'
             _info "Forced updated to latest version."
         else
 #             git checkout "$LATEST" || _error "Git refused request" "Updater" "6"
             [ -n "$_DEBUG_UPDATE" ] && _debug "Updating to the latest tag..."
-            [ -n "$_DEBUG_UPDATE" ] && _debug "Checkout."
-            git checkout "$(_oms_update_channel_fetch)"
+            # [ -n "$_DEBUG_UPDATE" ] && _debug "Checkout."
+            # git checkout "$(_oms_update_channel_fetch)"
             [ -n "$_DEBUG_UPDATE" ] && _debug "Pull."
             git pull
             [ -n "$_DEBUG_UPDATE" ] && _debug "Checkout."
-            git checkout "$LATEST"
+            git checkout "$LATEST" &> /dev/null
             [ -n "$_DEBUG_UPDATE" ] && _debug "Done."
         fi
         _info "Updated. Press enter to quit."
