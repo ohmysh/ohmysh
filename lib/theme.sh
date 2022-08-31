@@ -61,16 +61,24 @@ trap 'echo -ne "\033]0;${PWD##*/}: (${BASH_COMMAND})\007"' DEBUG
 _theme_runner(){
   if [ -f "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"  ]
   then
+    [ -n "$_DEBUG_THEME" ] && _debug "Enabling theme $OMS_THEME from official package." "Theme"
+    [ -n "$_DEBUG_THEME" ] && cat "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"
+    [ -n "$_DEBUG_THEME" ] && echo " ----------------------- "
     source "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"
     #PS1="\[$(tput sc; rightprompt $OMS_THEME_RIGHT; tput rc)\]\[$(OMS_GIT)\]$OMS_THEME_PS"
     #PS1="$OMS_THEME_PS"
   elif [ -f "$OMS_DIR/usr/local/theme/$OMS_THEME/$OMS_THEME.theme.sh" ]
   then
+    [ -n "$_DEBUG_THEME" ] && _debug "Enabling theme $OMS_THEME from local package." "Theme"
+    [ -n "$_DEBUG_THEME" ] && cat "$OMS_DIR/usr/local/theme/$OMS_THEME/$OMS_THEME.theme.sh"
+    [ -n "$_DEBUG_THEME" ] && echo " ----------------------- "
     source "$OMS_DIR/usr/local/theme/$OMS_THEME/$OMS_THEME.theme.sh"
   else
-    _error "Cannot found theme '$OMS_THEME'!!!" 'OhMySh::Theme' '4'
+    [ -n "$_DEBUG_THEME" ] && _debug "Theme $OMS_THEME can not be found." "Theme"
+    _error "Cannot found theme '$OMS_THEME'!!!" 'Theme' '4'
     PS1="OhMySh Theme Not Found \$ "
   fi
+  [ -n "$_DEBUG_THEME" ] && _debug "The PS1 is set to \"$PS1\"." "Theme"
   
   # if [ "$OMS_TITLE" != "Disable" ]
   # then

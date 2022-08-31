@@ -14,24 +14,25 @@ _helpcommand(){
     -h  --help                  :    Ask help
     -v  --version               :    Check OhMySh Version
     -t  --theme [THEME]         :    Change theme
-    --themelist                 :    Get list of themes
+                list            :    Get list of themes
     -p  --plugin [OPT] [PLUGIN] :    Enable or disable plugin
     plugin::[OPT]:
          start [PLUGIN]         :    Run a plugin in one go
          enable [PLUGIN]        :    Enable a plugin
          disable [PLUGIN]       :    Disable a plugin
-         restart [PLUGIN]       :    Restart a plugin
-    --pluginlist                :    Get list of plugins
+         list                   :    Get list of plugins
     -a  --alias (EDITOR)        :    Config aliases (EDITOR=vi)
     -c  --cover (EDITOR)        :    Edit the cover (EDITOR=vi)
     -e  --advconfig (EDITOR)    :    Edit the cover (EDITOR=vi)
     -r  --reload                :    Reload OhMySh
-    --chsh [SHELL (sh|bash|zsh)]:    Creat config file for [SHELL]
+    --chsh [SHELL (sh/bash/zsh)]:    Creat config file for [SHELL]
     --channel (stable/dev)      :    Join/leave development channel
+    --debug [NAME] (-/on/off)   :    [TESTING] Set/unset a debug flag.
+            list                :    [TESTING] Get debug flags list.
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
-- https://ohmysh.gitee.io/docs-v2
+- https://ohmysh.gitee.io/docs-v2 (for Chinese)
 EOF
 }
 
@@ -45,6 +46,29 @@ _ohmyshdevwarn(){
 
 _ohmyshprofile(){
     _oms_getprofile
+}
+
+_comp_output(){
+    if [ -n "$BCVER" ]
+    then
+        cat <<EOX
+    Completion Version  :  $BCVER
+    Completion Status   :  $OMSBC_status
+    Completion Platform :  $OMSBC_plat ($bashcompletionPlatform)
+    Completion Path     :  $OMSBC_path
+EOX
+    else
+        echo "    Completion Status   :  Disable"
+    fi
+}
+
+_cli_debug_output(){
+  if [ -n "$(_debug_list_on)" ]
+  then
+    cat <<EOX
+    Debug list          :  $(_debug_list_on)
+EOX
+  fi
 }
 
 oms(){
@@ -94,10 +118,8 @@ oms(){
     System Shell        :  $SHELL
     OhMySh Theme        :  $OMS_THEME
     OhMySh Plugins      :  ${OMS_PLUGIN[@]}
-    Completion Version  :  $BCVER
-    Completion Status   :  $OMSBC_status
-    Completion Platform :  $OMSBC_plat ($bashcompletionPlatform)
-    Completion Path     :  $OMSBC_path
+$(_comp_output)
+$(_cli_debug_output)
 
 $(_ohmyshdevwarn)
 EOF
@@ -106,8 +128,15 @@ EOF
     if [ -z "$2" ]
     then
       _error "Missing parameters" 'OhMySh::CLI' '7'
+    elif [ "$2" = "list" ]
+    then
+      _info "You are using the theme: $OMS_THEME" 'Theme'
+      _log ' List of themes:'
+      ls "$OMS_DIR/usr/theme"
+      ls "$OMS_DIR/usr/local/theme"
+      # echo $(cd "$OMS_DIR/usr/theme" && echo !("readme.md"))
     else
-      _warn "Change theme to '$2'" 'OhMySh::Theme'
+      _warn "Change theme to '$2'" 'Theme'
       OMS_THEME_NEW="$2"
       sed -n "/OMS_THEME='$OMS_THEME'/p" "$HOME/.profile" | sed "s/OMS_THEME='$OMS_THEME'/OMS_THEME='$OMS_THEME_NEW'/g" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
@@ -116,24 +145,36 @@ EOF
     fi
   elif [ "$1" = "--themelist" ]
   then
-    _info "You are using the theme: $OMS_THEME" 'OhMySh::Theme'
+    _info "You are using the theme: $OMS_THEME" 'Theme'
     echo ' List of themes:'
     ls "$OMS_DIR/usr/theme"
+    _warn "The option \"--themelist\" has already expired. Use \"oms -t list\""
   elif [ "$1" = "--plugin" ] || [ "$1" = "-p" ]
   then
-    if [ -z "$2" ] || [ -z "$3" ]
+    if [ -z "$2" ]
+    then
+      _error "Missing parameters" 'CLI' '7'
+    elif [ "$2" = "list" ]
+    then
+      _info "You are using these plugins:"
+      echo "${OMS_PLUGIN[@]}"
+      _log ' List of plugins:'
+      ls "$OMS_DIR/usr/plugin"
+      ls "$OMS_DIR/usr/local/plugin"
+      # echo !("readme.md")
+    elif [ -z "$3" ]
     then
       _error "Missing parameters" 'OhMySh::CLI' '7'
     elif [ ! -f "$OMS_DIR/usr/local/plugin/$3/$3.plugin.sh" ] && [ ! -f "$OMS_DIR/usr/plugin/$3/$3.plugin.sh" ]
     then
-      _error "Plugin not found!" 'OhMySh::Plugin' '5'
+      _error "Plugin not found!" 'Plugin' '5'
     elif [ "$2" = "start" ]
     then
-      _warn "Run plugin '$3'" 'OhMySh::Plugin'
+      _warn "Run plugin '$3'" 'Plugin'
       _plugin_runner "$3"
     elif [ "$2" = "enable" ]
     then
-      _warn "Enable plugin '$3'" 'OhMySh::Plugin'
+      _warn "Enable plugin '$3'" 'Plugin'
       OMS_PLUGIN_NEW="$3"
       sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/PLUGIN=(/PLUGIN=(\"$OMS_PLUGIN_NEW\" /" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
@@ -141,15 +182,11 @@ EOF
       _plugin_runner "$OMS_PLUGIN_NEW"
     elif [ "$2" = "disable" ]
     then
-      _warn "Disable plugin '$3'" 'OhMySh::Plugin'
+      _warn "Disable plugin '$3'" 'Plugin'
       OMS_PLUGIN_NEW="$3"
       sed -n "/OMS_PLUGIN=(/p" "$HOME/.profile" | sed "s/\"$OMS_PLUGIN_NEW\" //g" "$HOME/.profile" > "$OMS_CACHE/profile"
       mv "$OMS_CACHE/profile" "$HOME/.profile"
       _warn "Disabled. It will be applied after you restart."
-    elif [ "$2" = "restart" ]
-    then
-      _warn "Restart plugin '$3'" "OhMySh::Plugin"
-      _plugin_runner "$3"
     fi
   elif [ "$1" = "--pluginlist" ]
   then
@@ -157,6 +194,7 @@ EOF
     echo "${OMS_PLUGIN[@]}"
     echo ' List of plugins:'
     ls "$OMS_DIR/usr/plugin"
+    _warn "The option \"--pluginlist\" has already expired. Use \"oms -p list\""
   elif [ "$1" = "-a" ] || [ "$1" = "--alias" ]
   then
     if [ -z "$2" ]
@@ -185,7 +223,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      _error "Missing parameters" 'OhMySh::CLI' '7'
+      _error "Missing parameters" 'CLI' '7'
       _helpcommand
     else
       _warn "Changing your shell to $2" "CLI"
@@ -204,7 +242,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      _error "Missing parameters" 'OhMySh::CLI' '7'
+      _error "Missing parameters" 'CLI' '7'
       _helpcommand
     else
       case "${2}" in
@@ -217,6 +255,27 @@ EOF
         *)
           ;;
       esac
+    fi
+  elif [ "$1" = "--debug" ]
+  then
+    if [ -z "$2" ]
+    then
+      _error "Missing parameters" 'CLI' '7'
+      _helpcommand
+    else
+      if [ "$2" = "list" ]
+      then
+        _debug_list
+      elif [ -z "$3" ]
+      then
+        _debug_check "$2"
+      elif [ "$3" = "on" ]
+      then 
+        _debug_start "$2"
+      elif [ "$3" = "off" ]
+      then
+        _debug_stop "$2"
+      fi
     fi
   else
     _error "Parameters '$1' not found" 'CLI' '2'
@@ -235,17 +294,17 @@ _oms_completion()
     pre2="${COMP_WORDS[COMP_CWORD-2]}"
 #     blue "$curr $prev $pre2"
 
-    opts="-u --update --uninstall -h --help -v --version -t -p --themelist --pluginlist -a --alias -c --cover -e --advconfig --chsh -r --reload --channel"
+    opts="-u --update --uninstall -h --help -v --version -t --theme -p --theme -a --alias -c --cover -e --advconfig --chsh -r --reload --channel --debug"
     if [[ "${COMP_CWORD}" -eq 1 ]]; then
         COMPREPLY=( $(compgen -W "${opts}" -- "${curr}") )
     fi
 
     case "${prev}" in
         "-t"|"--theme")
-            COMPREPLY=( $(compgen -W "$(ls --color="never" "$OMS_DIR/usr/theme" && ls --color="never" "$OMS_DIR/usr/local/theme")" -- "${curr}") )
+            COMPREPLY=( $(compgen -W "list $(ls --color="never" "$OMS_DIR/usr/theme" && ls --color="never" "$OMS_DIR/usr/local/theme")" -- "${curr}") )
             ;;
         "-p"|"--plugin")
-            COMPREPLY=( $(compgen -W "start enable disable restart" -- "${curr}") )
+            COMPREPLY=( $(compgen -W "start enable disable list" -- "${curr}") )
             ;;
         "--chsh")
             COMPREPLY=( $(compgen -W "bash sh zsh" -- "${curr}") )
@@ -256,16 +315,16 @@ _oms_completion()
         "-a"|"--alias"|"-c"|"--cover"|"-e"|"--advconfig")
             COMPREPLY=( $(compgen -W "vi vim nano" -- "${curr}") )
             ;;
-#         "hello")
-#             COMPREPLY=( $(compgen -W "ldrow raboof" -- "${curr}") )
-#             ;;
+        "--debug")
+            COMPREPLY=( $(compgen -W "list ${!_OMS_DEBUG_LIST[*]}" -- "${curr}") )
+            ;;
         *)
             ;;
     esac
     case "${pre2}" in
         "-p"|"--plugin")
             case "${prev}" in
-                "start"|"enable"|"disable"|"restart")
+                "start"|"enable"|"disable")
                     COMPREPLY=( $(compgen -W "$(ls --color="never" "$OMS_DIR/usr/plugin" && ls --color="never" "$OMS_DIR/usr/local/plugin")" -- "${curr}") )
                     ;;
             esac

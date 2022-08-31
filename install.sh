@@ -2,6 +2,101 @@
 
 # OhMySh Installer
 
+
+# function to install with the appropriate package manager from debian or ubuntu or archlinux or redhat 
+linux_install_with_package_manager() {
+  # if the OS is debian/ubuntu use apt-get to install $1
+    if [ -f /etc/debian_version ]; then
+        sudo apt-get install -y "$1"
+    # elif the OS is archlinux use pacman to install $1
+    elif [ -f /etc/arch-release ]; then
+        sudo pacman -S --noconfirm "$1"
+    # elif the OS is redhat/fedora use yum to install $1
+    elif [ -f /etc/redhat-release ]; then
+        sudo yum install -y "$1"
+    else
+        echo "OS not supported"
+        return 1
+    fi
+}
+
+# function to update an package manager from debian or arch or redhat
+linux_update_package_manager(){
+    if [ -f /etc/debian_version ]; then
+        sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y
+    elif [ -f /etc/arch-release ]; then
+        sudo pacman -Syu
+    elif [ -f /etc/redhat-release ]; then
+        sudo yum update
+    else
+        echo "OS not supported"
+        return 1
+    fi
+}
+
+# Check if lolcat is installed
+check_lolcat_is_installed(){
+  if [[ "$(which lolcat | wc -l)" != "0" ]]
+  then
+    return 1
+  else
+    return 0
+  fi
+}
+
+# use check_lolcat_is_installed function to check if lolcat is installed
+# if lolcat is installed display the text 'lolcat is installed' in rainbow color with an delay of 3 seconds
+if [ "$(check_lolcat_is_installed)" = "1" ]
+then
+  echo "lolcat is installed" | lolcat -a -d 3
+else
+  echo "[Optional] lolcat is not installed."
+  echo "[Optional] Do You Want Install lolcat? (y/n)"
+  read -n1 -r answer
+  # Read a char with -n1
+  if [ "$answer" = "y" ] || [ "$answer" = "Y" ]
+  then
+    echo "Installing lolcat..."
+    # here use linux_update_package_manager to update the appropriate package manager
+    linux_update_package_manager
+    # here use linux_install_with_package_manager to install lolcat
+    linux_install_with_package_manager lolcat
+    echo "lolcat is installed" | lolcat -a -d 3
+  else
+    echo "Aborting installation of lolcat."
+    echo "You can install lolcat manually if you want to use it (rainbow colors feature)."
+  fi
+fi
+
+# function to display logo of the install
+_logo_display_installer(){
+cat <<EOF
+        ____  __   __  ___     ___ _
+       / __ \/ /  /  |/  /_ __/ __| |_
+      / /_/ / _ \/ /|_/ / // /\__ \ . \  
+      \____/_//_/_/  /_/\_, / |___/_||_| [] [] []
+                       /___/
+EOF
+}
+
+_logo_installer(){
+  if [ "$(checkcmd lolcat)" = "1" ]
+  then
+    # play an sound wav file in the folder /install/sounds
+    #play /install/sounds/ohmysh.wav
+    # display logo in rainbow color during 10 seconds step by step with lolcat
+    _logo_display_installer | lolcat -a -d 10
+
+  else
+    _logo_display_installer
+  fi
+
+  cat <<EOF
+       INSTALL OF ...
+       OhMySh - The Shell Framework 
+EOF
+}
+
 # Color Defines
 function blue(){
     echo -e "\033[34m$1\033[0m"
@@ -78,6 +173,14 @@ checkcommand(){
  return 0
 }
 
+checkcmd(){
+    if command -v "${1%% *}" >/dev/null 2>&1; then 
+        echo '1' 
+    else 
+        echo -e "\033[31mCommand Not Found!\033[0m" >&2
+    fi
+}
+
 omsconfig(){
   cat <<EOF > "$OMS_RC_D"
 #
@@ -139,6 +242,10 @@ cloneerror(){
     _error "Cannot reach OhMySh repo, check on FAQ." "Installer" "3"
 }
 
+# The update has been checked when installing lolcat.
+# _info "Update package manager"
+# linux_update_package_manager
+
 _info 'Preparing to install'
 checkcommand git Installer
 if [ $? == 1 ] ; then
@@ -166,6 +273,8 @@ cp "$OMS/lib/etc/config.etc.sh" "$OMS_CACHE/config.ohmysh.sh"
 mkdir -p "$OMS_CACHE/runtime-script"
 mkdir -p "$OMS_CACHE/startup-script"
 mkdir -p "$OMS_CACHE/trash"
+
+
 
 _info 'OhMySh is already installed! '
 

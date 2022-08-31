@@ -27,3 +27,5 @@
 # bashcompletionPathCustom='Custom path'
 # dateFormat='%x'   # See in 'date --help'
 # timeFormat='%H:%M:%S' # See in 'date --help'
+
+# OMS_DEBUG=("update")
