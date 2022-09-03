@@ -12,6 +12,7 @@
 # configStartPath="$HOME/"
 # configPathEnv='FULLPATH1:FULLPATH2'
 # configBashcompletion='Enable'
+# configLOLCAT='Disable'
 # mapLs='Disable'
 # mapCd='Disable'
 # mapHelp='Disable'

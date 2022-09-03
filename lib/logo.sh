@@ -11,8 +11,37 @@ cat <<EOF
 EOF
 }
 
+_oms_lolcat_check(){
+  if [ "$(checkcmd lolcat)" = "1" ] && [ "$configLOLCAT" != 'Disable' ]
+  then
+    if [ "$configLOLCAT" != 'Enable' ]
+    then
+      if [ -f "$configLOLCAT" ]
+      then
+        echo "1"
+      else
+        echo "0"
+      fi
+    else
+      echo "1"
+    fi
+  else
+    echo "0"
+  fi
+}
+
+_oms_lolcat(){
+  # Do this before _oms_lolcat_check.
+  if [ "$configLOLCAT" != 'Enable' ]
+  then
+    echo "$configLOLCAT"
+  else
+    echo "lolcat"
+  fi
+}
+
 _logo(){
-  if [ "$(checkcmd lolcat)" = "1" ]
+  if [ "$(_oms_lolcat_check)" = "1" ]
   then
     # play 3 time an bell sound
     for _ in {1..5}; do
@@ -21,14 +50,13 @@ _logo(){
     done
   
     # print logo in rainbow color
-    _logo_display | lolcat -a -d 10
+    _logo_display | "$(_oms_lolcat)" -a -d 10
 
   else
     _logo_display
   fi
 
   cat <<EOF
-
-       OhMySh - The Shell Framework
+         OhMySh - The Shell Framework
 EOF
 }

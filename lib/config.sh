@@ -19,6 +19,7 @@ export configCover='Enable'
 export configStartPath="$HOME/"
 export configPathEnv='Disable'
 export configBashcompletion='Enable'
+export configLOLCAT='Enable'
 export mapLs='Enable'
 export mapCd='Enable'
 export mapHelp='Enable'
