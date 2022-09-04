@@ -40,6 +40,10 @@ _oms_lolcat(){
   fi
 }
 
+# usage:
+# 1. Checking: _oms_lolcat_check
+# 2. Using: $(_oms_lolcat) -xxx
+
 _logo(){
   if [ "$(_oms_lolcat_check)" = "1" ]
   then
