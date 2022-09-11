@@ -30,3 +30,4 @@
 # timeFormat='%H:%M:%S' # See in 'date --help'
 
 # OMS_DEBUG=("update")
+# OMS_TITLE="$(pwd)"

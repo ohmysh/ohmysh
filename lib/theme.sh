@@ -50,13 +50,18 @@ rightprompt(){
 
 trap 'echo -ne "\033]0;${PWD##*/}: (${BASH_COMMAND})\007"' DEBUG
 
-# _title_runner(){
-#     if [ -z "$OMS_TITLE" ]
-#     then
-#         OMS_TITLE='${PWD##*/}'
-#     fi
-#     echo -n -e "\033]0;$OMS_TITLE\007"
-# }
+# TD="$(pwd)"
+
+_title_runner(){
+    if [ -z "$OMS_TITLE" ]
+    then
+        # OMS_TITLE="echo -n -e \033]0;$(pwd)\007"
+        OMS_TITLE="$(pwd)"
+    fi
+    # TT="$(pwd)"
+    echo -n -e "\033]0;$OMS_TITLE\007"
+    # $OMS_TITLE
+}
 
 _theme_runner(){
   if [ -f "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"  ]
@@ -80,10 +85,10 @@ _theme_runner(){
   fi
   [ -n "$_DEBUG_THEME" ] && _debug "The PS1 is set to \"$PS1\"." "Theme"
   
-  # if [ "$OMS_TITLE" != "Disable" ]
-  # then
-  #   PS1="\$(_title_runner)$PS1"
-  # fi
+  if [ "$OMS_TITLE" != "Disable" ]
+  then
+    PS1="\$(_title_runner)$PS1"
+  fi
 }
 
 #export -f _theme_runner
