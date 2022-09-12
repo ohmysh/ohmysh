@@ -70,6 +70,21 @@ _info(){
     bgreen " $tp : $1"
 }
 
+_lolout(){
+    if [ -z "$2"  ]
+    then
+        tp="[INFO] OhMySh"
+    else
+        tp="[INFO] OhMySh::$2"
+    fi
+    if [ "$(_oms_lolcat_check)" = "1" ]
+    then
+        echo " $tp : $1" | "$(_oms_lolcat)" -a -d 10
+    else
+        echo " $tp : $1"
+    fi
+}
+
 _debug(){
     if [ -z "$2"  ]
     then
