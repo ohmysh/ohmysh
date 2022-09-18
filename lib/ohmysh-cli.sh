@@ -27,8 +27,8 @@ _helpcommand(){
     -r  --reload                :    Reload OhMySh
     --chsh [SHELL (sh/bash/zsh)]:    Creat config file for [SHELL]
     --channel (stable/dev)      :    Join/leave development channel
-    --debug [NAME] (-/on/off)   :    [TESTING] Set/unset a debug flag.
-            list                :    [TESTING] Get debug flags list.
+    --debug [NAME] (-/on/off)   :    Check/set/unset a debug flag.
+            list                :    Get debug flags list.
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
@@ -74,7 +74,7 @@ EOX
 oms(){
   if [ -z "$1" ]
   then
-    _error 'Missing parameters' 'OhMySh::CLI' '1'
+    _error 'Missing parameters' 'CLI' '1'
     _helpcommand
   elif [ "$1" = "--update" ] || [ "$1" = "-u" ]
   then
@@ -127,7 +127,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      _error "Missing parameters" 'OhMySh::CLI' '7'
+      _error "Missing parameters" 'CLI' '7'
     elif [ "$2" = "list" ]
     then
       _info "You are using the theme: $OMS_THEME" 'Theme'
