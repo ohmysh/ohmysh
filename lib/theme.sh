@@ -48,7 +48,12 @@ rightprompt(){
 # fi
 # source "$OMS_CACHE/title.ohmysh.sh"
 
-trap 'echo -ne "\033]0;${PWD##*/}: (${BASH_COMMAND})\007"' DEBUG
+
+# This line caught error in #29
+# ---
+#trap 'echo -ne "\033]0;${PWD##*/}: (${BASH_COMMAND})\007"' DEBUG
+# ---
+
 
 # TD="$(pwd)"
 
