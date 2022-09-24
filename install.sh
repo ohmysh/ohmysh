@@ -18,6 +18,15 @@ linux_install_with_package_manager() {
         echo "OS not supported"
         return 1
     fi
+    _info "Finished getting \"$1\". Check that the operation was completed correctly."
+    echo -n "[Input (y/n)] "
+    read -n1 -r answer
+    echo "Read \"$answer\"."
+    if [ "$answer" != "y" ] || [ "$answer" != "Y" ]
+    then
+      echo " === Program exit with exception === "
+      exit 1
+    fi
 }
 
 # function to update an package manager from debian or arch or redhat
@@ -43,30 +52,6 @@ check_lolcat_is_installed(){
     return 0
   fi
 }
-
-# use check_lolcat_is_installed function to check if lolcat is installed
-# if lolcat is installed display the text 'lolcat is installed' in rainbow color with an delay of 3 seconds
-if [ "$(check_lolcat_is_installed)" = "1" ]
-then
-  echo "lolcat is installed" | lolcat -a -d 3
-else
-  echo "[Optional] lolcat is not installed."
-  echo "[Optional] Do You Want Install lolcat? (y/n)"
-  read -n1 -r answer
-  # Read a char with -n1
-  if [ "$answer" = "y" ] || [ "$answer" = "Y" ]
-  then
-    echo "Installing lolcat..."
-    # here use linux_update_package_manager to update the appropriate package manager
-    linux_update_package_manager
-    # here use linux_install_with_package_manager to install lolcat
-    linux_install_with_package_manager lolcat
-    echo "lolcat is installed" | lolcat -a -d 3
-  else
-    echo "Aborting installation of lolcat."
-    echo "You can install lolcat manually if you want to use it (rainbow colors feature)."
-  fi
-fi
 
 # function to display logo of the install
 _logo_display_installer(){
@@ -246,25 +231,75 @@ cloneerror(){
 # _info "Update package manager"
 # linux_update_package_manager
 
+# Preparing
+# - git
 _info 'Preparing to install'
 checkcommand git Installer
 if [ $? == 1 ] ; then
-  _error 'Failed to install OhMySh!!! ' 'Installer' '1'
-  exit 1
+  _warn "Git is not installed!"
+  _warn "Do You Want to Install git? (y/n)"
+  read -n1 -r answer
+  # Read a char with -n1
+  echo "Read \"$answer\"."
+  if [ "$answer" = "y" ] || [ "$answer" = "Y" ]
+  then
+    echo "Installing git..."
+    # here use linux_update_package_manager to update the appropriate package manager
+    linux_update_package_manager
+    # here use linux_install_with_package_manager to install lolcat
+    linux_install_with_package_manager git
+    echo "git is installed"
+  else
+    echo "Aborting installation of git."
+    _error 'Failed to install OhMySh!!! ' 'Installer' '1'
+    exit 1
+  fi
 fi
+
+# - [OPTIONAL] lolcat
+# use check_lolcat_is_installed function to check if lolcat is installed
+# if lolcat is installed display the text 'lolcat is installed' in rainbow color with an delay of 3 seconds
+if [ "$(check_lolcat_is_installed)" = "1" ]
+then
+  echo "lolcat is installed" | lolcat -a -d 3
+else
+  echo "[Optional] lolcat is not installed."
+  echo "[Optional] Do You Want Install lolcat? (y/n)"
+  read -n1 -r answer
+  # Read a char with -n1
+  echo "Read \"$answer\"."
+  if [ "$answer" = "y" ] || [ "$answer" = "Y" ]
+  then
+    echo "Installing lolcat..."
+    # here use linux_update_package_manager to update the appropriate package manager
+    linux_update_package_manager
+    # here use linux_install_with_package_manager to install lolcat
+    linux_install_with_package_manager lolcat
+    echo "lolcat is installed" | lolcat -a -d 3
+  else
+    echo "Aborting installation of lolcat."
+    echo "You can install lolcat manually if you want to use it (rainbow colors feature)."
+  fi
+fi
+
 if [ -d "$OMS" ]
 then
   _error 'OhMySh has been installed on your device ' 'Installer' '2'
   exit 2
 fi
-_info '  Getting OMS'
+_info '  Getting OhMySh...'
 git clone "$REPO" "$OMS" || ( cloneerror && exit 3 )
 _info 'Putting config file'
 if [ "$NF" = "NEWFILE" ] ; then
   omsconfig
 fi
+
+# Loading hook.
+source "$OMS/lib/ohmysh-version.sh"
 [ -f "$OMS/lib/opt/profile-update.sh" ] && source "$OMS/lib/opt/profile-update.sh"
-_info '  Creating cache'
+source "$OMS/lib/logo.sh"
+
+_info '  Creating cache...'
 mkdir -p "$OMS_CACHE"
 date +%Y%m%d > "$OMS_CACHE/update"
 cp "$OMS/lib/etc/alias.etc.sh" "$OMS_CACHE/alias.ohmysh.sh"
@@ -275,11 +310,15 @@ mkdir -p "$OMS_CACHE/startup-script"
 mkdir -p "$OMS_CACHE/trash"
 
 
-
-_info 'OhMySh is already installed! '
+if [ "$(_oms_lolcat_check)" = "1" ]
+then
+  echo 'OhMySh is already installed! ' | "$(_oms_lolcat)" -a -d 10
+else
+  _info 'OhMySh is already installed! '
+fi
 
 # config
-_info 'Configing... '
+_info 'Configuring... '
 _info '  Checking shell'
 
 # shell info
@@ -292,7 +331,6 @@ cat <<EOF
 EOF
 
 # logo
-source "$OMS/lib/logo.sh"
 _logo
 cat <<EOF
   Welcome to use OhMySh!
@@ -303,8 +341,12 @@ cat <<EOF
     Or Chinese:     https://ohmysh.gitee.io/docs-v2
 EOF
 
-source "$OMS/lib/ohmysh-version.sh"
-_info "Installed OhMySh Version $OMS_VER!"
+if [ "$(_oms_lolcat_check)" = "1" ]
+then
+  echo "Installed OhMySh Version $OMS_VER!" | "$(_oms_lolcat)" -a -d 10
+else
+  _info "Installed OhMySh Version $OMS_VER!"
+fi
 
 # OhMySh Installer Script.
 
