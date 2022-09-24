@@ -22,7 +22,7 @@ linux_install_with_package_manager() {
     echo -n "[Input (y/n)] "
     read -n1 -r answer
     echo "Read \"$answer\"."
-    if [ "$answer" != "y" ] || [ "$answer" != "Y" ]
+    if [ "$answer" != "y" ] && [ "$answer" != "Y" ]
     then
       echo " === Program exit with exception === "
       exit 1
