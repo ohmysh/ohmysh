@@ -102,7 +102,10 @@ oms(){
     fi
   elif [ "$1" = "--version" ] || [ "$1" = "-v" ]
   then
-    _logo
+    if [ -n "$2" ] || [ "$2" != "--nologo" ]
+    then
+      _logo
+    fi
     cat <<EOF
 
                      Version
