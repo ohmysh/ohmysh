@@ -25,7 +25,7 @@ _helpcommand(){
     -c  --cover (EDITOR)        :    Edit the cover (EDITOR=vi)
     -e  --advconfig (EDITOR)    :    Edit the cover (EDITOR=vi)
     -r  --reload                :    Reload OhMySh
-    --chsh [SHELL (sh/bash/zsh)]:    Creat config file for [SHELL]
+    --chsh                      :    Change default shell
     --channel (stable/dev)      :    Join/leave development channel
     --debug [NAME] (-/on/off)   :    Check/set/unset a debug flag.
             list                :    Get debug flags list.
@@ -224,20 +224,21 @@ EOF
     fi
   elif [ "$1" = "--chsh" ]
   then
-    if [ -z "$2" ]
-    then
-      _error "Missing parameters" 'CLI' '7'
-      _helpcommand
-    else
-      _warn "Changing your shell to $2" "CLI"
-      if [ "$2" = "sh" ] || [ "$2" = "/bin/sh" ]
-      then
-        echo '. ~/.profile' >> ~/.bashrc
-      else
-	      echo "OMS_OTHER_SHELL='$2'" >> "$HOME/.$2rc"
-        echo '. ~/.profile' >> "$HOME/.$2rc"
-      fi
-    fi
+    # if [ -z "$2" ]
+    # then
+    #   _error "Missing parameters" 'CLI' '7'
+    #   _helpcommand
+    # else
+    #   _warn "Changing your shell to $2" "CLI"
+    #   if [ "$2" = "sh" ] || [ "$2" = "/bin/sh" ]
+    #   then
+    #     echo '. ~/.profile' >> ~/.bashrc
+    #   else
+	  #     echo "OMS_OTHER_SHELL='$2'" >> "$HOME/.$2rc"
+    #     echo '. ~/.profile' >> "$HOME/.$2rc"
+    #   fi
+    # fi
+    bash "$OMS_DIR/lib/opt/changeshell.sh"
   elif [ "$1" = "-r" ] || [ "$1" = "--reload" ]
   then
     oms_reload
