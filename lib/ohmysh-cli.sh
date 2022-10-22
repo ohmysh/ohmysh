@@ -109,9 +109,10 @@ oms(){
     cat <<EOF
 
                      Version
-    OhMySh Version      :  $OMS_VER
+    OhMySh Version      :  $OMS_VER_NAME
+    OhMySh Version ID   :  $OMS_VER
     Update channel      :  $(_oms_update_channel_fetch)
-    Last checked update :  $(date -d "$(cat "$OMS_CACHE/update")" "+$dateFormat" | echo "$(cat "$OMS_CACHE/update")") ($configUpdate)
+    Last checked update :  $(_oms_date "$(cat "$OMS_CACHE/update")" "+$dateFormat") ($configUpdate)
 
                    Environment
     OhMySh Path         :  $OMS_DIR
