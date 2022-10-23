@@ -150,7 +150,8 @@ _oms_update(){
     if [ "$_CACHE_VERSION" != "$OMS_VER" ]
     then
         _run_update "$((_CACHE_BUILD+1))" "$OMS_BUILD"
-        _lolout "Updated OhMySH to version $OMS_VER!" 'Updater'
+        _lolout "Updated OhMySH to version $OMS_VER!"
+        _lolout "Version: $OMS_VER_NAME, enjoy!"
         echo "$_CACHE_VERSION" > "$OMS_CACHE/update-lastver"
         date +%Y%m%d > "$OMS_CACHE/update-lastdate"
     fi
