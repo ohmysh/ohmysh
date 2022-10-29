@@ -7,6 +7,11 @@ then
     date +%Y%m%d > "$OMS_CACHE/update"
 fi
 
+if [ -f "$OMS_CACHE/update.o" ]
+then
+    rm "$OMS_CACHE/update.o"
+fi
+
 _oms_update_channel_fetch(){
 
 
@@ -137,23 +142,32 @@ _oms_update(){
     #_CACHE_PLUGIN=(${OMS_PLUGIN[*]})
     cd "$OMS_DIR" || exit
 
-    # Version 2 update
-    _oms_update_new
-
-    # Old version update
-#     git pull || _error 'ERROR cannot get update!!!' 'Updater' '6'
-
-
-
-    source "$OMS_DIR/lib/ohmysh-version.sh"
-    date +%Y%m%d > "$OMS_CACHE/update"
-    if [ "$_CACHE_VERSION" != "$OMS_VER" ]
+    # Update occupy
+    if [ -f "$OMS_CACHE/update.o" ]
     then
-        _run_update "$((_CACHE_BUILD+1))" "$OMS_BUILD"
-        _lolout "Updated OhMySH to version $OMS_VER!"
-        _lolout "Version: $OMS_VER_NAME, enjoy!"
-        echo "$_CACHE_VERSION" > "$OMS_CACHE/update-lastver"
-        date +%Y%m%d > "$OMS_CACHE/update-lastdate"
+        _error "An update is running background! Please wait..." "Updater" "14"
+        return 1
+    else
+        echo "OhMySh Update" > "$OMS_CACHE/update.o"
+
+        # Version 2 update
+        _oms_update_new
+
+        # Old version update
+    #     git pull || _error 'ERROR cannot get update!!!' 'Updater' '6'
+    
+        rm "$OMS_CACHE/update.o"
+
+        source "$OMS_DIR/lib/ohmysh-version.sh"
+        date +%Y%m%d > "$OMS_CACHE/update"
+        if [ "$_CACHE_VERSION" != "$OMS_VER" ]
+        then
+            _run_update "$((_CACHE_BUILD+1))" "$OMS_BUILD"
+            _lolout "Updated OhMySH to version $OMS_VER!"
+            _lolout "Version: $OMS_VER_NAME, enjoy!"
+            echo "$_CACHE_VERSION" > "$OMS_CACHE/update-lastver"
+            date +%Y%m%d > "$OMS_CACHE/update-lastdate"
+        fi
     fi
 }
 
