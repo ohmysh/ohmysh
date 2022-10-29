@@ -5,7 +5,7 @@
 # Shell changing application provides you a method to use other shell.
 
 _yourshell="$SHELL"
-_avilshell_temp="$(cat /etc/shells | grep "/")"
+_avilshell_temp="$(grep "/" /etc/shells)"
 _avilshell=( ${_avilshell_temp//$'\n'/ } )
 
 _info "You are using shell \"$_yourshell\"."
