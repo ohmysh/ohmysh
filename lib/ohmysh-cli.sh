@@ -25,10 +25,10 @@ _helpcommand(){
     -c  --cover (EDITOR)        :    Edit the cover (EDITOR=vi)
     -e  --advconfig (EDITOR)    :    Edit the cover (EDITOR=vi)
     -r  --reload                :    Reload OhMySh
-    --chsh [SHELL (sh/bash/zsh)]:    Creat config file for [SHELL]
+    --chsh                      :    Change default shell
     --channel (stable/dev)      :    Join/leave development channel
-    --debug [NAME] (-/on/off)   :    [TESTING] Set/unset a debug flag.
-            list                :    [TESTING] Get debug flags list.
+    --debug [NAME] (-/on/off)   :    Check/set/unset a debug flag.
+            list                :    Get debug flags list.
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
@@ -74,7 +74,7 @@ EOX
 oms(){
   if [ -z "$1" ]
   then
-    _error 'Missing parameters' 'OhMySh::CLI' '1'
+    _error 'Missing parameters' 'CLI' '1'
     _helpcommand
   elif [ "$1" = "--update" ] || [ "$1" = "-u" ]
   then
@@ -102,15 +102,19 @@ oms(){
     fi
   elif [ "$1" = "--version" ] || [ "$1" = "-v" ]
   then
-    _logo
+    if [ -n "$2" ] || [ "$2" != "--nologo" ]
+    then
+      _logo
+    fi
     cat <<EOF
 
-               Version --- OhMySh
-    OhMySh Version      :  $OMS_VER
+                     Version
+    OhMySh Version      :  $OMS_VER_NAME
+    OhMySh Version ID   :  $OMS_VER
     Update channel      :  $(_oms_update_channel_fetch)
-    Last checked update :  $(date -d "$(cat "$OMS_CACHE/update")" "+$dateFormat") ($configUpdate)
+    Last checked update :  $(_oms_date "$(cat "$OMS_CACHE/update")" "+$dateFormat") ($configUpdate)
 
-           Environment --- OhMySh
+                   Environment
     OhMySh Path         :  $OMS_DIR
     OhMySh Cache Path   :  $OMS_CACHE
     OhMySh Profile Path :  $(_ohmyshprofile)
@@ -127,7 +131,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      _error "Missing parameters" 'OhMySh::CLI' '7'
+      _error "Missing parameters" 'CLI' '7'
     elif [ "$2" = "list" ]
     then
       _info "You are using the theme: $OMS_THEME" 'Theme'
@@ -221,20 +225,21 @@ EOF
     fi
   elif [ "$1" = "--chsh" ]
   then
-    if [ -z "$2" ]
-    then
-      _error "Missing parameters" 'CLI' '7'
-      _helpcommand
-    else
-      _warn "Changing your shell to $2" "CLI"
-      if [ "$2" = "sh" ] || [ "$2" = "/bin/sh" ]
-      then
-        echo '. ~/.profile' >> ~/.bashrc
-      else
-	      echo "OMS_OTHER_SHELL='$2'" >> "$HOME/.$2rc"
-        echo '. ~/.profile' >> "$HOME/.$2rc"
-      fi
-    fi
+    # if [ -z "$2" ]
+    # then
+    #   _error "Missing parameters" 'CLI' '7'
+    #   _helpcommand
+    # else
+    #   _warn "Changing your shell to $2" "CLI"
+    #   if [ "$2" = "sh" ] || [ "$2" = "/bin/sh" ]
+    #   then
+    #     echo '. ~/.profile' >> ~/.bashrc
+    #   else
+	  #     echo "OMS_OTHER_SHELL='$2'" >> "$HOME/.$2rc"
+    #     echo '. ~/.profile' >> "$HOME/.$2rc"
+    #   fi
+    # fi
+    bash "$OMS_DIR/lib/opt/changeshell.sh"
   elif [ "$1" = "-r" ] || [ "$1" = "--reload" ]
   then
     oms_reload

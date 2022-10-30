@@ -3,3 +3,5 @@ usr/local/theme/*
 
 usr/local/plugin/*
 !usr/local/plugin/local-plugin
+
+!.gitkeep

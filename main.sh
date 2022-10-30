@@ -14,16 +14,17 @@ fi
 # Load Config file
 source "$OMS_DIR/lib/config.sh"
 source "$OMS_DIR/lib/debug.sh"
+source "$OMS_DIR/lib/ohmysh-version.sh"
 
 # Load base script
-source "$OMS_DIR/lib/ohmysh-version.sh"
+source "$OMS_DIR/lib/check-command.sh"
+source "$OMS_DIR/lib/define.sh"
 source "$OMS_DIR/lib/logo.sh"
 source "$OMS_DIR/lib/color.sh"
 source "$OMS_DIR/lib/run-update.sh"
 source "$OMS_DIR/lib/update.sh"
 
 # Load functional script
-source "$OMS_DIR/lib/check-command.sh"
 source "$OMS_DIR/lib/tool/base.sh"
 source "$OMS_DIR/lib/tool/git-prompt.sh"
 source "$OMS_DIR/lib/tool/colours.theme.sh"

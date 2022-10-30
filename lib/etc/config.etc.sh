@@ -12,6 +12,7 @@
 # configStartPath="$HOME/"
 # configPathEnv='FULLPATH1:FULLPATH2'
 # configBashcompletion='Enable'
+# configLOLCAT='Disable'
 # mapLs='Disable'
 # mapCd='Disable'
 # mapHelp='Disable'
@@ -29,3 +30,4 @@
 # timeFormat='%H:%M:%S' # See in 'date --help'
 
 # OMS_DEBUG=("update")
+# OMS_TITLE="$(pwd)"
