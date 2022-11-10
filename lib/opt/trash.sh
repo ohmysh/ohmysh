@@ -18,7 +18,8 @@ fi
 
 if [ -n "$trashAutoDeleteService" ] && [ "$trashAutoDeleteService" = "Enable" ]
 then
-    find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | while IFS= read -r i
+    # find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | while IFS= read -r i
+    find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | while IFS= read -r i
     do
         fullfilename="${i//"_%^%_"/"/"}"
         filename="${fullfilename%%"_%backup%_"*}"
@@ -90,7 +91,8 @@ lstrash(){
         search=""
     fi
     printf " %-22s %s\n" "Date deleted" "File name"
-    find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$search" | while IFS= read -r i
+    # find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$search" | while IFS= read -r i
+    find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$search" | while IFS= read -r i
     do
         fullfilename="${i//"_%^%_"/"/"}"
         # echo $fullfilename
@@ -149,7 +151,8 @@ rmtrash(){
 #                 _rmlist=("${_rmlist[@]}" "$i")
 #                 echo "$i ${#_rmlist[@]}"
 #             done
-            _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
+            # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
+            _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$NP") )
             _count="${#_rmlist[@]}"
             _info "Found ${#_rmlist[@]} result(s)."
             if [ "$_count" = "0" ]
@@ -236,7 +239,8 @@ retrash(){
 #         do
 #             _rmlist+=("$i")
 #         done
-        _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
+        # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
+        _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$NP") )
         _count="${#_rmlist[@]}"
         _info "Found $_count result(s)."
         if [ "$_count" = "0" ]
