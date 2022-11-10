@@ -3,8 +3,8 @@
 #   !!! You can NOT edit this file !!!
 #   build/PRE; x.x.x-build_(Alpha/Beta/RC)x.yymmdd
 
-export OMS_VER='0.0.10-build_73.221030'
-export OMS_VER_NAME='OhMySh 0.0.10 (LTS)'
-export OMS_BUILD='73'
-export OMS_PRE='build'
+export OMS_VER='0.0.11-build_Alpha74.221110'
+export OMS_VER_NAME='Dev 0.0.11 (Alpha)'
+export OMS_BUILD='74'
+export OMS_PRE='PRE'
 
