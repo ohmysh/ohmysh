@@ -72,7 +72,7 @@ EOX
 }
 
 _editor_select(){
-    if [ -n "$editorSelect" ]
+    if [ -z "$editorSelect" ]
     then
         echo "vim"
     else
