@@ -74,3 +74,6 @@ _oms_getprofile(){
 }
 
 alias oms_reload='. "$(_oms_getprofile)"'
+
+export EDITOR="$editorSelect"
+

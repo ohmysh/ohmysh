@@ -28,6 +28,7 @@
 # bashcompletionPathCustom='Custom path'
 # dateFormat='%x'   # See in 'date --help'
 # timeFormat='%H:%M:%S' # See in 'date --help'
+# editorSelect='vim'    # Set Editor for editing configuration file.
 
 # OMS_DEBUG=("update")
 # OMS_TITLE="$(pwd)"

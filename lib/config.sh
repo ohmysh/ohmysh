@@ -35,6 +35,7 @@ export bashcompletionPathMacOS='/sw/etc/bash_completion'
 export bashcompletionPathCustom='Custom path'
 export dateFormat='%x'
 export timeFormat='%H:%M:%S'
+export editorSelect='vim'
 
 ##### GLOBAL DEFINES #####
 # Do not edit it.

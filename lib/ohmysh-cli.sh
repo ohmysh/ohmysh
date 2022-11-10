@@ -71,6 +71,15 @@ EOX
   fi
 }
 
+_editor_select(){
+    if [ -n "$editorSelect" ]
+    then
+        echo "vim"
+    else
+        echo "$editorSelect"
+    fi
+}
+
 oms(){
   if [ -z "$1" ]
   then
@@ -122,6 +131,7 @@ oms(){
     System Shell        :  $SHELL
     OhMySh Theme        :  $OMS_THEME
     OhMySh Plugins      :  ${OMS_PLUGIN[@]}
+    Default Editor      :  $editorSelect
 $(_comp_output)
 $(_cli_debug_output)
 
@@ -203,7 +213,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      vi "$OMS_CACHE/alias.ohmysh.sh"
+      "$(_editor_select)" "$OMS_CACHE/alias.ohmysh.sh"
     else
       $2 "$OMS_CACHE/alias.ohmysh.sh"
     fi
@@ -211,7 +221,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      vi "$OMS_CACHE/cover.ohmysh.sh"
+      "$(_editor_select)" "$OMS_CACHE/cover.ohmysh.sh"
     else
       $2 "$OMS_CACHE/cover.ohmysh.sh"
     fi
@@ -219,7 +229,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      vi "$OMS_CACHE/config.ohmysh.sh"
+        "$(_editor_select)" "$OMS_CACHE/config.ohmysh.sh"
     else
       $2 "$OMS_CACHE/config.ohmysh.sh"
     fi
@@ -318,7 +328,7 @@ _oms_completion()
             COMPREPLY=( $(compgen -W "stable dev" -- "${curr}") )
             ;;
         "-a"|"--alias"|"-c"|"--cover"|"-e"|"--advconfig")
-            COMPREPLY=( $(compgen -W "vi vim nano" -- "${curr}") )
+            COMPREPLY=( $(compgen -W "vi vim nano nvim" -- "${curr}") )
             ;;
         "--debug")
             COMPREPLY=( $(compgen -W "list ${!_OMS_DEBUG_LIST[*]}" -- "${curr}") )
