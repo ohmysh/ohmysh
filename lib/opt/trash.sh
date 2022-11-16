@@ -19,7 +19,8 @@ fi
 if [ -n "$trashAutoDeleteService" ] && [ "$trashAutoDeleteService" = "Enable" ]
 then
     # find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | while IFS= read -r i
-    find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | while IFS= read -r i
+    # find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | while IFS= read -r i
+    for file in "$OMS_CACHE/trash/*"
     do
         fullfilename="${i//"_%^%_"/"/"}"
         filename="${fullfilename%%"_%backup%_"*}"
@@ -74,7 +75,7 @@ trash(){
                 # mv "$OMS_CACHE/trash/$NP" "$OMS_CACHE/trash/${NP}_%backup%_$(date +%Y%m%d_%H%M%S_%8N)"
             # fi
             # mv "$RP" "$OMS_CACHE/trash/$NP"
-            mv "$RP" "$OMS_CACHE/trash/${NP}_%backup%_$(date +%Y%m%d_%H%M%S_%8N)"
+            mv "$RP" "$OMS_CACHE/trash/${NP}_%backup%_$("$(_oms_date_select)" +%Y%m%d_%H%M%S_%8N)"
         else
             _error "No such file or directory." "TrashManager"
         fi
@@ -92,8 +93,10 @@ lstrash(){
     fi
     printf " %-22s %s\n" "Date deleted" "File name"
     # find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$search" | while IFS= read -r i
-    find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$search" | while IFS= read -r i
+    # find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$search" | while IFS= read -r i
+    for file in "$OMS_CACHE/trash/"*
     do
+        i="${file##"$OMS_CACHE/trash/"}"
         fullfilename="${i//"_%^%_"/"/"}"
         # echo $fullfilename
         fullfilename="${fullfilename//"_%SPACE%_"/" "}"
@@ -152,7 +155,8 @@ rmtrash(){
 #                 echo "$i ${#_rmlist[@]}"
 #             done
             # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
-            _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$NP") )
+            # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$NP") )
+            _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo ${file##"$OMS_CACHE/trash/"} | grep "$NP"; done) )
             _count="${#_rmlist[@]}"
             _info "Found ${#_rmlist[@]} result(s)."
             if [ "$_count" = "0" ]
@@ -234,13 +238,9 @@ retrash(){
         RP="$1"
         NP="${RP//"/"/"_%^%_"}"
         _warn "Restoring $RP..."
-#         _rmlist=()
-#         find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep $NP | while IFS= read -r i
-#         do
-#             _rmlist+=("$i")
-#         done
         # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
-        _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$NP") )
+        # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$NP") )
+        _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo ${file##"$OMS_CACHE/trash/"} | grep "$NP"; done) )
         _count="${#_rmlist[@]}"
         _info "Found $_count result(s)."
         if [ "$_count" = "0" ]
@@ -310,5 +310,4 @@ retrash(){
                 mv -f "$OMS_CACHE/trash/${_rmlist[0]}" "$filename"
             fi
         fi
-#     fi
 }
