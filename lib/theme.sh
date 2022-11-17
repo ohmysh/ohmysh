@@ -94,6 +94,7 @@ _theme_runner(){
   then
     PS1="\$(_title_runner)$PS1"
   fi
+  PS1="\$(_bcd_rec)$PS1"
 }
 
 #export -f _theme_runner
