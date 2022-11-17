@@ -20,8 +20,9 @@ if [ -n "$trashAutoDeleteService" ] && [ "$trashAutoDeleteService" = "Enable" ]
 then
     # find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | while IFS= read -r i
     # find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | while IFS= read -r i
-    for file in "$OMS_CACHE/trash/*"
+    for file in "$OMS_CACHE/trash/"*
     do
+        i="${file##"$OMS_CACHE/trash/"}"
         fullfilename="${i//"_%^%_"/"/"}"
         filename="${fullfilename%%"_%backup%_"*}"
         timename="${fullfilename##*"_%backup%_"}"
@@ -29,7 +30,7 @@ then
         then
             editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
             secdate="$(_oms_date "$editdate" "+%s")"
-            time1=$((($(date +%s)-secdate)/86400))
+            time1=$((($("$(_oms_date_select)" "+%s")-secdate)/86400))
             if [ "$time1" -gt "$trashAutoDeleteConfigDate" ]
             then
                 _warn "The file $filename last over $trashAutoDeleteConfigDate days, deleting..."
