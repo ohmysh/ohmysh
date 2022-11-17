@@ -3,25 +3,52 @@
 # 'cd' record.
 # provide a way to back to last directory.
 
+
+for file in "$OMS_CACHE/tmp/bcd/"*
+do
+    i="${file##"$OMS_CACHE/tmp/bcd/"}"
+    editdate="${i:0:4}/${i:4:2}/${i:6:2}"
+    secdate="$(_oms_date "$editdate" "+%s")"
+    time1=$((($("$(_oms_date_select)" "+%s")-secdate)/86400))
+    if [ "$time1" -gt "3" ]
+    then
+        rm -rf "$file"
+    fi
+done
+
+
 export OMS_BCD_ID="$("$(_oms_date_select)" +%Y%m%d)-$RANDOM$RANDOM"
 export OMS_BCD_TOP="0"
 export OMS_BCD_LIST=("$configStartPath")
 
 mkdir -p "$OMS_CACHE/tmp/bcd/$OMS_BCD_ID"
 
+_bcd_notfound(){
+    if [ ! -d "$OMS_CACHE/tmp/bcd/$OMS_BCD_ID" ]
+    then
+        mkdir -p "$OMS_CACHE/tmp/bcd/$OMS_BCD_ID"
+        echo "0" > "$OMS_CACHE/tmp/bcd/$OMS_BCD_ID/top"
+        echo "$(pwd)" > "$OMS_CACHE/tmp/bcd/$OMS_BCD_ID/0"
+    fi
+}
+
 _bcd_get_top(){
+    _bcd_notfound
     echo "$(<"$OMS_CACHE/tmp/bcd/$OMS_BCD_ID/top")"
 }
 
 _bcd_put_top(){
+    _bcd_notfound
     echo "$1" > "$OMS_CACHE/tmp/bcd/$OMS_BCD_ID/top"
 }
 
 _bcd_get_id(){
+    _bcd_notfound
     echo "$(<"$OMS_CACHE/tmp/bcd/$OMS_BCD_ID/$1")"
 }
 
 _bcd_put_id(){
+    _bcd_notfound
     echo "$2" > "$OMS_CACHE/tmp/bcd/$OMS_BCD_ID/$1"
 }
 
@@ -83,3 +110,4 @@ _bcd(){
     fi
 }
 
+alias bcd='_bcd'
