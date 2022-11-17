@@ -52,6 +52,7 @@ then
     alias rmt='rmtrash'
     alias lst='lstrash'
     alias ret='retrash'
+    alias vit='vitrash'
     alias rma='rmtrash -a'
 fi
 

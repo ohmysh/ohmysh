@@ -127,25 +127,21 @@ lstrash(){
 }
 
 rmtrash(){
-#     if [ -z "$1" ]
-#     then
-#         _error 'Missing parameters' 'TrashManager' '10'
-#     else
-        if [ "$1" = "-a" ]
+    if [ "$1" = "-a" ]
+    then
+        _warn "You are going to delete all the caching trashes. Are you sure? [y/n]" "TrashManager"
+        read -r -s -n1 _cfm
+        if [ "$_cfm" = "y" ] || [ "$_cfm" = "Y" ]
         then
-            _warn "You are going to delete all the caching trashes. Are you sure? [y/n]" "TrashManager"
-            read -r -s -n1 _cfm
-            if [ "$_cfm" = "y" ] || [ "$_cfm" = "Y" ]
-            then
-                _warn "You chose yes." "TrashManager"
-                rm -rf "$OMS_CACHE/trash/*"
-            else
-                blue "You chose no. Nothing will be changed."
-            fi
+            _warn "You chose yes." "TrashManager"
+            rm -rf "$OMS_CACHE/trash/*"
         else
-            RP="$1"
-            NP="${RP//"/"/"_%^%_"}"
-            _warn "Deleting $RP..."
+            blue "You chose no. Nothing will be changed."
+        fi
+    else
+        RP="$1"
+        NP="${RP//"/"/"_%^%_"}"
+        _warn "Deleting $RP..."
 #             echo $NP
 #             ls "$OMS_CACHE/trash/" | grep "$NP"
 #             local _rmlist=()
@@ -154,95 +150,11 @@ rmtrash(){
 #                 _rmlist=("${_rmlist[@]}" "$i")
 #                 echo "$i ${#_rmlist[@]}"
 #             done
-            # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
-            # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$NP") )
-            _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo ${file##"$OMS_CACHE/trash/"} | grep "$NP"; done) )
-            _count="${#_rmlist[@]}"
-            _info "Found ${#_rmlist[@]} result(s)."
-            if [ "$_count" = "0" ]
-            then
-                _error "The path is not correct." "TrashManager"
-                return
-                _error "Command return is broken!"
-            elif [ "$_count" != "1" ]
-            then
-                printf " %-4s %-22s %s\n" "#" "Date deleted" "File name"
-                for ((i=0;i<_count;i++))
-                do
-                    fullfilename="${_rmlist[i]//"_%^%_"/"/"}"
-                    fullfilename="${fullfilename//"_%SPACE%_"/" "}"
-                    filename="${fullfilename%%"_%backup%_"*}"
-                    timename="${fullfilename##*"_%backup%_"}"
-                    if [ "$timename" != "$filename" ]
-                    then
-                        editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
-                        outdate="$(_oms_date "$editdate" "+$dateFormat $timeFormat")"
-                        if [ -d "$OMS_CACHE/trash/${_rmlist[i]}" ]
-                        then
-                            printf " %-4s %-22s \033[34m%s\033[0m\n" "$i" "$outdate" "$filename"
-                        elif [ -f "$OMS_CACHE/trash/${_rmlist[i]}" ]
-                        then
-                            printf " %-4s %-22s %s\n" "$i" "$outdate" "$filename"
-                        fi
-                    fi
-                done
-                _info "Which one do you want to delete? [0-$((_count-1))]"
-                read -r _delnum
-                if [ -z "$_delnum" ] || [ "$_delnum" -lt "0" ] || [ "$_delnum" -ge "$_count" ]
-                then
-                    _error "Invalid input."
-                    return
-                fi
-                fullfilename="${_rmlist[_delnum]//"_%^%_"/"/"}"
-                fullfilename="${fullfilename//"_%SPACE%_"/" "}"
-                filename="${fullfilename%%"_%backup%_"*}"
-                _warn "Deleting ${filename}..."
-                rm -rf "$OMS_CACHE/trash/${_rmlist[_delnum]}"
-            else
-                fullfilename="${_rmlist[0]//"_%^%_"/"/"}"
-                fullfilename="${fullfilename//"_%SPACE%_"/" "}"
-                filename="${fullfilename%%"_%backup%_"*}"
-                timename="${fullfilename##*"_%backup%_"}"
-                if [ "$timename" != "$filename" ]
-                then
-                    editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
-                    outdate="$(_oms_date "$editdate" "+$dateFormat $timeFormat")"
-                    if [ -d "$OMS_CACHE/trash/${_rmlist[0]}" ]
-                    then
-                        printf " %-22s \033[34m%s\033[0m\n" "$outdate" "$filename"
-                    elif [ -f "$OMS_CACHE/trash/${_rmlist[0]}" ]
-                    then
-                        printf " %-22s %s\n" "$outdate" "$filename"
-                    fi
-                fi
-                _info "Do you really want to delete this file? [y/n]"
-                read -r -n1 _confirm
-                if [ "$_confirm" = "y" ] || [ "$_confirm" = "Y" ]
-                then
-                    fullfilename="${_rmlist[0]//"_%^%_"/"/"}"
-                    fullfilename="${fullfilename//"_%SPACE%_"/" "}"
-                    filename="${fullfilename%%"_%backup%_"*}"
-                    _warn "Deleting ${filename}..."
-                    rm -rf "$OMS_CACHE/trash/${_rmlist[0]}"
-                fi
-            fi
-        fi
-#     fi
-}
-
-retrash(){
-#     if [ -z "$1" ]
-#     then
-#         _error 'Missing parameters' 'TrashManager' '10'
-#     else
-        RP="$1"
-        NP="${RP//"/"/"_%^%_"}"
-        _warn "Restoring $RP..."
         # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
         # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$NP") )
         _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo ${file##"$OMS_CACHE/trash/"} | grep "$NP"; done) )
         _count="${#_rmlist[@]}"
-        _info "Found $_count result(s)."
+        _info "Found ${#_rmlist[@]} result(s)."
         if [ "$_count" = "0" ]
         then
             _error "The path is not correct." "TrashManager"
@@ -280,8 +192,8 @@ retrash(){
             fullfilename="${_rmlist[_delnum]//"_%^%_"/"/"}"
             fullfilename="${fullfilename//"_%SPACE%_"/" "}"
             filename="${fullfilename%%"_%backup%_"*}"
-            _warn "Restoring ${filename}..."
-            mv -f "$OMS_CACHE/trash/${_rmlist[_delnum]}" "$filename"
+            _warn "Deleting ${filename}..."
+            rm -rf "$OMS_CACHE/trash/${_rmlist[_delnum]}"
         else
             fullfilename="${_rmlist[0]//"_%^%_"/"/"}"
             fullfilename="${fullfilename//"_%SPACE%_"/" "}"
@@ -299,15 +211,190 @@ retrash(){
                     printf " %-22s %s\n" "$outdate" "$filename"
                 fi
             fi
-            _info "Do you really want to restore this file? [y/n]"
+            _info "Do you really want to delete this file? [y/n]"
             read -r -n1 _confirm
             if [ "$_confirm" = "y" ] || [ "$_confirm" = "Y" ]
             then
                 fullfilename="${_rmlist[0]//"_%^%_"/"/"}"
                 fullfilename="${fullfilename//"_%SPACE%_"/" "}"
                 filename="${fullfilename%%"_%backup%_"*}"
-                _warn "Restoring ${filename}..."
-                mv -f "$OMS_CACHE/trash/${_rmlist[0]}" "$filename"
+                _warn "Deleting ${filename}..."
+                rm -rf "$OMS_CACHE/trash/${_rmlist[0]}"
             fi
         fi
+    fi
+}
+
+retrash(){
+    RP="$1"
+    NP="${RP//"/"/"_%^%_"}"
+    _warn "Restoring $RP..."
+    # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
+    # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$NP") )
+    _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo ${file##"$OMS_CACHE/trash/"} | grep "$NP"; done) )
+    _count="${#_rmlist[@]}"
+    _info "Found $_count result(s)."
+    if [ "$_count" = "0" ]
+    then
+        _error "The path is not correct." "TrashManager"
+        return
+        _error "Command return is broken!"
+    elif [ "$_count" != "1" ]
+    then
+        printf " %-4s %-22s %s\n" "#" "Date deleted" "File name"
+        for ((i=0;i<_count;i++))
+        do
+            fullfilename="${_rmlist[i]//"_%^%_"/"/"}"
+            fullfilename="${fullfilename//"_%SPACE%_"/" "}"
+            filename="${fullfilename%%"_%backup%_"*}"
+            timename="${fullfilename##*"_%backup%_"}"
+            if [ "$timename" != "$filename" ]
+            then
+                editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
+                outdate="$(_oms_date "$editdate" "+$dateFormat $timeFormat")"
+                if [ -d "$OMS_CACHE/trash/${_rmlist[i]}" ]
+                then
+                    printf " %-4s %-22s \033[34m%s\033[0m\n" "$i" "$outdate" "$filename"
+                elif [ -f "$OMS_CACHE/trash/${_rmlist[i]}" ]
+                then
+                    printf " %-4s %-22s %s\n" "$i" "$outdate" "$filename"
+                fi
+            fi
+        done
+        _info "Which one do you want to delete? [0-$((_count-1))]"
+        read -r _delnum
+        if [ -z "$_delnum" ] || [ "$_delnum" -lt "0" ] || [ "$_delnum" -ge "$_count" ]
+        then
+            _error "Invalid input."
+            return
+        fi
+        fullfilename="${_rmlist[_delnum]//"_%^%_"/"/"}"
+        fullfilename="${fullfilename//"_%SPACE%_"/" "}"
+        filename="${fullfilename%%"_%backup%_"*}"
+        _warn "Restoring ${filename}..."
+        mv -f "$OMS_CACHE/trash/${_rmlist[_delnum]}" "$filename"
+    else
+        fullfilename="${_rmlist[0]//"_%^%_"/"/"}"
+        fullfilename="${fullfilename//"_%SPACE%_"/" "}"
+        filename="${fullfilename%%"_%backup%_"*}"
+        timename="${fullfilename##*"_%backup%_"}"
+        if [ "$timename" != "$filename" ]
+        then
+            editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
+            outdate="$(_oms_date "$editdate" "+$dateFormat $timeFormat")"
+            if [ -d "$OMS_CACHE/trash/${_rmlist[0]}" ]
+            then
+                printf " %-22s \033[34m%s\033[0m\n" "$outdate" "$filename"
+            elif [ -f "$OMS_CACHE/trash/${_rmlist[0]}" ]
+            then
+                printf " %-22s %s\n" "$outdate" "$filename"
+            fi
+        fi
+        _info "Do you really want to restore this file? [y/n]"
+        read -r -n1 _confirm
+        if [ "$_confirm" = "y" ] || [ "$_confirm" = "Y" ]
+        then
+            fullfilename="${_rmlist[0]//"_%^%_"/"/"}"
+            fullfilename="${fullfilename//"_%SPACE%_"/" "}"
+            filename="${fullfilename%%"_%backup%_"*}"
+            _warn "Restoring ${filename}..."
+            mv -f "$OMS_CACHE/trash/${_rmlist[0]}" "$filename"
+        fi
+    fi
+}
+
+vitrash(){
+    RP="$1"
+    NP="${RP//"/"/"_%^%_"}"
+    _warn "Loading $RP..."
+    _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo ${file##"$OMS_CACHE/trash/"} | grep "$NP"; done) )
+    _count="${#_rmlist[@]}"
+    _info "Found ${#_rmlist[@]} result(s)."
+    if [ "$_count" = "0" ]
+    then
+        _error "The path is not correct." "TrashManager"
+        return
+        _error "Command return is broken!"
+    elif [ "$_count" != "1" ]
+    then
+        printf " %-4s %-22s %s\n" "#" "Date deleted" "File name"
+        for ((i=0;i<_count;i++))
+        do
+            fullfilename="${_rmlist[i]//"_%^%_"/"/"}"
+            fullfilename="${fullfilename//"_%SPACE%_"/" "}"
+            filename="${fullfilename%%"_%backup%_"*}"
+            timename="${fullfilename##*"_%backup%_"}"
+            if [ "$timename" != "$filename" ]
+            then
+                editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
+                outdate="$(_oms_date "$editdate" "+$dateFormat $timeFormat")"
+                if [ -d "$OMS_CACHE/trash/${_rmlist[i]}" ]
+                then
+                    printf " %-4s %-22s \033[34m%s\033[0m\n" "$i" "$outdate" "$filename"
+                elif [ -f "$OMS_CACHE/trash/${_rmlist[i]}" ]
+                then
+                    printf " %-4s %-22s %s\n" "$i" "$outdate" "$filename"
+                fi
+            fi
+        done
+        _info "Which one do you want to view? [0-$((_count-1))]"
+        read -r _delnum
+        if [ -z "$_delnum" ] || [ "$_delnum" -lt "0" ] || [ "$_delnum" -ge "$_count" ]
+        then
+            _error "Invalid input."
+            return
+        fi
+        fullfilename="${_rmlist[_delnum]//"_%^%_"/"/"}"
+        fullfilename="${fullfilename//"_%SPACE%_"/" "}"
+        filename="${fullfilename%%"_%backup%_"*}"
+        cp -r "$OMS_CACHE/trash/${_rmlist[_delnum]}" "$OMS_CACHE/tmp/${_rmlist[_delnum]}"
+        if [ -f "$OMS_CACHE/trash/${_rmlist[_delnum]}" ]
+        then
+            _info "File ${filename} selected. Which tool do you want to use?"
+            echo -n "Input [default=$editorSelect]: "
+            read -r edt
+            if [ -z "$edt" ]
+            then
+                edt="$editorSelect"
+            fi
+            "$edt" "$OMS_CACHE/tmp/${_rmlist[_delnum]}"
+            rm -rf "$OMS_CACHE/tmp/${_rmlist[_delnum]}"
+        else
+            _info "You can go to this directory below."
+            echo "> $OMS_CACHE/tmp/${_rmlist[_delnum]}"
+        fi
+    else
+        fullfilename="${_rmlist[0]//"_%^%_"/"/"}"
+        fullfilename="${fullfilename//"_%SPACE%_"/" "}"
+        filename="${fullfilename%%"_%backup%_"*}"
+        timename="${fullfilename##*"_%backup%_"}"
+        if [ "$timename" != "$filename" ]
+        then
+            editdate="${timename:0:4}/${timename:4:2}/${timename:6:2} ${timename:9:2}:${timename:11:2}:${timename:13:2}.${timename:16:8}"
+            outdate="$(_oms_date "$editdate" "+$dateFormat $timeFormat")"
+            if [ -d "$OMS_CACHE/trash/${_rmlist[0]}" ]
+            then
+                printf " %-22s \033[34m%s\033[0m\n" "$outdate" "$filename"
+            elif [ -f "$OMS_CACHE/trash/${_rmlist[0]}" ]
+            then
+                printf " %-22s %s\n" "$outdate" "$filename"
+            fi
+        fi
+        cp -r "$OMS_CACHE/trash/${_rmlist[_delnum]}" "$OMS_CACHE/tmp/${_rmlist[_delnum]}"
+        if [ -f "$OMS_CACHE/trash/${_rmlist[_delnum]}" ]
+        then
+            _info "File ${filename} selected. Which tool do you want to use?"
+            echo -n "Input [default=$editorSelect]: "
+            read -r edt
+            if [ -z "$edt" ]
+            then
+                edt="$editorSelect"
+            fi
+            "$edt" "$OMS_CACHE/tmp/${_rmlist[_delnum]}"
+            rm -rf "$OMS_CACHE/tmp/${_rmlist[_delnum]}"
+        else
+            _info "You can go to this directory below."
+            echo "> $OMS_CACHE/tmp/${_rmlist[_delnum]}"
+        fi
+    fi
 }
