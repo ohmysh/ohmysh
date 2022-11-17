@@ -8,7 +8,7 @@ then
 fi
 
 #find "$OMS_CACHE/runtime-script" -maxdepth 1 -type f -printf "%f\n" | while IFS= read -r i
-for file in "$OMS_CACHE/runtime-script/*"
+for file in "$OMS_CACHE/runtime-script/"*
 do
     if [ "${i##*.}" = "sh" ]
     then

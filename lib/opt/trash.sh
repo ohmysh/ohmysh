@@ -98,6 +98,10 @@ lstrash(){
     for file in "$OMS_CACHE/trash/"*
     do
         i="${file##"$OMS_CACHE/trash/"}"
+        if [ -z "$(echo "$i" | grep "$search")" ]
+        then
+            continue
+        fi
         fullfilename="${i//"_%^%_"/"/"}"
         # echo $fullfilename
         fullfilename="${fullfilename//"_%SPACE%_"/" "}"
@@ -153,7 +157,7 @@ rmtrash(){
 #             done
         # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
         # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$NP") )
-        _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo ${file##"$OMS_CACHE/trash/"} | grep "$NP"; done) )
+        _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo "${file##"$OMS_CACHE/trash/"}" | grep "$NP"; done) )
         _count="${#_rmlist[@]}"
         _info "Found ${#_rmlist[@]} result(s)."
         if [ "$_count" = "0" ]
@@ -232,7 +236,7 @@ retrash(){
     _warn "Restoring $RP..."
     # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 -printf "%f\n" | grep "$NP") )
     # _rmlist=( $(find "$OMS_CACHE/trash" -maxdepth 1 | sed 's/\t\t*/\n/g' | grep "$NP") )
-    _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo ${file##"$OMS_CACHE/trash/"} | grep "$NP"; done) )
+    _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo "${file##"$OMS_CACHE/trash/"}" | grep "$NP"; done) )
     _count="${#_rmlist[@]}"
     _info "Found $_count result(s)."
     if [ "$_count" = "0" ]
@@ -308,7 +312,7 @@ vitrash(){
     RP="$1"
     NP="${RP//"/"/"_%^%_"}"
     _warn "Loading $RP..."
-    _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo ${file##"$OMS_CACHE/trash/"} | grep "$NP"; done) )
+    _rmlist=( $(for file in "$OMS_CACHE/trash/"*; do echo "${file##"$OMS_CACHE/trash/"}" | grep "$NP"; done) )
     _count="${#_rmlist[@]}"
     _info "Found ${#_rmlist[@]} result(s)."
     if [ "$_count" = "0" ]
