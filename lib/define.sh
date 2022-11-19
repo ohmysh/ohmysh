@@ -3,7 +3,7 @@
 
 # Time&date defines
 _oms_date_select(){
-    if [ "$(date "+%8N")" = "+8N" ]
+    if [ "$(date "+%8N")" = "+8N" ] || [ "$(date "+%8N")" = "8N" ]
     then
         # Bad tool.
         gdate -d "20220101" "+%x" >/dev/null 2>&1
