@@ -70,8 +70,20 @@ _bcd_rec(){
     bcdnow="$(_bcd_get_id "$bcdtop")"
     if [ "$bcdnow" != "$(pwd)" ]
     then
-        _bcd_put_top "$((bcdtop+1))"
+        if [ -f "$OMS_CACHE/tmp/bcd/$OMS_BCD_ID/$((bcdtop+1))" ]
+        then
+            if [ "$(_bcd_get_id "$((bcdtop+1))")" != "$(pwd)" ]
+            then
+                i="$((bcdtop+1))"
+                until [ ! -f "$OMS_CACHE/tmp/bcd/$OMS_BCD_ID/$i" ]
+                do
+                    rm "$OMS_CACHE/tmp/bcd/$OMS_BCD_ID/$i"
+                    i="$((i+1))"
+                done
+            fi
+        fi
         _bcd_put_id "$((bcdtop+1))" "$(pwd)"
+        _bcd_put_top "$((bcdtop+1))"
         # echo "$((bcdtop+1)) $(pwd)"
     fi
 }
@@ -99,7 +111,8 @@ _bcd(){
     # fi
 
     bcdtop="$(_bcd_get_top)"
-    if [ "$((bcdtop-_d))" -ge "0" ]
+    # if [ "$((bcdtop-_d))" -ge "0" ]
+    if [ -f "$OMS_CACHE/tmp/bcd/$OMS_BCD_ID/$((bcdtop-_d))" ]
     then
         bcdto="$(_bcd_get_id "$((bcdtop-_d))")"
         _info "Backing to $bcdto..."
