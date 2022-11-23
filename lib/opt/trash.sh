@@ -49,6 +49,8 @@ lstrash:
   lstrash          :  get a list of the bin
   lstrash KEY      :  search KEY
   lstrash PATH     :  search file on PATH
+vitrash:
+  vitrash KEY      :  search KEY to view
 rmtrash:
   rmtrash FILE     :  remove FILE
   rmtrash KEY      :  search KEY to remove
