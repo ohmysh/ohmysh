@@ -1,6 +1,10 @@
 #!/bin/bash
 # Basic Function defines
 
+# Some bash defines
+shopt -s globstar
+shopt -s extglob 
+
 # Time&date defines
 _oms_date_select(){
     if [ "$(date "+%8N")" = "+8N" ] || [ "$(date "+%8N")" = "8N" ]
@@ -39,3 +43,29 @@ _oms_date(){
     fi
     "$(_oms_date_select)" -d "$SRC" "$FMT"
 }
+
+
+
+
+
+# Profile Signed
+
+_oms_getprofile(){
+    if [ -n "${OMS_PROFILE[0]}" ]
+    then
+        if grep -q "Install" <<< "${OMS_PROFILE[0]}"; then
+            echo "${OMS_PROFILE[1]}"
+        else
+            echo "${OMS_PROFILE[0]}"
+        fi
+    else
+        _error "Error not found." "CLI" "12"
+    fi
+}
+
+alias oms_reload='. "$(_oms_getprofile)"'
+
+
+# EDITOR define
+
+export EDITOR="$editorSelect"

@@ -61,20 +61,8 @@ then
     export PATH="$PATH:$configPathEnv"
 fi
 
-_oms_getprofile(){
-    if [ -n "${OMS_PROFILE[0]}" ]
-    then
-        if grep -q "Install" <<< "${OMS_PROFILE[0]}"; then
-            echo "${OMS_PROFILE[1]}"
-        else
-            echo "${OMS_PROFILE[0]}"
-        fi
-    else
-        _error "Error not found." "CLI" "12"
-    fi
-}
-
-alias oms_reload='. "$(_oms_getprofile)"'
-
-export EDITOR="$editorSelect"
+if [ "$mapGrep" != 'Disable' ]
+then
+    alias grep='grep --color=auto'
+fi
 
