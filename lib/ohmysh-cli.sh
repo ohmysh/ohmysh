@@ -27,8 +27,6 @@ _helpcommand(){
     -r  --reload                :    Reload OhMySh
     --chsh                      :    Change default shell
     --channel (stable/dev)      :    Join/leave development channel
-    --debug [NAME] (-/on/off)   :    Check/set/unset a debug flag.
-            list                :    Get debug flags list.
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
@@ -62,14 +60,14 @@ EOX
     fi
 }
 
-_cli_debug_output(){
-  if [ -n "$(_debug_list_on)" ]
-  then
-    cat <<EOX
-    Debug list          :  $(_debug_list_on)
-EOX
-  fi
-}
+# _cli_debug_output(){
+#   if [ -n "$(_debug_list_on)" ]
+#   then
+#     cat <<EOX
+#     Debug list          :  $(_debug_list_on)
+# EOX
+#   fi
+# }
 
 _editor_select(){
     if [ -z "$editorSelect" ]
@@ -133,7 +131,6 @@ oms(){
     OhMySh Plugins      :  ${OMS_PLUGIN[@]}
     Default Editor      :  $editorSelect
 $(_comp_output)
-$(_cli_debug_output)
 
 $(_ohmyshdevwarn)
 EOF
@@ -330,9 +327,9 @@ _oms_completion()
         "-a"|"--alias"|"-c"|"--cover"|"-e"|"--advconfig")
             COMPREPLY=( $(compgen -W "vi vim nano nvim" -- "${curr}") )
             ;;
-        "--debug")
-            COMPREPLY=( $(compgen -W "list ${!_OMS_DEBUG_LIST[*]}" -- "${curr}") )
-            ;;
+        # "--debug")
+        #     COMPREPLY=( $(compgen -W "list ${!_OMS_DEBUG_LIST[*]}" -- "${curr}") )
+        #     ;;
         *)
             ;;
     esac

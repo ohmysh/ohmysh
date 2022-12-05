@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# =========== Important ============
+#  Tis feature has been disabled!
+#                         @0.0.11
+#                         Dec2022
+
 # Rule: _DEBUG_XXXXXX
 # @FAQ: ERROR 13
 
