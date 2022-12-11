@@ -45,5 +45,4 @@
 
 
 # Other
-# OMS_DEBUG=("update")
 # OMS_TITLE="$(pwd)"
