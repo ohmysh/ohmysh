@@ -10,27 +10,27 @@ fi
 
 # set theme color
 declare -A COLOR
-COLOR[reset]='\033[0m'
-COLOR[black]='\033[30m'
-COLOR[red]='\033[31m'
-COLOR[green]='\033[32m'
-COLOR[brown]='\033[33m'
-COLOR[blue]='\033[34m'
-COLOR[purple]='\033[35m'
-COLOR[cyan]='\033[36m'
-COLOR[white]='\033[37m'
+COLOR[reset]='\[\033[00m\]'
+COLOR[black]='\[\033[01;30m\]'
+COLOR[red]='\[\033[01;31m\]'
+COLOR[green]='\[\033[01;32m\]'
+COLOR[brown]='\[\033[01;33m\]'
+COLOR[blue]='\[\033[01;34m\]'
+COLOR[purple]='\[\033[01;35m\]'
+COLOR[cyan]='\[\033[01;36m\]'
+COLOR[white]='\[\033[01;37m\]'
 export COLOR
 
 # set theme background color
 declare -A BGCOLOR
-BGCOLOR[black]='\033[40m'
-BGCOLOR[red]='\033[41m'
-BGCOLOR[green]='\033[42m'
-BGCOLOR[brown]='\033[43m'
-BGCOLOR[blue]='\033[44m'
-BGCOLOR[purple]='\033[45m'
-BGCOLOR[cyan]='\033[46m'
-BGCOLOR[white]='\033[47m'
+BGCOLOR[black]='\[\033[40m\]'
+BGCOLOR[red]='\[\033[41m\]'
+BGCOLOR[green]='\[\033[42m\]'
+BGCOLOR[brown]='\[\033[43m\]'
+BGCOLOR[blue]='\[\033[44m\]'
+BGCOLOR[purple]='\[\033[45m\]'
+BGCOLOR[cyan]='\[\033[46m\]'
+BGCOLOR[white]='\[\033[47m\]'
 export BGCOLOR
 
 rightprompt(){
@@ -84,9 +84,9 @@ _theme_runner(){
   
   if [ "$OMS_TITLE" != "Disable" ]
   then
-    PS1="\$(_title_runner)$PS1"
+    PS1="\[\$(_title_runner)\]$PS1"
   fi
-  PS1="\$(_bcd_rec)$PS1"
+  PS1="\[\$(_bcd_rec)\]$PS1"
 }
 
 #export -f _theme_runner
