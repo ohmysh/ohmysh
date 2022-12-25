@@ -27,8 +27,6 @@ _helpcommand(){
     -r  --reload                :    Reload OhMySh
     --chsh                      :    Change default shell
     --channel (stable/dev)      :    Join/leave development channel
-    --debug [NAME] (-/on/off)   :    Check/set/unset a debug flag.
-            list                :    Get debug flags list.
 
 More information about using OhMySh, visit our documents: 
 - https://ohmysh.github.io/docs-v2
@@ -62,13 +60,22 @@ EOX
     fi
 }
 
-_cli_debug_output(){
-  if [ -n "$(_debug_list_on)" ]
-  then
-    cat <<EOX
-    Debug list          :  $(_debug_list_on)
-EOX
-  fi
+# _cli_debug_output(){
+#   if [ -n "$(_debug_list_on)" ]
+#   then
+#     cat <<EOX
+#     Debug list          :  $(_debug_list_on)
+# EOX
+#   fi
+# }
+
+_editor_select(){
+    if [ -z "$editorSelect" ]
+    then
+        echo "vim"
+    else
+        echo "$editorSelect"
+    fi
 }
 
 oms(){
@@ -122,8 +129,8 @@ oms(){
     System Shell        :  $SHELL
     OhMySh Theme        :  $OMS_THEME
     OhMySh Plugins      :  ${OMS_PLUGIN[@]}
+    Default Editor      :  $editorSelect
 $(_comp_output)
-$(_cli_debug_output)
 
 $(_ohmyshdevwarn)
 EOF
@@ -203,7 +210,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      vi "$OMS_CACHE/alias.ohmysh.sh"
+      "$(_editor_select)" "$OMS_CACHE/alias.ohmysh.sh"
     else
       $2 "$OMS_CACHE/alias.ohmysh.sh"
     fi
@@ -211,7 +218,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      vi "$OMS_CACHE/cover.ohmysh.sh"
+      "$(_editor_select)" "$OMS_CACHE/cover.ohmysh.sh"
     else
       $2 "$OMS_CACHE/cover.ohmysh.sh"
     fi
@@ -219,7 +226,7 @@ EOF
   then
     if [ -z "$2" ]
     then
-      vi "$OMS_CACHE/config.ohmysh.sh"
+        "$(_editor_select)" "$OMS_CACHE/config.ohmysh.sh"
     else
       $2 "$OMS_CACHE/config.ohmysh.sh"
     fi
@@ -318,11 +325,11 @@ _oms_completion()
             COMPREPLY=( $(compgen -W "stable dev" -- "${curr}") )
             ;;
         "-a"|"--alias"|"-c"|"--cover"|"-e"|"--advconfig")
-            COMPREPLY=( $(compgen -W "vi vim nano" -- "${curr}") )
+            COMPREPLY=( $(compgen -W "vi vim nano nvim" -- "${curr}") )
             ;;
-        "--debug")
-            COMPREPLY=( $(compgen -W "list ${!_OMS_DEBUG_LIST[*]}" -- "${curr}") )
-            ;;
+        # "--debug")
+        #     COMPREPLY=( $(compgen -W "list ${!_OMS_DEBUG_LIST[*]}" -- "${curr}") )
+        #     ;;
         *)
             ;;
     esac

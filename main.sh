@@ -13,7 +13,6 @@ fi
 
 # Load Config file
 source "$OMS_DIR/lib/config.sh"
-source "$OMS_DIR/lib/debug.sh"
 source "$OMS_DIR/lib/ohmysh-version.sh"
 
 # Load base script
@@ -36,6 +35,7 @@ source "$OMS_DIR/lib/cover.sh"
 source "$OMS_DIR/lib/opt/map.sh"
 [ -n "$trashService" ] && [ "$trashService" = 'Enable' ] && source "$OMS_DIR/lib/opt/trash.sh"
 source "$OMS_DIR/lib/opt/completion.sh"
+source "$OMS_DIR/lib/cdrecord.sh"
 
 # Load CLI
 source "$OMS_DIR/lib/ohmysh-cli.sh"

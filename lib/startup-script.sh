@@ -7,8 +7,10 @@ then
     mkdir -p "$OMS_CACHE/startup-script"
 fi
 
-find "$OMS_CACHE/startup-script" -maxdepth 1 -type f -printf "%f\n" | while IFS= read -r i
+# find "$OMS_CACHE/startup-script" -maxdepth 1 -type f -printf "%f\n" | while IFS= read -r i
+for file in "$OMS_CACHE/startup-script/"*
 do
+    i="${file##"$OMS_CACHE/startup-script/"}"
     if [ "${i##*.}" = 'sh' ]
     then
         . "$OMS_CACHE/startup-script/$i"

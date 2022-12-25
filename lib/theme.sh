@@ -10,27 +10,43 @@ fi
 
 # set theme color
 declare -A COLOR
-COLOR[reset]='\033[0m'
-COLOR[black]='\033[30m'
-COLOR[red]='\033[31m'
-COLOR[green]='\033[32m'
-COLOR[brown]='\033[33m'
-COLOR[blue]='\033[34m'
-COLOR[purple]='\033[35m'
-COLOR[cyan]='\033[36m'
-COLOR[white]='\033[37m'
+COLOR[reset]='\[\033[00m\]'
+COLOR[black]='\[\033[00;30m\]'
+COLOR[red]='\[\033[00;31m\]'
+COLOR[green]='\[\033[00;32m\]'
+COLOR[brown]='\[\033[00;33m\]'
+COLOR[blue]='\[\033[00;34m\]'
+COLOR[purple]='\[\033[00;35m\]'
+COLOR[cyan]='\[\033[00;36m\]'
+COLOR[white]='\[\033[00;37m\]'
+COLOR[bblack]='\[\033[01;30m\]'
+COLOR[bred]='\[\033[01;31m\]'
+COLOR[bgreen]='\[\033[01;32m\]'
+COLOR[bbrown]='\[\033[01;33m\]'
+COLOR[bblue]='\[\033[01;34m\]'
+COLOR[bpurple]='\[\033[01;35m\]'
+COLOR[bcyan]='\[\033[01;36m\]'
+COLOR[bwhite]='\[\033[01;37m\]'
 export COLOR
 
 # set theme background color
 declare -A BGCOLOR
-BGCOLOR[black]='\033[40m'
-BGCOLOR[red]='\033[41m'
-BGCOLOR[green]='\033[42m'
-BGCOLOR[brown]='\033[43m'
-BGCOLOR[blue]='\033[44m'
-BGCOLOR[purple]='\033[45m'
-BGCOLOR[cyan]='\033[46m'
-BGCOLOR[white]='\033[47m'
+BGCOLOR[black]='\[\033[00;40m\]'
+BGCOLOR[red]='\[\033[00;41m\]'
+BGCOLOR[green]='\[\033[00;42m\]'
+BGCOLOR[brown]='\[\033[00;43m\]'
+BGCOLOR[blue]='\[\033[00;44m\]'
+BGCOLOR[purple]='\[\033[00;45m\]'
+BGCOLOR[cyan]='\[\033[00;46m\]'
+BGCOLOR[white]='\[\033[00;47m\]'
+BGCOLOR[black]='\[\033[01;40m\]'
+BGCOLOR[bred]='\[\033[01;41m\]'
+BGCOLOR[bgreen]='\[\033[01;42m\]'
+BGCOLOR[bbrown]='\[\033[01;43m\]'
+BGCOLOR[bblue]='\[\033[01;44m\]'
+BGCOLOR[bpurple]='\[\033[01;45m\]'
+BGCOLOR[bcyan]='\[\033[01;46m\]'
+BGCOLOR[bwhite]='\[\033[01;47m\]'
 export BGCOLOR
 
 rightprompt(){
@@ -71,29 +87,22 @@ _title_runner(){
 _theme_runner(){
   if [ -f "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"  ]
   then
-    [ -n "$_DEBUG_THEME" ] && _debug "Enabling theme $OMS_THEME from official package." "Theme"
-    [ -n "$_DEBUG_THEME" ] && cat "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"
-    [ -n "$_DEBUG_THEME" ] && echo " ----------------------- "
     source "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"
     #PS1="\[$(tput sc; rightprompt $OMS_THEME_RIGHT; tput rc)\]\[$(OMS_GIT)\]$OMS_THEME_PS"
     #PS1="$OMS_THEME_PS"
   elif [ -f "$OMS_DIR/usr/local/theme/$OMS_THEME/$OMS_THEME.theme.sh" ]
   then
-    [ -n "$_DEBUG_THEME" ] && _debug "Enabling theme $OMS_THEME from local package." "Theme"
-    [ -n "$_DEBUG_THEME" ] && cat "$OMS_DIR/usr/local/theme/$OMS_THEME/$OMS_THEME.theme.sh"
-    [ -n "$_DEBUG_THEME" ] && echo " ----------------------- "
     source "$OMS_DIR/usr/local/theme/$OMS_THEME/$OMS_THEME.theme.sh"
   else
-    [ -n "$_DEBUG_THEME" ] && _debug "Theme $OMS_THEME can not be found." "Theme"
     _error "Cannot found theme '$OMS_THEME'!!!" 'Theme' '4'
     PS1="OhMySh Theme Not Found \$ "
   fi
-  [ -n "$_DEBUG_THEME" ] && _debug "The PS1 is set to \"$PS1\"." "Theme"
   
   if [ "$OMS_TITLE" != "Disable" ]
   then
-    PS1="\$(_title_runner)$PS1"
+    PS1="\[\$(_title_runner)\]$PS1"
   fi
+  PS1="\[\$(_bcd_rec)\]$PS1"
 }
 
 #export -f _theme_runner

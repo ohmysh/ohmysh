@@ -82,6 +82,18 @@ chsh -s /bin/bash
 
 OhMySh Command Line Interface (CLI) is a command line tool for OhMySh. You can use it to change the theme, run plugins and do more things!
 
+**Changing a Theme**
+
+First, checkout the theme you want to use in `usr/theme` folder. Then, use `oms -t THEME_NAME` to change.
+
+---
+
+**Enabling a Plugin**
+
+Find the plugin you want to use in `usr/plugin` folder. Then, use `oms -p enable PLUGIN` to enable it. After that, use `oms -r` to reload the shell.
+
+---
+
 To get some helps, try `oms --help` .
 
 ## More
