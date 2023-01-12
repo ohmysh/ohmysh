@@ -147,12 +147,17 @@ EOF
       ls "$OMS_DIR/usr/local/theme"
       # echo $(cd "$OMS_DIR/usr/theme" && echo !("readme.md"))
     else
-      _warn "Change theme to '$2'" 'Theme'
-      OMS_THEME_NEW="$2"
-      sed -n "/OMS_THEME='$OMS_THEME'/p" "$HOME/.profile" | sed "s/OMS_THEME='$OMS_THEME'/OMS_THEME='$OMS_THEME_NEW'/g" "$HOME/.profile" > "$OMS_CACHE/profile"
-      mv "$OMS_CACHE/profile" "$HOME/.profile"
-      OMS_THEME=$OMS_THEME_NEW
-      _theme_runner
+      if [ -f "$OMS_DIR/usr/theme/$2/$2.theme.sh" ] || [ -f "$OMS_DIR/usr/local/theme/$2/$2.theme.sh" ]
+      then
+        _warn "Change theme to '$2'" 'Theme'
+        OMS_THEME_NEW="$2"
+        sed -n "/OMS_THEME='$OMS_THEME'/p" "$HOME/.profile" | sed "s/OMS_THEME='$OMS_THEME'/OMS_THEME='$OMS_THEME_NEW'/g" "$HOME/.profile" > "$OMS_CACHE/profile"
+        mv "$OMS_CACHE/profile" "$HOME/.profile"
+        OMS_THEME=$OMS_THEME_NEW
+        _theme_runner
+      else
+        _error "Theme '$2' does not exist." 'Theme' '4'
+      fi
     fi
   elif [ "$1" = "--themelist" ]
   then
