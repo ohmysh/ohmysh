@@ -53,11 +53,3 @@ source "$OMS_DIR/lib/startup-script.sh"
 
 # RUN Runtime Script
 source "$OMS_DIR/lib/runtime-script.sh"
-
-# Change to Start Path
-if [ -n "$configStartPath" ]
-then
-    cd "$configStartPath"
-else
-    cd ~
-fi
