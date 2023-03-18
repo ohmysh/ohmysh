@@ -53,35 +53,12 @@ rightprompt(){
   printf "%*s" "$COLUMNS" "$1"
 }
 
-# if [ ! -f "$OMS_CACHE/title.ohmysh.sh" ]
-# then
-#   if [ -f "$OMS_DIR/lib/etc/title.etc.sh" ]
-#   then
-#     cp "$OMS_DIR/lib/etc/title.etc.sh" "$OMS_CACHE/title.ohmysh.sh"
-#   else
-#     touch "$OMS_CACHE/title.ohmysh.sh"
-#   fi
-# fi
-# source "$OMS_CACHE/title.ohmysh.sh"
-
-
-# This line caught error in #29
-# ---
-#trap 'echo -ne "\033]0;${PWD##*/}: (${BASH_COMMAND})\007"' DEBUG
-# ---
-
-
-# TD="$(pwd)"
-
 _title_runner(){
     if [ -z "$OMS_TITLE" ]
     then
-        # OMS_TITLE="echo -n -e \033]0;$(pwd)\007"
         OMS_TITLE="$(pwd)"
     fi
-    # TT="$(pwd)"
     echo -n -e "\033]0;$OMS_TITLE\007"
-    # $OMS_TITLE
 }
 
 _theme_runner(){
@@ -89,7 +66,6 @@ _theme_runner(){
   then
     source "$OMS_DIR/usr/theme/$OMS_THEME/$OMS_THEME.theme.sh"
     #PS1="\[$(tput sc; rightprompt $OMS_THEME_RIGHT; tput rc)\]\[$(OMS_GIT)\]$OMS_THEME_PS"
-    #PS1="$OMS_THEME_PS"
   elif [ -f "$OMS_DIR/usr/local/theme/$OMS_THEME/$OMS_THEME.theme.sh" ]
   then
     source "$OMS_DIR/usr/local/theme/$OMS_THEME/$OMS_THEME.theme.sh"
@@ -104,5 +80,3 @@ _theme_runner(){
   fi
   PS1="\[\$(_bcd_rec)\]$PS1"
 }
-
-#export -f _theme_runner

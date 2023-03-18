@@ -60,15 +60,6 @@ EOX
     fi
 }
 
-# _cli_debug_output(){
-#   if [ -n "$(_debug_list_on)" ]
-#   then
-#     cat <<EOX
-#     Debug list          :  $(_debug_list_on)
-# EOX
-#   fi
-# }
-
 _editor_select(){
     if [ -z "$editorSelect" ]
     then
@@ -83,17 +74,17 @@ oms(){
   then
     _error 'Missing parameters' 'CLI' '1'
     _helpcommand
-  elif [ "$1" = "--update" ] || [ "$1" = "-u" ]
+  elif [ "$1" = "--update" ] || [ "$1" = "-u" ] || [ "$1" = "update" ]
   then
     _info 'Updating OhMySh' 'CLI'
     forceUpdate=1
     source "$OMS_DIR/lib/update.sh"
     unset forceUpdate
 #     oms_reload
-  elif [ "$1" = "--help" ] || [ "$1" = "-h" ]
+  elif [ "$1" = "--help" ] || [ "$1" = "-h" ] || [ "$1" = "help" ]
   then
     _helpcommand
-  elif [ "$1" = "--uninstall" ]
+  elif [ "$1" = "--uninstall" ] || [ "$1" = "uninstall" ]
   then
     _warn 'Are you sure to uninstall OhMySh? [Y/N]' 'CLI'
     read ch
@@ -107,7 +98,7 @@ oms(){
     else
       _info 'You chose No' 'CLI'
     fi
-  elif [ "$1" = "--version" ] || [ "$1" = "-v" ]
+  elif [ "$1" = "--version" ] || [ "$1" = "-v" ] || [ "$1" = "version" ]
   then
     if [ -n "$2" ] || [ "$2" != "--nologo" ]
     then
@@ -134,7 +125,7 @@ $(_comp_output)
 
 $(_ohmyshdevwarn)
 EOF
-  elif [ "$1" = "--theme" ] || [ "$1" = "-t" ]
+  elif [ "$1" = "--theme" ] || [ "$1" = "-t" ] || [ "$1" = "theme" ]
   then
     if [ -z "$2" ]
     then
@@ -165,7 +156,7 @@ EOF
     echo ' List of themes:'
     ls "$OMS_DIR/usr/theme"
     _warn "The option \"--themelist\" has already expired. Use \"oms -t list\""
-  elif [ "$1" = "--plugin" ] || [ "$1" = "-p" ]
+  elif [ "$1" = "--plugin" ] || [ "$1" = "-p" ] || [ "$1" = "plugin" ]
   then
     if [ -z "$2" ]
     then
@@ -204,14 +195,14 @@ EOF
       mv "$OMS_CACHE/profile" "$HOME/.profile"
       _warn "Disabled. It will be applied after you restart."
     fi
-  elif [ "$1" = "--pluginlist" ]
+  elif [ "$1" = "--pluginlist" ] || [ "$1" = "pluginlist" ]
   then
     _info "You are using these plugins:"
     echo "${OMS_PLUGIN[@]}"
     echo ' List of plugins:'
     ls "$OMS_DIR/usr/plugin"
     _warn "The option \"--pluginlist\" has already expired. Use \"oms -p list\""
-  elif [ "$1" = "-a" ] || [ "$1" = "--alias" ]
+  elif [ "$1" = "-a" ] || [ "$1" = "--alias" ] || [ "$1" = "alias" ]
   then
     if [ -z "$2" ]
     then
@@ -219,7 +210,7 @@ EOF
     else
       $2 "$OMS_CACHE/alias.ohmysh.sh"
     fi
-  elif [ "$1" = "-c" ] || [ "$1" = "--cover" ]
+  elif [ "$1" = "-c" ] || [ "$1" = "--cover" ] || [ "$1" = "cover" ]
   then
     if [ -z "$2" ]
     then
@@ -227,7 +218,7 @@ EOF
     else
       $2 "$OMS_CACHE/cover.ohmysh.sh"
     fi
-  elif [ "$1" = "-e" ] || [ "$1" = "--advconfig" ]
+  elif [ "$1" = "-e" ] || [ "$1" = "--advconfig" ] || [ "$1" = "advconfig" ]
   then
     if [ -z "$2" ]
     then
@@ -235,7 +226,7 @@ EOF
     else
       $2 "$OMS_CACHE/config.ohmysh.sh"
     fi
-  elif [ "$1" = "--chsh" ]
+  elif [ "$1" = "--chsh" ] || [ "$1" = "chsh" ]
   then
     # if [ -z "$2" ]
     # then
@@ -252,10 +243,10 @@ EOF
     #   fi
     # fi
     bash "$OMS_DIR/lib/opt/changeshell.sh"
-  elif [ "$1" = "-r" ] || [ "$1" = "--reload" ]
+  elif [ "$1" = "-r" ] || [ "$1" = "--reload" ] || [ "$1" = "reload" ]
   then
     oms_reload
-  elif [ "$1" = "--channel" ]
+  elif [ "$1" = "--channel" ] || [ "$1" = "channel" ]
   then
     if [ -z "$2" ]
     then
@@ -273,27 +264,6 @@ EOF
           ;;
       esac
     fi
-  elif [ "$1" = "--debug" ]
-  then
-    if [ -z "$2" ]
-    then
-      _error "Missing parameters" 'CLI' '7'
-      _helpcommand
-    else
-      if [ "$2" = "list" ]
-      then
-        _debug_list
-      elif [ -z "$3" ]
-      then
-        _debug_check "$2"
-      elif [ "$3" = "on" ]
-      then 
-        _debug_start "$2"
-      elif [ "$3" = "off" ]
-      then
-        _debug_stop "$2"
-      fi
-    fi
   else
     _error "Parameters '$1' not found" 'CLI' '2'
   fi
@@ -309,9 +279,8 @@ _oms_completion()
     curr="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
     pre2="${COMP_WORDS[COMP_CWORD-2]}"
-#     blue "$curr $prev $pre2"
 
-    opts="-u --update --uninstall -h --help -v --version -t --theme -p --theme -a --alias -c --cover -e --advconfig --chsh -r --reload --channel --debug"
+    opts="-u --update --uninstall -h --help -v --version -t --theme -p --theme -a --alias -c --cover -e --advconfig --chsh -r --reload --channel"
     if [[ "${COMP_CWORD}" -eq 1 ]]; then
         COMPREPLY=( $(compgen -W "${opts}" -- "${curr}") )
     fi
@@ -332,9 +301,6 @@ _oms_completion()
         "-a"|"--alias"|"-c"|"--cover"|"-e"|"--advconfig")
             COMPREPLY=( $(compgen -W "vi vim nano nvim" -- "${curr}") )
             ;;
-        # "--debug")
-        #     COMPREPLY=( $(compgen -W "list ${!_OMS_DEBUG_LIST[*]}" -- "${curr}") )
-        #     ;;
         *)
             ;;
     esac
@@ -350,6 +316,3 @@ _oms_completion()
 }
 
 complete -F _oms_completion oms
-
-#export -f oms _helpcommand
-#export ohmysh
