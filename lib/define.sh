@@ -25,14 +25,6 @@ _oms_date_select(){
 
 # . Rules: _oms_date "Date" "Format" 
 _oms_date(){
-    # date -d "20220101" "+%x" >/dev/null 2>&1
-    # if [ "$?" != "0" ]
-    # then
-    #     echo "$1"
-    # else
-    #     date -d "$1" "$2"
-    # fi
-
     if [ "$1" = "-d" ]
     then
         local SRC="$2"
@@ -44,12 +36,7 @@ _oms_date(){
     "$(_oms_date_select)" -d "$SRC" "$FMT"
 }
 
-
-
-
-
 # Profile Signed
-
 _oms_getprofile(){
     if [ -n "${OMS_PROFILE[0]}" ]
     then

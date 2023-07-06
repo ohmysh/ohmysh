@@ -56,16 +56,6 @@ _bcd_put_top "0"
 _bcd_put_id "0" "$HOME"
 
 _bcd_rec(){
-    # if [ "$(pwd)" != "${OMS_BCD_LIST[OMS_BCD_TOP]}" ]
-    # then
-    #     echo "$(pwd)"
-    #     echo "${OMS_BCD_LIST[OMS_BCD_TOP]}"
-    #     # export OMS_BCD_LIST+=("$(pwd)")
-    #     # export OMS_BCD_TOP=$(($OMS_BCD_TOP+1))
-        
-    #     echo "$OMS_BCD_TOP"
-    # fi
-
     bcdtop="$(_bcd_get_top)"
     bcdnow="$(_bcd_get_id "$bcdtop")"
     if [ "$bcdnow" != "$(pwd)" ]
